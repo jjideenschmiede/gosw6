@@ -13,26 +13,24 @@ package gosw6
 
 import "encoding/json"
 
-// AccessTokenBody is to structure the data
-type AccessTokenBody struct {
-	ClientId  string `json:"client_id"`
-	GrantType string `json:"grant_type"`
-	Scopes    string `json:"scopes"`
-	Username  string `json:"username"`
-	Password  string `json:"password"`
+// RefreshTokenBody is to structure the data
+type RefreshTokenBody struct {
+	GrantType    string `json:"grant_type"`
+	ClientId     string `json:"client_id"`
+	RefreshToken string `json:"refresh_token"`
 }
 
-// AccessTokenReturn is to decode the json return
-type AccessTokenReturn struct {
+// RefreshTokenReturn is to decode the json data
+type RefreshTokenReturn struct {
 	TokenType    string `json:"token_type"`
 	ExpiresIn    int    `json:"expires_in"`
 	AccessToken  string `json:"access_token"`
 	RefreshToken string `json:"refresh_token"`
 	Errors       []struct {
-		Code   string      `json:"code"`
-		Status string      `json:"status"`
-		Title  string      `json:"title"`
-		Detail interface{} `json:"detail"`
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
 		Meta   struct {
 			Trace []struct {
 				File     string `json:"file"`
@@ -47,13 +45,13 @@ type AccessTokenReturn struct {
 	} `json:"errors"`
 }
 
-// AccessToken is to get a bearer token from the system
-func AccessToken(body AccessTokenBody, r Request) (AccessTokenReturn, error) {
+// RefreshToken is to get a new bearer token
+func RefreshToken(body RefreshTokenBody, r Request) (RefreshTokenReturn, error) {
 
 	// Convert body
 	convert, err := json.Marshal(body)
 	if err != nil {
-		return AccessTokenReturn{}, err
+		return RefreshTokenReturn{}, err
 	}
 
 	// Set config for request
@@ -67,18 +65,18 @@ func AccessToken(body AccessTokenBody, r Request) (AccessTokenReturn, error) {
 	// Send request
 	response, err := c.Send(r)
 	if err != nil {
-		return AccessTokenReturn{}, err
+		return RefreshTokenReturn{}, err
 	}
 
 	// Close request
 	defer response.Body.Close()
 
 	// Decode data
-	var decode AccessTokenReturn
+	var decode RefreshTokenReturn
 
 	err = json.NewDecoder(response.Body).Decode(&decode)
 	if err != nil {
-		return AccessTokenReturn{}, err
+		return RefreshTokenReturn{}, err
 	}
 
 	// Return data
