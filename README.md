@@ -72,7 +72,7 @@ If you want to read all products, you can do it with the following function.
 
 ```go
 // Define the request
-r := Request{
+r := gosw6.Request{
     BaseUrl:     "https://shopware-demo.test.de",
     BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
 }
@@ -92,13 +92,13 @@ If you want to read a specific product, you can do it with this function.
 
 ```go
 // Define the request
-r := Request{
+r := gosw6.Request{
     BaseUrl:     "https://shopware-demo.test.de",
     BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
 }
 
 // Get all products
-product, err := Product("a27be66bc743476089a0672290eed674", r)
+product, err := gosw6.Product("a27be66bc743476089a0672290eed674", r)
 if err != nil {
     log.Fatalln(err)
 } else {
