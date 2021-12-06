@@ -59,7 +59,7 @@ func RefreshToken(body RefreshTokenBody, r Request) (RefreshTokenReturn, error) 
 		Path:        "/api/oauth/token",
 		Method:      "POST",
 		Body:        convert,
-		AccessToken: false,
+		AccessToken: true,
 	}
 
 	// Send request

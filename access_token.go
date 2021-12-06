@@ -61,7 +61,7 @@ func AccessToken(body AccessTokenBody, r Request) (AccessTokenReturn, error) {
 		Path:        "/api/oauth/token",
 		Method:      "POST",
 		Body:        convert,
-		AccessToken: false,
+		AccessToken: true,
 	}
 
 	// Send request
