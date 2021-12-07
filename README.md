@@ -17,7 +17,8 @@ Currently we have the following functions covered:
 - [Product](https://github.com/jjideenschmiede/gosw6#product)
 - [Category](https://github.com/jjideenschmiede/gosw6#category)
 - [Product manufacturer](https://github.com/jjideenschmiede/gosw6#product-manufacturer)
-- [Property groups](https://github.com/jjideenschmiede/gosw6#property-groups)
+- [Property groups](https://github.com/jjideenschmiede/gosw6#property-group)
+- [Property groups option](https://github.com/jjideenschmiede/gosw6#property-group-option)
 
 ## Access token
 
@@ -214,7 +215,7 @@ r := gosw6.Request{
 }
 
 // Define body
-body := CreateProductManufacturerBody{
+body := gosw6.CreateProductManufacturerBody{
     MediaId:     "7ae758e4c3cb457e8b023b2c859616f7",
     Name:        "Afterbuy",
     Link:        "https://www.afterbuy.de",
@@ -222,7 +223,7 @@ body := CreateProductManufacturerBody{
 }
 
 // Create a product manufacturer
-createProductManufacturer, err := CreateProductManufacturer(body, r)
+createProductManufacturer, err := gosw6.CreateProductManufacturer(body, r)
 if err != nil {
     log.Fatalln(err)
 } else {
@@ -242,7 +243,7 @@ r := gosw6.Request{
 }
 
 // Define body
-body := UpdateProductManufacturerBody{
+body := gosw6.UpdateProductManufacturerBody{
     MediaId:     "7ae758e4c3cb457e8b023b2c859616f7",
     Name:        "Afterbuy2",
     Link:        "https://www.afterbuy.de",
@@ -250,7 +251,7 @@ body := UpdateProductManufacturerBody{
 }
 
 // Update a product manufacturer by id
-updateProductManufacturer, err := UpdateProductManufacturer("cd38ccc066ff4400a80373ba86058df3", body, r)
+updateProductManufacturer, err := gosw6.UpdateProductManufacturer("cd38ccc066ff4400a80373ba86058df3", body, r)
 if err != nil {
     log.Fatalln(err)
 } else {
@@ -270,7 +271,7 @@ r := gosw6.Request{
 }
 
 // Delete a product manufacturer by id
-deleteProductManufacturer, err := DeleteProductManufacturer("cd38ccc066ff4400a80373ba86058df3", r)
+deleteProductManufacturer, err := gosw6.DeleteProductManufacturer("cd38ccc066ff4400a80373ba86058df3", r)
 if err != nil {
     log.Fatalln(err)
 } else {
@@ -278,7 +279,7 @@ if err != nil {
 }
 ```
 
-## Property groups
+## Property group
 
 ### Get all property groups
 
@@ -332,7 +333,7 @@ r := gosw6.Request{
 }
 
 // Define body
-body := CreatePropertyGroupBody{
+body := gosw6.CreatePropertyGroupBody{
     Name:                       "Size",
     DisplayType:                "text",
     SortingType:                "alphanumeric",
@@ -343,7 +344,7 @@ body := CreatePropertyGroupBody{
 }
 
 // Create a property group
-createPropertyGroup, err := CreatePropertyGroup(body, r)
+createPropertyGroup, err := gosw6.CreatePropertyGroup(body, r)
 if err != nil {
     log.Fatalln(err)
 } else {
@@ -363,7 +364,7 @@ r := gosw6.Request{
 }
 
 // Define body
-body := UpdatePropertyGroupBody{
+body := gosw6.UpdatePropertyGroupBody{
     Name:                       "Size",
     DisplayType:                "text",
     SortingType:                "alphanumeric",
@@ -374,7 +375,7 @@ body := UpdatePropertyGroupBody{
 }
 
 // Update a property group by id
-updatePropertyGroup, err := UpdatePropertyGroup("272c3f25999e4f779c28db479ad0af5c", body, r)
+updatePropertyGroup, err := gosw6.UpdatePropertyGroup("272c3f25999e4f779c28db479ad0af5c", body, r)
 if err != nil {
     log.Fatalln(err)
 } else {
@@ -394,10 +395,128 @@ r := gosw6.Request{
 }
 
 // Update a property group by id
-deletePropertyGroup, err := DeletePropertyGroup("272c3f25999e4f779c28db479ad0af5c", r)
+deletePropertyGroup, err := gosw6.DeletePropertyGroup("272c3f25999e4f779c28db479ad0af5c", r)
 if err != nil {
     log.Fatalln(err)
 } else {
     log.Println(deletePropertyGroup)
+}
+```
+
+## Property group option
+
+### Get all property group options
+
+If you want to read all property group options, you can do it with the following function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Get all property group options
+propertyGroupOptions, err := gosw6.PropertyGroupOptions("7c1ea10d2c3844f1ba2ab88fbcda1df2", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(propertyGroupOptions)
+}
+```
+
+### Get a property group option
+
+If you want to read a specific property group option, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Get all property group option by id
+propertyGroupOption, err := gosw6.PropertyGroupOption("aee4401b771748319f2651c2e113f267", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(propertyGroupOption)
+}
+```
+
+### Create a property group option
+
+If you want to create a property group option, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := gosw6.CreatePropertyGroupOptionBody{
+    Name:         "Test1",
+    Position:     1,
+    ColorHexCode: nil,
+    MediaId:      nil,
+}
+
+// Create a property group option
+createPropertyGroupOption, err := gosw6.CreatePropertyGroupOption("7c1ea10d2c3844f1ba2ab88fbcda1df2", body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(createPropertyGroupOption)
+}
+```
+
+### Update a property group option
+
+If you want to update a property group option, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := gosw6.UpdatePropertyGroupOptionBody{
+    Name:         "Test2",
+    Position:     1,
+    ColorHexCode: nil,
+    MediaId:      nil,
+    }
+
+// Update a property group option
+updatePropertyGroupOption, err := gosw6.UpdatePropertyGroupOption("830cbe62c1b943c5b5ffa4895b48efd6", body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(updatePropertyGroupOption)
+}
+```
+
+### Delete a property group option
+
+If you want to delete a property group option, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Update a property group option by id
+deletePropertyGroupOption, err := gosw6.DeletePropertyGroupOption("830cbe62c1b943c5b5ffa4895b48efd6", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(deletePropertyGroupOption)
 }
 ```
