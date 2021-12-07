@@ -65,7 +65,7 @@ type ProductsReturn struct {
 			Extensions []interface{} `json:"extensions"`
 			ApiAlias   string        `json:"apiAlias"`
 		} `json:"purchasePrices"`
-		MarkAsTopseller         *bool         `json:"markAsTopseller"`
+		MarkAsTopseller         bool          `json:"markAsTopseller"`
 		Weight                  interface{}   `json:"weight"`
 		Width                   interface{}   `json:"width"`
 		Height                  interface{}   `json:"height"`
@@ -499,7 +499,7 @@ type ProductReturn struct {
 	} `json:"errors"`
 }
 
-// Products is to get a list of all products
+// Products are to get a list of all products
 func Products(r Request) (ProductsReturn, error) {
 
 	// Set config for request
