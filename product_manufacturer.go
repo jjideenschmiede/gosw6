@@ -116,6 +116,85 @@ type ProductManufacturerReturn struct {
 	} `json:"errors"`
 }
 
+// CreateProductManufacturerBody is to structure the body data
+type CreateProductManufacturerBody struct {
+	MediaId     string `json:"mediaId"`
+	Name        string `json:"name"`
+	Link        string `json:"link"`
+	Description string `json:"description"`
+}
+
+// CreateProductManufacturerReturn is to decode the json data
+type CreateProductManufacturerReturn struct {
+	Errors []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
+// UpdateProductManufacturerBody is to structure the body data
+type UpdateProductManufacturerBody struct {
+	MediaId     string `json:"mediaId"`
+	Name        string `json:"name"`
+	Link        string `json:"link"`
+	Description string `json:"description"`
+}
+
+// UpdateProductManufacturerReturn is to decode the json data
+type UpdateProductManufacturerReturn struct {
+	Errors []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
+// DeleteProductManufacturerReturn is to decode the json data
+type DeleteProductManufacturerReturn struct {
+	Errors []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
 // ProductManufacturers are to get a list of all product manufacturers
 func ProductManufacturers(r Request) (ProductManufacturersReturn, error) {
 
@@ -173,6 +252,123 @@ func ProductManufacturer(id string, r Request) (ProductManufacturerReturn, error
 	err = json.NewDecoder(response.Body).Decode(&decode)
 	if err != nil {
 		return ProductManufacturerReturn{}, err
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// CreateProductManufacturer is to create a new product manufacturer
+func CreateProductManufacturer(body CreateProductManufacturerBody, r Request) (CreateProductManufacturerReturn, error) {
+
+	// Convert body data
+	convert, err := json.Marshal(body)
+	if err != nil {
+		return CreateProductManufacturerReturn{}, err
+	}
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product-manufacturer",
+		Method: "POST",
+		Body:   convert,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return CreateProductManufacturerReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode CreateProductManufacturerReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return CreateProductManufacturerReturn{}, err
+		}
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// UpdateProductManufacturer is to update a new product manufacturer
+func UpdateProductManufacturer(id string, body UpdateProductManufacturerBody, r Request) (UpdateProductManufacturerReturn, error) {
+
+	// Convert body data
+	convert, err := json.Marshal(body)
+	if err != nil {
+		return UpdateProductManufacturerReturn{}, err
+	}
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product-manufacturer/" + id,
+		Method: "PATCH",
+		Body:   convert,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return UpdateProductManufacturerReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode UpdateProductManufacturerReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return UpdateProductManufacturerReturn{}, err
+		}
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// DeleteProductManufacturer is to delete a new product manufacturer
+func DeleteProductManufacturer(id string, r Request) (DeleteProductManufacturerReturn, error) {
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product-manufacturer/" + id,
+		Method: "DELETE",
+		Body:   nil,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return DeleteProductManufacturerReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode DeleteProductManufacturerReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return DeleteProductManufacturerReturn{}, err
+		}
 	}
 
 	// Return data
