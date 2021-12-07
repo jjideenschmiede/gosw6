@@ -11,6 +11,16 @@ go get github.com/jjideenschmiede/gosw6
 
 ## How to use?
 
+Currently we have the following functions covered:
+
+- Access token
+- Product
+- Category
+- Product manufacturer
+- Property groups
+
+## Access token
+
 ### Obtain an access token
 
 If you want to create a new Bearer Token, you can do this with the following function. You get the Bearer Token and a Refresh Token back. With this Refresh Token, you can always generate a new Bearer Token before expiration. [Here](https://shopware.stoplight.io/docs/admin-api/ZG9jOjEwODA3NjQx-authentication-and-authorisation) you can find the documentation.
@@ -66,6 +76,8 @@ if err != nil {
 }
 ```
 
+## Product
+
 ### Get all products
 
 If you want to read all products, you can do it with the following function.
@@ -105,6 +117,8 @@ if err != nil {
     log.Println(product)
 }
 ```
+
+## Category
 
 ### Get all categories
 
@@ -146,6 +160,8 @@ if err != nil {
 }
 ```
 
+## Product manufacturer
+
 ### Get all product manufacturers
 
 If you want to read all product manufacturers, you can do it with the following function.
@@ -185,6 +201,84 @@ if err != nil {
     log.Println(productManufacturer)
 }
 ```
+
+### Create a product manufacturer
+
+If you want to create a product manufacturer, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := CreateProductManufacturerBody{
+    MediaId:     "7ae758e4c3cb457e8b023b2c859616f7",
+    Name:        "Afterbuy",
+    Link:        "https://www.afterbuy.de",
+    Description: "Nutzen Sie die führende All-in-One-Lösung für den E-Commerce",
+}
+
+// Create a product manufacturer
+createProductManufacturer, err := CreateProductManufacturer(body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(createProductManufacturer)
+}
+```
+
+### Update a product manufacturer
+
+If you want to update a product manufacturer, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := UpdateProductManufacturerBody{
+    MediaId:     "7ae758e4c3cb457e8b023b2c859616f7",
+    Name:        "Afterbuy2",
+    Link:        "https://www.afterbuy.de",
+    Description: "Nutzen Sie die führende All-in-One-Lösung für den E-Commerce",
+}
+
+// Update a product manufacturer by id
+updateProductManufacturer, err := UpdateProductManufacturer("cd38ccc066ff4400a80373ba86058df3", body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(updateProductManufacturer)
+}
+```
+
+### Delete a product manufacturer
+
+If you want to delete a product manufacturer, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Delete a product manufacturer
+deleteProductManufacturer, err := DeleteProductManufacturer("cd38ccc066ff4400a80373ba86058df3", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(deleteProductManufacturer)
+}
+```
+
+## Property groups
 
 ### Get all property groups
 
