@@ -185,3 +185,43 @@ if err != nil {
     log.Println(productManufacturer)
 }
 ```
+
+### Get all property groups
+
+If you want to read all property groups, you can do it with the following function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Get all property groups
+propertyGroups, err := gosw6.PropertyGroups(r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(propertyGroups)
+}
+```
+
+### Get a property group
+
+If you want to read a specific property group, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Get a property group by id
+propertyGroup, err := gosw6.PropertyGroup("7c1ea10d2c3844f1ba2ab88fbcda1df2", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(propertyGroup)
+}
+```
