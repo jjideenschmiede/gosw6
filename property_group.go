@@ -135,7 +135,8 @@ type CreatePropertyGroupBody struct {
 
 // CreatePropertyGroupBodyReturn is to decode the json data
 type CreatePropertyGroupBodyReturn struct {
-	Errors []struct {
+	Location string `json:"location"`
+	Errors   []struct {
 		Code   string `json:"code"`
 		Status string `json:"status"`
 		Title  string `json:"title"`
@@ -306,6 +307,9 @@ func CreatePropertyGroup(body CreatePropertyGroupBody, r Request) (CreatePropert
 			return CreatePropertyGroupBodyReturn{}, err
 		}
 	}
+
+	// Get location in header & set to return struct
+	decode.Location = response.Header.Get("location")
 
 	// Return data
 	return decode, err

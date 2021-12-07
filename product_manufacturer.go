@@ -126,7 +126,8 @@ type CreateProductManufacturerBody struct {
 
 // CreateProductManufacturerReturn is to decode the json data
 type CreateProductManufacturerReturn struct {
-	Errors []struct {
+	Location string `json:"location"`
+	Errors   []struct {
 		Code   string `json:"code"`
 		Status string `json:"status"`
 		Title  string `json:"title"`
@@ -294,6 +295,9 @@ func CreateProductManufacturer(body CreateProductManufacturerBody, r Request) (C
 			return CreateProductManufacturerReturn{}, err
 		}
 	}
+
+	// Get location in header & set to return struct
+	decode.Location = response.Header.Get("location")
 
 	// Return data
 	return decode, err
