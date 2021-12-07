@@ -13,11 +13,11 @@ go get github.com/jjideenschmiede/gosw6
 
 Currently we have the following functions covered:
 
-- Access token
-- Product
-- Category
-- Product manufacturer
-- Property groups
+- [Access token](https://github.com/jjideenschmiede/gosw6#access-token)
+- [Product](https://github.com/jjideenschmiede/gosw6#product)
+- [Category](https://github.com/jjideenschmiede/gosw6#category)
+- [Product manufacturer](https://github.com/jjideenschmiede/gosw6#product-manufacturer)
+- [Property groups](https://github.com/jjideenschmiede/gosw6#property-groups)
 
 ## Access token
 
