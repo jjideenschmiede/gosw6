@@ -145,3 +145,43 @@ if err != nil {
     log.Println(category)
 }
 ```
+
+### Get all product manufacturers
+
+If you want to read all product manufacturers, you can do it with the following function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Get all product manufacturers
+productManufacturers, err := gosw6.ProductManufacturers(r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(productManufacturers)
+}
+```
+
+### Get a product manufacturer
+
+If you want to read a specific product manufacturer, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Get a product manufacturer by id
+productManufacturer, err := gosw6.ProductManufacturer("a27be66bc743476089a0672290eed674", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(productManufacturer)
+}
+```
