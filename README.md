@@ -269,7 +269,7 @@ r := gosw6.Request{
     BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
 }
 
-// Delete a product manufacturer
+// Delete a product manufacturer by id
 deleteProductManufacturer, err := DeleteProductManufacturer("cd38ccc066ff4400a80373ba86058df3", r)
 if err != nil {
     log.Fatalln(err)
@@ -317,5 +317,87 @@ if err != nil {
     log.Fatalln(err)
 } else {
     log.Println(propertyGroup)
+}
+```
+
+### Create a property group
+
+If you want to create a property group, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := CreatePropertyGroupBody{
+    Name:                       "Size",
+    DisplayType:                "text",
+    SortingType:                "alphanumeric",
+    Description:                "To define the shoe size.",
+    Position:                   1,
+    Filterable:                 true,
+    VisibleOnProductDetailPage: true,
+}
+
+// Create a property group
+createPropertyGroup, err := CreatePropertyGroup(body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(createPropertyGroup)
+}
+```
+
+### Update a property group
+
+If you want to update a property group, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := UpdatePropertyGroupBody{
+    Name:                       "Size",
+    DisplayType:                "text",
+    SortingType:                "alphanumeric",
+    Description:                "To define the shoe size.",
+    Position:                   1,
+    Filterable:                 true,
+    VisibleOnProductDetailPage: true,
+}
+
+// Update a property group by id
+updatePropertyGroup, err := UpdatePropertyGroup("272c3f25999e4f779c28db479ad0af5c", body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(updatePropertyGroup)
+}
+```
+
+### Delete a property group
+
+If you want to delete a property group, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Update a property group by id
+deletePropertyGroup, err := DeletePropertyGroup("272c3f25999e4f779c28db479ad0af5c", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(deletePropertyGroup)
 }
 ```
