@@ -125,3 +125,23 @@ if err != nil {
     log.Println(categories)
 }
 ```
+
+### Get a category
+
+If you want to read a specific category, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Get a category by id
+category, err := gosw6.Category("a27be66bc743476089a0672290eed674", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(category)
+}
+```
