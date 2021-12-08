@@ -19,6 +19,7 @@ Currently we have the following functions covered:
 - [Product manufacturer](https://github.com/jjideenschmiede/gosw6#product-manufacturer)
 - [Property groups](https://github.com/jjideenschmiede/gosw6#property-group)
 - [Property groups option](https://github.com/jjideenschmiede/gosw6#property-group-option)
+- [Media](https://github.com/jjideenschmiede/gosw6#media)
 
 ## Access token
 
@@ -622,5 +623,78 @@ if err != nil {
     log.Fatalln(err)
 } else {
     log.Println(deletePropertyGroupOption)
+}
+```
+
+## Media
+
+### Create a media
+
+If you want to create a media, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Create a media
+createMedia, err := CreateMedia(r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(createMedia)
+}
+```
+
+### Upload a media from url
+
+If you want to create a media from url, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := gosw6.UploadUrlMediaBody{
+    Url: "https://jj-ideenschmiede.de/img/jan-droste.de11537e.jpg",
+}
+
+// Get all property groups
+createMedia, err := gosw6.UploadUrlMedia("jan-droste", "jpg", "1e3c74f2e6f448eeb660251a27e41165", body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(createMedia)
+}
+```
+
+### Upload a media from local
+
+If you want to upload a media from local, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Open file
+file, err := os.Open("/Users/jonaskwiedor/Downloads/weihnachts-postkarte.pdf")
+if err != nil {
+    log.Fatalln(err)
+}
+
+// Get all property groups
+uploadMedia, err := gosw6.UploadLocalMedia(file, "weihnachts-postkarte", "pdf", "e747cc2d5a684131b972469c1e2bc815", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(uploadMedia)
 }
 ```
