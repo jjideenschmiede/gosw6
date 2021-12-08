@@ -161,6 +161,110 @@ if err != nil {
 }
 ```
 
+### Create a category
+
+If you want to create a category, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := gosw6.CreateCategoryBody{
+    ParentId:              "ec1dc66781f04ec3bd7e5df94cb74b5a",
+    MediaId:               nil,
+    Name:                  "New category",
+    Active:                true,
+    VisibleChildCount:     0,
+    DisplayNestedProducts: true,
+    CmsPageId:             "6de66fe08d4544e397ed99d7efd4c32d",
+    LinkType:              nil,
+    LinkNewTab:            nil,
+    InternalLink:          nil,
+    ExternalLink:          nil,
+    Visible:               false,
+    Type:                  "page",
+    ProductAssignmentType: "product",
+    Description:           "New Description!",
+    MetaTitle:             "Nice meta title",
+    MetaDescription:       "Nice meta description!",
+    Keywords:              "category, nice",
+}
+
+// Create a category
+createCategory, err := gosw6.CreateCategory(body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(createCategory)
+}
+```
+
+### Update a category
+
+If you want to update a category, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := gosw6.UpdateCategoryBody{
+    ParentId:              "ec1dc66781f04ec3bd7e5df94cb74b5a",
+    MediaId:               nil,
+    Name:                  "New category v2",
+    Active:                true,
+    VisibleChildCount:     0,
+    DisplayNestedProducts: true,
+    CmsPageId:             "6de66fe08d4544e397ed99d7efd4c32d",
+    LinkType:              nil,
+    LinkNewTab:            nil,
+    InternalLink:          nil,
+    ExternalLink:          nil,
+    Visible:               false,
+    Type:                  "page",
+    ProductAssignmentType: "product",
+    Description:           "New Description v2!",
+    MetaTitle:             "Nice meta title",
+    MetaDescription:       "Nice meta description!",
+    Keywords:              "category, nice",
+}
+
+// Update a category by id
+updateCategory, err := gosw6.UpdateCategory("5967746e6cbd444bb4d3d7f060c58aea", body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(updateCategory)
+}
+```
+
+### Delete a category
+
+If you want to delete a category, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Delete a category by id
+deleteCategory, err := gosw6.DeleteCategory("5967746e6cbd444bb4d3d7f060c58aea", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(deleteCategory)
+}
+```
+
 ## Product manufacturer
 
 ### Get all product manufacturers
