@@ -13,6 +13,8 @@ package gosw6
 
 import (
 	"encoding/json"
+	"fmt"
+	"net/url"
 	"time"
 )
 
@@ -209,7 +211,7 @@ type DeletePropertyGroupBodyReturn struct {
 }
 
 // PropertyGroups are to get a list of all property groups
-func PropertyGroups(r Request) (PropertyGroupsReturn, error) {
+func PropertyGroups(parameter map[string]string, r Request) (PropertyGroupsReturn, error) {
 
 	// Set config for request
 	c := Config{
@@ -217,6 +219,25 @@ func PropertyGroups(r Request) (PropertyGroupsReturn, error) {
 		Method: "GET",
 		Body:   nil,
 	}
+
+	// Parse url & add attributes
+	parse, err := url.Parse(c.Path)
+	if err != nil {
+		return PropertyGroupsReturn{}, err
+	}
+
+	newUrl, err := url.ParseQuery(parse.RawQuery)
+	if err != nil {
+		return PropertyGroupsReturn{}, err
+	}
+
+	for index, value := range parameter {
+		newUrl.Add(index, value)
+	}
+
+	// Set new url
+	parse.RawQuery = newUrl.Encode()
+	c.Path = fmt.Sprintf("%s", parse)
 
 	// Send request
 	response, err := c.Send(r)

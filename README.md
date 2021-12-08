@@ -92,8 +92,13 @@ r := gosw6.Request{
     BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
 }
 
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
 // Get all products
-products, err := gosw6.Products(r)
+products, err := gosw6.Products(parameter, r)
 if err != nil {
     log.Fatalln(err)
 } else {
@@ -134,8 +139,13 @@ r := gosw6.Request{
     BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
 }
 
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
 // Get all categories
-categories, err := gosw6.Categories(r)
+categories, err := gosw6.Categories(parameter, r)
 if err != nil {
     log.Fatalln(err)
 } else {
@@ -280,8 +290,13 @@ r := gosw6.Request{
     BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
 }
 
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
 // Get all product manufacturers
-productManufacturers, err := gosw6.ProductManufacturers(r)
+productManufacturers, err := gosw6.ProductManufacturers(parameter, r)
 if err != nil {
     log.Fatalln(err)
 } else {
@@ -398,8 +413,13 @@ r := gosw6.Request{
     BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
 }
 
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
 // Get all property groups
-propertyGroups, err := gosw6.PropertyGroups(r)
+propertyGroups, err := gosw6.PropertyGroups(parameter, r)
 if err != nil {
     log.Fatalln(err)
 } else {
@@ -522,8 +542,13 @@ r := gosw6.Request{
     BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
 }
 
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
 // Get all property group options
-propertyGroupOptions, err := gosw6.PropertyGroupOptions("7c1ea10d2c3844f1ba2ab88fbcda1df2", r)
+propertyGroupOptions, err := gosw6.PropertyGroupOptions("7c1ea10d2c3844f1ba2ab88fbcda1df2", parameter, r)
 if err != nil {
     log.Fatalln(err)
 } else {

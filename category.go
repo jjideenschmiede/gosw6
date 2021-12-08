@@ -13,6 +13,8 @@ package gosw6
 
 import (
 	"encoding/json"
+	"fmt"
+	"net/url"
 	"time"
 )
 
@@ -288,7 +290,7 @@ type UpdateCategoryReturn struct {
 }
 
 // Categories are to get a list of all categories
-func Categories(r Request) (CategoriesReturn, error) {
+func Categories(parameter map[string]string, r Request) (CategoriesReturn, error) {
 
 	// Set config for request
 	c := Config{
@@ -296,6 +298,25 @@ func Categories(r Request) (CategoriesReturn, error) {
 		Method: "GET",
 		Body:   nil,
 	}
+
+	// Parse url & add attributes
+	parse, err := url.Parse(c.Path)
+	if err != nil {
+		return CategoriesReturn{}, err
+	}
+
+	newUrl, err := url.ParseQuery(parse.RawQuery)
+	if err != nil {
+		return CategoriesReturn{}, err
+	}
+
+	for index, value := range parameter {
+		newUrl.Add(index, value)
+	}
+
+	// Set new url
+	parse.RawQuery = newUrl.Encode()
+	c.Path = fmt.Sprintf("%s", parse)
 
 	// Send request
 	response, err := c.Send(r)
