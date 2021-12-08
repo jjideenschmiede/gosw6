@@ -19,6 +19,11 @@ import (
 	"os"
 )
 
+// CreateMediaBody is to structure the body data
+type CreateMediaBody struct {
+	MediaFolderId string `json:"mediaFolderId"`
+}
+
 // CreateMediaReturn is to decode the json return
 type CreateMediaReturn struct {
 	Location string `json:"location"`
@@ -89,13 +94,19 @@ type UploadLocalMediaReturn struct {
 }
 
 // CreateMedia is to create a new media
-func CreateMedia(r Request) (CreateMediaReturn, error) {
+func CreateMedia(body CreateMediaBody, r Request) (CreateMediaReturn, error) {
+
+	// Convert body data
+	convert, err := json.Marshal(body)
+	if err != nil {
+		return CreateMediaReturn{}, err
+	}
 
 	// Set config for request
 	c := Config{
 		Path:   "/api/media",
 		Method: "POST",
-		Body:   nil,
+		Body:   convert,
 	}
 
 	// Send request

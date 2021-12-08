@@ -639,8 +639,13 @@ r := gosw6.Request{
     BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
 }
 
+// Define body
+body := gosw6.CreateMediaBody{
+    MediaFolderId: "bce5a570d3004c9c86471c7acb661593",
+}
+
 // Create a media
-createMedia, err := CreateMedia(r)
+createMedia, err := gosw6.CreateMedia(body, r)
 if err != nil {
     log.Fatalln(err)
 } else {
