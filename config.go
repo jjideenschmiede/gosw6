@@ -19,8 +19,10 @@ import (
 // Config is to define config data
 type Config struct {
 	Path, Method string
+	ContentType  string
 	Body         []byte
 	AccessToken  bool
+	UploadMedia  bool
 }
 
 // Request is to define the request data
@@ -44,8 +46,14 @@ func (c *Config) Send(r Request) (*http.Response, error) {
 	}
 
 	// Define header & check if access token is active
-	request.Header.Set("Accept", "application/json")
-	request.Header.Set("Content-Type", "application/json")
+	switch {
+	case c.UploadMedia:
+		request.Header.Set("Accept", "application/vnd.api+json")
+		request.Header.Set("Content-Type", "image/png")
+	default:
+		request.Header.Set("Accept", "application/json")
+		request.Header.Set("Content-Type", "application/json")
+	}
 
 	if !c.AccessToken {
 		request.Header.Set("Authorization", r.BearerToken)
