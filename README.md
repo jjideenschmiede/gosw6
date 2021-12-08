@@ -852,3 +852,122 @@ if err != nil {
     log.Println(deleteMediaFolder)
 }
 ```
+
+## Orders
+
+### Get all orders
+
+If you want to get a list of all orders, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
+// Get a list of all orders
+orders, err := gosw6.Orders(parameter, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(orders)
+}
+```
+
+### Get a order
+
+If you want to get an order by id, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Get an order by id
+order, err := gosw6.Order("82cb57d2e4f645f2b5c39c9913f9354f", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(order)
+}
+```
+
+### Change order delivery state
+
+If you want to change the order delivery state by id, you can do it with this function.
+
+The State is deposited here as follows. Please always specify the int.
+
+| Integer |           Value            |
+|---------|:--------------------------:|
+| 0       |           reopen           |
+| 1       |           retour           |
+| 2       |      retour_partially      |
+| 3       |            ship            |
+| 4       |       ship_partially       |
+| 5       |           cancel           |
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := gosw6.OrderDeliveryStateBody{
+    DocumentIds: nil,
+    SendMail:    false,
+}
+
+// Change order delivery state
+orderDeliveryState, err := gosw6.OrderDeliveryState("8d406c6191204dc69e14048409be74fc", 3, body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(orderDeliveryState)
+}
+```
+
+### Change order state
+
+If you want to change the order state by id, you can do it with this function.
+
+The State is deposited here as follows. Please always specify the int.
+
+| Integer |  Value   |
+|---------|:--------:|
+| 0       |  reopen  |
+| 1       | process  |
+| 2       | complete |
+| 3       |  cancel  |
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := gosw6.OrderStateBody{
+    DocumentIds: nil,
+    SendMail:    false,
+}
+
+// Change order state
+orderState, err := gosw6.OrderState("82cb57d2e4f645f2b5c39c9913f9354f", 1, body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(orderState)
+}
+```
