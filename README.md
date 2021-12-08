@@ -20,6 +20,7 @@ Currently we have the following functions covered:
 - [Property groups](https://github.com/jjideenschmiede/gosw6#property-group)
 - [Property groups option](https://github.com/jjideenschmiede/gosw6#property-group-option)
 - [Media](https://github.com/jjideenschmiede/gosw6#media)
+- [Media folder](https://github.com/jjideenschmiede/gosw6#media-folder)
 
 ## Access token
 
@@ -701,5 +702,128 @@ if err != nil {
     log.Fatalln(err)
 } else {
     log.Println(uploadMedia)
+}
+```
+
+## Media folder
+
+### Get all media folders
+
+If you want to get a list of all media folders, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
+// Get all media folders
+mediaFolders, err := gosw6.MediaFolders(parameter, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(mediaFolders)
+}
+```
+
+### Get a media folder
+
+If you want to read a specific media folder, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Get a media folder by id
+mediaFolder, err := gosw6.MediaFolder("bce5a570d3004c9c86471c7acb661593", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(mediaFolder)
+}
+```
+
+### Create a media folder
+
+If you want to create a media folder option, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := gosw6.CreateMediaFolderBody{
+    ConfigurationId:        "a0ae2934fc094b3086b06196a1125320",
+    Name:                   "test-product",
+    ParentId:               "bce5a570d3004c9c86471c7acb661593",
+    UseParentConfiguration: true,
+}
+
+// Create a media folder
+createMediaFolder, err := gosw6.CreateMediaFolder(body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(createMediaFolder)
+}
+```
+
+### Update a media folder
+
+If you want to update a media folder, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := gosw6.UpdateMediaFolderBody{
+    ConfigurationId:        "a0ae2934fc094b3086b06196a1125320",
+    Name:                   "test-product-v2",
+    ParentId:               "bce5a570d3004c9c86471c7acb661593",
+    UseParentConfiguration: true,
+}
+
+// Update a media folder
+updateMediaFolder, err := gosw6.UpdateMediaFolder("035b6e7440d04fc4b0a982cbce4a27c7", body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(updateMediaFolder)
+}
+```
+
+### Delete a media folder
+
+If you want to delete a media folder, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Delete a media folder
+deleteMediaFolder, err := gosw6.DeleteMediaFolder("035b6e7440d04fc4b0a982cbce4a27c7", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(deleteMediaFolder)
 }
 ```
