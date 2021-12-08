@@ -11,7 +11,9 @@
 
 package gosw6
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 // RefreshTokenBody is to structure the data
 type RefreshTokenBody struct {

@@ -11,7 +11,9 @@
 
 package gosw6
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 // AccessTokenBody is to structure the data
 type AccessTokenBody struct {
