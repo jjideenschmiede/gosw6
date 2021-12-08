@@ -13,6 +13,8 @@ package gosw6
 
 import (
 	"encoding/json"
+	"fmt"
+	"net/url"
 	"time"
 )
 
@@ -184,7 +186,7 @@ type UpdatePropertyGroupOptionReturn struct {
 }
 
 // PropertyGroupOptions are to get a list of all property group options
-func PropertyGroupOptions(id string, r Request) (PropertyGroupOptionsReturn, error) {
+func PropertyGroupOptions(id string, parameter map[string]string, r Request) (PropertyGroupOptionsReturn, error) {
 
 	// Set config for request
 	c := Config{
@@ -192,6 +194,25 @@ func PropertyGroupOptions(id string, r Request) (PropertyGroupOptionsReturn, err
 		Method: "GET",
 		Body:   nil,
 	}
+
+	// Parse url & add attributes
+	parse, err := url.Parse(c.Path)
+	if err != nil {
+		return PropertyGroupOptionsReturn{}, err
+	}
+
+	newUrl, err := url.ParseQuery(parse.RawQuery)
+	if err != nil {
+		return PropertyGroupOptionsReturn{}, err
+	}
+
+	for index, value := range parameter {
+		newUrl.Add(index, value)
+	}
+
+	// Set new url
+	parse.RawQuery = newUrl.Encode()
+	c.Path = fmt.Sprintf("%s", parse)
 
 	// Send request
 	response, err := c.Send(r)

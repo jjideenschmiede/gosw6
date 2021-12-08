@@ -13,6 +13,8 @@ package gosw6
 
 import (
 	"encoding/json"
+	"fmt"
+	"net/url"
 	"time"
 )
 
@@ -197,7 +199,7 @@ type DeleteProductManufacturerReturn struct {
 }
 
 // ProductManufacturers are to get a list of all product manufacturers
-func ProductManufacturers(r Request) (ProductManufacturersReturn, error) {
+func ProductManufacturers(parameter map[string]string, r Request) (ProductManufacturersReturn, error) {
 
 	// Set config for request
 	c := Config{
@@ -205,6 +207,25 @@ func ProductManufacturers(r Request) (ProductManufacturersReturn, error) {
 		Method: "GET",
 		Body:   nil,
 	}
+
+	// Parse url & add attributes
+	parse, err := url.Parse(c.Path)
+	if err != nil {
+		return ProductManufacturersReturn{}, err
+	}
+
+	newUrl, err := url.ParseQuery(parse.RawQuery)
+	if err != nil {
+		return ProductManufacturersReturn{}, err
+	}
+
+	for index, value := range parameter {
+		newUrl.Add(index, value)
+	}
+
+	// Set new url
+	parse.RawQuery = newUrl.Encode()
+	c.Path = fmt.Sprintf("%s", parse)
 
 	// Send request
 	response, err := c.Send(r)

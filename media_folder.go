@@ -18,31 +18,27 @@ import (
 	"time"
 )
 
-// PropertyGroupsReturn is to decode the json data
-type PropertyGroupsReturn struct {
+// MediaFoldersReturn is to decode the json data
+type MediaFoldersReturn struct {
 	Total int `json:"total"`
 	Data  []struct {
-		Name                       string      `json:"name"`
-		DisplayType                string      `json:"displayType"`
-		SortingType                string      `json:"sortingType"`
-		Description                string      `json:"description"`
-		Position                   int         `json:"position"`
-		Filterable                 bool        `json:"filterable"`
-		VisibleOnProductDetailPage bool        `json:"visibleOnProductDetailPage"`
-		Options                    interface{} `json:"options"`
-		Translations               interface{} `json:"translations"`
-		UniqueIdentifier           string      `json:"_uniqueIdentifier"`
-		VersionId                  interface{} `json:"versionId"`
-		Translated                 struct {
-			Name         string `json:"name"`
-			Description  string `json:"description"`
-			Position     int    `json:"position"`
-			CustomFields struct {
-			} `json:"customFields"`
-		} `json:"translated"`
-		CreatedAt  time.Time   `json:"createdAt"`
-		UpdatedAt  interface{} `json:"updatedAt"`
-		Extensions struct {
+		Name                   string        `json:"name"`
+		ParentId               string        `json:"parentId"`
+		Parent                 interface{}   `json:"parent"`
+		ChildCount             int           `json:"childCount"`
+		Media                  interface{}   `json:"media"`
+		ConfigurationId        string        `json:"configurationId"`
+		Configuration          interface{}   `json:"configuration"`
+		UseParentConfiguration bool          `json:"useParentConfiguration"`
+		Children               interface{}   `json:"children"`
+		DefaultFolder          interface{}   `json:"defaultFolder"`
+		DefaultFolderId        string        `json:"defaultFolderId"`
+		UniqueIdentifier       string        `json:"_uniqueIdentifier"`
+		VersionId              interface{}   `json:"versionId"`
+		Translated             []interface{} `json:"translated"`
+		CreatedAt              time.Time     `json:"createdAt"`
+		UpdatedAt              interface{}   `json:"updatedAt"`
+		Extensions             struct {
 			ForeignKeys struct {
 				ApiAlias   interface{}   `json:"apiAlias"`
 				Extensions []interface{} `json:"extensions"`
@@ -72,30 +68,26 @@ type PropertyGroupsReturn struct {
 	} `json:"errors"`
 }
 
-// PropertyGroupReturn is to decode the json data
-type PropertyGroupReturn struct {
+// MediaFolderReturn is to decode the json data
+type MediaFolderReturn struct {
 	Data struct {
-		Name                       string      `json:"name"`
-		DisplayType                string      `json:"displayType"`
-		SortingType                string      `json:"sortingType"`
-		Description                string      `json:"description"`
-		Position                   int         `json:"position"`
-		Filterable                 bool        `json:"filterable"`
-		VisibleOnProductDetailPage bool        `json:"visibleOnProductDetailPage"`
-		Options                    interface{} `json:"options"`
-		Translations               interface{} `json:"translations"`
-		UniqueIdentifier           string      `json:"_uniqueIdentifier"`
-		VersionId                  interface{} `json:"versionId"`
-		Translated                 struct {
-			Name         string `json:"name"`
-			Description  string `json:"description"`
-			Position     int    `json:"position"`
-			CustomFields struct {
-			} `json:"customFields"`
-		} `json:"translated"`
-		CreatedAt  time.Time   `json:"createdAt"`
-		UpdatedAt  interface{} `json:"updatedAt"`
-		Extensions struct {
+		Name                   string        `json:"name"`
+		ParentId               interface{}   `json:"parentId"`
+		Parent                 interface{}   `json:"parent"`
+		ChildCount             int           `json:"childCount"`
+		Media                  interface{}   `json:"media"`
+		ConfigurationId        string        `json:"configurationId"`
+		Configuration          interface{}   `json:"configuration"`
+		UseParentConfiguration bool          `json:"useParentConfiguration"`
+		Children               interface{}   `json:"children"`
+		DefaultFolder          interface{}   `json:"defaultFolder"`
+		DefaultFolderId        string        `json:"defaultFolderId"`
+		UniqueIdentifier       string        `json:"_uniqueIdentifier"`
+		VersionId              interface{}   `json:"versionId"`
+		Translated             []interface{} `json:"translated"`
+		CreatedAt              time.Time     `json:"createdAt"`
+		UpdatedAt              interface{}   `json:"updatedAt"`
+		Extensions             struct {
 			ForeignKeys struct {
 				ApiAlias   interface{}   `json:"apiAlias"`
 				Extensions []interface{} `json:"extensions"`
@@ -124,19 +116,16 @@ type PropertyGroupReturn struct {
 	} `json:"errors"`
 }
 
-// CreatePropertyGroupBody is to structure the body data
-type CreatePropertyGroupBody struct {
-	Name                       string `json:"name"`
-	DisplayType                string `json:"displayType"`
-	SortingType                string `json:"sortingType"`
-	Description                string `json:"description"`
-	Position                   int    `json:"position"`
-	Filterable                 bool   `json:"filterable"`
-	VisibleOnProductDetailPage bool   `json:"visibleOnProductDetailPage"`
+// CreateMediaFolderBody is to structure the body data
+type CreateMediaFolderBody struct {
+	ConfigurationId        string `json:"configurationId"`
+	Name                   string `json:"name"`
+	ParentId               string `json:"parentId"`
+	UseParentConfiguration bool   `json:"useParentConfiguration"`
 }
 
-// CreatePropertyGroupBodyReturn is to decode the json data
-type CreatePropertyGroupBodyReturn struct {
+// CreateMediaFolderReturn is to decode the json data
+type CreateMediaFolderReturn struct {
 	Location string `json:"location"`
 	Errors   []struct {
 		Code   string `json:"code"`
@@ -157,20 +146,18 @@ type CreatePropertyGroupBodyReturn struct {
 	} `json:"errors"`
 }
 
-// UpdatePropertyGroupBody is to structure the body data
-type UpdatePropertyGroupBody struct {
-	Name                       string `json:"name"`
-	DisplayType                string `json:"displayType"`
-	SortingType                string `json:"sortingType"`
-	Description                string `json:"description"`
-	Position                   int    `json:"position"`
-	Filterable                 bool   `json:"filterable"`
-	VisibleOnProductDetailPage bool   `json:"visibleOnProductDetailPage"`
+// UpdateMediaFolderBody is to structure the body data
+type UpdateMediaFolderBody struct {
+	ConfigurationId        string `json:"configurationId"`
+	Name                   string `json:"name"`
+	ParentId               string `json:"parentId"`
+	UseParentConfiguration bool   `json:"useParentConfiguration"`
 }
 
-// UpdatePropertyGroupBodyReturn is to decode the json data
-type UpdatePropertyGroupBodyReturn struct {
-	Errors []struct {
+// UpdateMediaFolderReturn is to decode the json data
+type UpdateMediaFolderReturn struct {
+	Location string `json:"location"`
+	Errors   []struct {
 		Code   string `json:"code"`
 		Status string `json:"status"`
 		Title  string `json:"title"`
@@ -189,9 +176,10 @@ type UpdatePropertyGroupBodyReturn struct {
 	} `json:"errors"`
 }
 
-// DeletePropertyGroupBodyReturn is to decode the json data
-type DeletePropertyGroupBodyReturn struct {
-	Errors []struct {
+// DeleteMediaFolderReturn is to decode the json data
+type DeleteMediaFolderReturn struct {
+	Location string `json:"location"`
+	Errors   []struct {
 		Code   string `json:"code"`
 		Status string `json:"status"`
 		Title  string `json:"title"`
@@ -210,12 +198,12 @@ type DeletePropertyGroupBodyReturn struct {
 	} `json:"errors"`
 }
 
-// PropertyGroups are to get a list of all property groups
-func PropertyGroups(parameter map[string]string, r Request) (PropertyGroupsReturn, error) {
+// MediaFolders are to get a list of all media folders
+func MediaFolders(parameter map[string]string, r Request) (MediaFoldersReturn, error) {
 
 	// Set config for request
 	c := Config{
-		Path:   "/api/property-group",
+		Path:   "/api/media-folder",
 		Method: "GET",
 		Body:   nil,
 	}
@@ -223,12 +211,12 @@ func PropertyGroups(parameter map[string]string, r Request) (PropertyGroupsRetur
 	// Parse url & add attributes
 	parse, err := url.Parse(c.Path)
 	if err != nil {
-		return PropertyGroupsReturn{}, err
+		return MediaFoldersReturn{}, err
 	}
 
 	newUrl, err := url.ParseQuery(parse.RawQuery)
 	if err != nil {
-		return PropertyGroupsReturn{}, err
+		return MediaFoldersReturn{}, err
 	}
 
 	for index, value := range parameter {
@@ -242,18 +230,18 @@ func PropertyGroups(parameter map[string]string, r Request) (PropertyGroupsRetur
 	// Send request
 	response, err := c.Send(r)
 	if err != nil {
-		return PropertyGroupsReturn{}, err
+		return MediaFoldersReturn{}, err
 	}
 
 	// Close request
 	defer response.Body.Close()
 
 	// Decode data
-	var decode PropertyGroupsReturn
+	var decode MediaFoldersReturn
 
 	err = json.NewDecoder(response.Body).Decode(&decode)
 	if err != nil {
-		return PropertyGroupsReturn{}, err
+		return MediaFoldersReturn{}, err
 	}
 
 	// Return data
@@ -261,12 +249,12 @@ func PropertyGroups(parameter map[string]string, r Request) (PropertyGroupsRetur
 
 }
 
-// PropertyGroup is to get a specific product property group by id
-func PropertyGroup(id string, r Request) (PropertyGroupReturn, error) {
+// MediaFolder are to get a specific product by id
+func MediaFolder(id string, r Request) (MediaFolderReturn, error) {
 
 	// Set config for request
 	c := Config{
-		Path:   "/api/property-group/" + id,
+		Path:   "/api/media-folder/" + id,
 		Method: "GET",
 		Body:   nil,
 	}
@@ -274,18 +262,18 @@ func PropertyGroup(id string, r Request) (PropertyGroupReturn, error) {
 	// Send request
 	response, err := c.Send(r)
 	if err != nil {
-		return PropertyGroupReturn{}, err
+		return MediaFolderReturn{}, err
 	}
 
 	// Close request
 	defer response.Body.Close()
 
 	// Decode data
-	var decode PropertyGroupReturn
+	var decode MediaFolderReturn
 
 	err = json.NewDecoder(response.Body).Decode(&decode)
 	if err != nil {
-		return PropertyGroupReturn{}, err
+		return MediaFolderReturn{}, err
 	}
 
 	// Return data
@@ -293,18 +281,18 @@ func PropertyGroup(id string, r Request) (PropertyGroupReturn, error) {
 
 }
 
-// CreatePropertyGroup is to create a product property group
-func CreatePropertyGroup(body CreatePropertyGroupBody, r Request) (CreatePropertyGroupBodyReturn, error) {
+// CreateMediaFolder is to create a media folder
+func CreateMediaFolder(body CreateMediaFolderBody, r Request) (CreateMediaFolderReturn, error) {
 
 	// Convert body data
 	convert, err := json.Marshal(body)
 	if err != nil {
-		return CreatePropertyGroupBodyReturn{}, err
+		return CreateMediaFolderReturn{}, err
 	}
 
 	// Set config for request
 	c := Config{
-		Path:   "/api/property-group",
+		Path:   "/api/media-folder",
 		Method: "POST",
 		Body:   convert,
 	}
@@ -312,20 +300,20 @@ func CreatePropertyGroup(body CreatePropertyGroupBody, r Request) (CreatePropert
 	// Send request
 	response, err := c.Send(r)
 	if err != nil {
-		return CreatePropertyGroupBodyReturn{}, err
+		return CreateMediaFolderReturn{}, err
 	}
 
 	// Close request
 	defer response.Body.Close()
 
 	// Decode data
-	var decode CreatePropertyGroupBodyReturn
+	var decode CreateMediaFolderReturn
 
 	// Check response header
 	if response.Status != "204 No Content" {
 		err = json.NewDecoder(response.Body).Decode(&decode)
 		if err != nil {
-			return CreatePropertyGroupBodyReturn{}, err
+			return CreateMediaFolderReturn{}, err
 		}
 	}
 
@@ -337,18 +325,18 @@ func CreatePropertyGroup(body CreatePropertyGroupBody, r Request) (CreatePropert
 
 }
 
-// UpdatePropertyGroup is to update a product property group
-func UpdatePropertyGroup(id string, body UpdatePropertyGroupBody, r Request) (UpdatePropertyGroupBodyReturn, error) {
+// UpdateMediaFolder is to update a media folder
+func UpdateMediaFolder(id string, body UpdateMediaFolderBody, r Request) (UpdateMediaFolderReturn, error) {
 
 	// Convert body data
 	convert, err := json.Marshal(body)
 	if err != nil {
-		return UpdatePropertyGroupBodyReturn{}, err
+		return UpdateMediaFolderReturn{}, err
 	}
 
 	// Set config for request
 	c := Config{
-		Path:   "/api/property-group/" + id,
+		Path:   "/api/media-folder/" + id,
 		Method: "PATCH",
 		Body:   convert,
 	}
@@ -356,20 +344,20 @@ func UpdatePropertyGroup(id string, body UpdatePropertyGroupBody, r Request) (Up
 	// Send request
 	response, err := c.Send(r)
 	if err != nil {
-		return UpdatePropertyGroupBodyReturn{}, err
+		return UpdateMediaFolderReturn{}, err
 	}
 
 	// Close request
 	defer response.Body.Close()
 
 	// Decode data
-	var decode UpdatePropertyGroupBodyReturn
+	var decode UpdateMediaFolderReturn
 
 	// Check response header
 	if response.Status != "204 No Content" {
 		err = json.NewDecoder(response.Body).Decode(&decode)
 		if err != nil {
-			return UpdatePropertyGroupBodyReturn{}, err
+			return UpdateMediaFolderReturn{}, err
 		}
 	}
 
@@ -378,12 +366,12 @@ func UpdatePropertyGroup(id string, body UpdatePropertyGroupBody, r Request) (Up
 
 }
 
-// DeletePropertyGroup is to delete a product property group
-func DeletePropertyGroup(id string, r Request) (DeletePropertyGroupBodyReturn, error) {
+// DeleteMediaFolder is to delete a media folder
+func DeleteMediaFolder(id string, r Request) (DeleteMediaFolderReturn, error) {
 
 	// Set config for request
 	c := Config{
-		Path:   "/api/property-group/" + id,
+		Path:   "/api/media-folder/" + id,
 		Method: "DELETE",
 		Body:   nil,
 	}
@@ -391,20 +379,20 @@ func DeletePropertyGroup(id string, r Request) (DeletePropertyGroupBodyReturn, e
 	// Send request
 	response, err := c.Send(r)
 	if err != nil {
-		return DeletePropertyGroupBodyReturn{}, err
+		return DeleteMediaFolderReturn{}, err
 	}
 
 	// Close request
 	defer response.Body.Close()
 
 	// Decode data
-	var decode DeletePropertyGroupBodyReturn
+	var decode DeleteMediaFolderReturn
 
 	// Check response header
 	if response.Status != "204 No Content" {
 		err = json.NewDecoder(response.Body).Decode(&decode)
 		if err != nil {
-			return DeletePropertyGroupBodyReturn{}, err
+			return DeleteMediaFolderReturn{}, err
 		}
 	}
 
