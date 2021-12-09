@@ -163,7 +163,7 @@ body := gosw6.CreateProductBody{
     Length:             nil,
     ReleaseDate:        time.Now().Format("2006-01-02T15:04:05.000+00:00"),
     Name:               "J&J Afterware6",
-    Keywords:           nil,
+    Tags:               []gosw6.CreateProductBodyTags{},
     Description:        "",
     MetaDescription:    "",
     MetaTitle:          "",
@@ -172,6 +172,11 @@ body := gosw6.CreateProductBody{
         Name:    "Standard rate",
     },
     CoverId: "e5b555b068d046c082f929d5d6b3db28",
+    Properties: []gosw6.CreateProductBodyProperties{},
+    Categories: []gosw6.CreateProductBodyCategories{},
+    CustomSearchKeywords: []string{
+        "New custom search keyword",
+    },
 }
 
 // Add price
@@ -194,6 +199,16 @@ body.PurchasePrices = append(body.PurchasePrices, gosw6.CreateProductBodyPurchas
     Net:        11000,
     Gross:      13090,
     Linked:     true,
+})
+
+// Add tags
+body.Tags = append(body.Tags, gosw6.CreateProductBodyTags{
+    Name: "Neuster Scheiß",
+})
+
+// Add category
+body.Categories = append(body.Categories, gosw6.CreateProductBodyCategories{
+    Id: "d9cc3869c4b64b15ad19c50088e339be",
 })
 
 // Create a product
@@ -241,7 +256,7 @@ body := gosw6.UpdateProductBody{
     Length:             nil,
     ReleaseDate:        time.Now().Format("2006-01-02T15:04:05.000+00:00"),
     Name:               "J&J Afterware6 v2",
-    Keywords:           nil,
+    Tags:               []gosw6.UpdateProductBodyTags{},
     Description:        "",
     MetaDescription:    "",
     MetaTitle:          "",
@@ -250,6 +265,11 @@ body := gosw6.UpdateProductBody{
         Name:    "Standard rate",
     },
     CoverId: "e5b555b068d046c082f929d5d6b3db28",
+    Properties: []gosw6.UpdateProductBodyProperties{},
+    Categories: []gosw6.UpdateProductBodyCategories{},
+    CustomSearchKeywords: []string{
+        "New custom search keyword",
+    },
 }
 
 // Add price
@@ -272,6 +292,16 @@ body.PurchasePrices = append(body.PurchasePrices, gosw6.UpdateProductBodyPurchas
     Net:        11000,
     Gross:      13090,
     Linked:     true,
+})
+
+// Add tags
+body.Tags = append(body.Tags, gosw6.UpdateProductBodyTags{
+    Name: "Neuster Scheiß",
+})
+
+// Add category
+body.Categories = append(body.Categories, gosw6.UpdateProductBodyCategories{
+    Id: "d9cc3869c4b64b15ad19c50088e339be",
 })
 
 // Update a product
