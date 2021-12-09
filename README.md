@@ -143,7 +143,7 @@ body := gosw6.CreateProductBody{
     ParentId:           nil,
     ManufacturerId:     "6b4df46cb3bc48c5a9b7cb1ecd896ae8",
     Active:             true,
-    Price:              []gosw6.CreateProductBodyPrice{},
+    Price:              []*gosw6.CreateProductBodyPrice{},
     ManufacturerNumber: "JJAW2021",
     Ean:                "1234894781274382",
     ProductNumber:      "SW1202001",
@@ -155,7 +155,7 @@ body := gosw6.CreateProductBody{
     MaxPurchase:        100,
     MinPurchase:        1,
     ShippingFree:       true,
-    PurchasePrices:     []gosw6.CreateProductBodyPurchasePrices{},
+    PurchasePrices:     []*gosw6.CreateProductBodyPurchasePrices{},
     MarkAsTopseller:    true,
     Weight:             nil,
     Width:              nil,
@@ -163,24 +163,24 @@ body := gosw6.CreateProductBody{
     Length:             nil,
     ReleaseDate:        time.Now().Format("2006-01-02T15:04:05.000+00:00"),
     Name:               "J&J Afterware6",
-    Tags:               []gosw6.CreateProductBodyTags{},
+    Tags:               []*gosw6.CreateProductBodyTags{},
     Description:        "",
     MetaDescription:    "",
     MetaTitle:          "",
-    Tax: gosw6.CreateProductBodyTax{
+    Tax: &gosw6.CreateProductBodyTax{
         TaxRate: 19,
         Name:    "Standard rate",
     },
     CoverId: "e5b555b068d046c082f929d5d6b3db28",
-    Properties: []gosw6.CreateProductBodyProperties{},
-    Categories: []gosw6.CreateProductBodyCategories{},
+    Properties: []*gosw6.CreateProductBodyProperties{},
+    Categories: []*gosw6.CreateProductBodyCategories{},
     CustomSearchKeywords: []string{
         "New custom search keyword",
     },
 }
 
 // Add price
-body.Price = append(body.Price, gosw6.CreateProductBodyPrice{
+body.Price = append(body.Price, &gosw6.CreateProductBodyPrice{
     CurrencyId: "b7d2554b0ce847cd82f3ac9bd1c0dfca",
     Net:        16.806722689076,
     Gross:      20,
@@ -194,7 +194,7 @@ body.Price = append(body.Price, gosw6.CreateProductBodyPrice{
 })
 
 // Add purchase price
-body.PurchasePrices = append(body.PurchasePrices, gosw6.CreateProductBodyPurchasePrices{
+body.PurchasePrices = append(body.PurchasePrices, &gosw6.CreateProductBodyPurchasePrices{
     CurrencyId: "b7d2554b0ce847cd82f3ac9bd1c0dfca",
     Net:        11000,
     Gross:      13090,
@@ -202,12 +202,12 @@ body.PurchasePrices = append(body.PurchasePrices, gosw6.CreateProductBodyPurchas
 })
 
 // Add tags
-body.Tags = append(body.Tags, gosw6.CreateProductBodyTags{
+body.Tags = append(body.Tags, &gosw6.CreateProductBodyTags{
     Name: "Neuster Scheiß",
 })
 
 // Add category
-body.Categories = append(body.Categories, gosw6.CreateProductBodyCategories{
+body.Categories = append(body.Categories, &gosw6.CreateProductBodyCategories{
     Id: "d9cc3869c4b64b15ad19c50088e339be",
 })
 
@@ -236,7 +236,7 @@ body := gosw6.UpdateProductBody{
     ParentId:           nil,
     ManufacturerId:     "6b4df46cb3bc48c5a9b7cb1ecd896ae8",
     Active:             true,
-    Price:              []gosw6.UpdateProductBodyPrice{},
+    Price:              []*gosw6.UpdateProductBodyPrice{},
     ManufacturerNumber: "JJAW2021",
     Ean:                "1234894781274382",
     ProductNumber:      "SW1202001",
@@ -248,7 +248,7 @@ body := gosw6.UpdateProductBody{
     MaxPurchase:        100,
     MinPurchase:        1,
     ShippingFree:       true,
-    PurchasePrices:     []gosw6.UpdateProductBodyPurchasePrices{},
+    PurchasePrices:     []*gosw6.UpdateProductBodyPurchasePrices{},
     MarkAsTopseller:    true,
     Weight:             nil,
     Width:              nil,
@@ -256,24 +256,24 @@ body := gosw6.UpdateProductBody{
     Length:             nil,
     ReleaseDate:        time.Now().Format("2006-01-02T15:04:05.000+00:00"),
     Name:               "J&J Afterware6 v2",
-    Tags:               []gosw6.UpdateProductBodyTags{},
+    Tags:               []*gosw6.UpdateProductBodyTags{},
     Description:        "",
     MetaDescription:    "",
     MetaTitle:          "",
-    Tax: gosw6.UpdateProductBodyTax{
+    Tax: &gosw6.UpdateProductBodyTax{
         TaxRate: 19,
         Name:    "Standard rate",
     },
     CoverId: "e5b555b068d046c082f929d5d6b3db28",
-    Properties: []gosw6.UpdateProductBodyProperties{},
-    Categories: []gosw6.UpdateProductBodyCategories{},
+    Properties: []*gosw6.UpdateProductBodyProperties{},
+    Categories: []*gosw6.UpdateProductBodyCategories{},
     CustomSearchKeywords: []string{
         "New custom search keyword",
     },
 }
 
 // Add price
-body.Price = append(body.Price, gosw6.UpdateProductBodyPrice{
+body.Price = append(body.Price, &gosw6.UpdateProductBodyPrice{
     CurrencyId: "b7d2554b0ce847cd82f3ac9bd1c0dfca",
     Net:        16.806722689076,
     Gross:      20,
@@ -287,7 +287,7 @@ body.Price = append(body.Price, gosw6.UpdateProductBodyPrice{
 })
 
 // Add purchase price
-body.PurchasePrices = append(body.PurchasePrices, gosw6.UpdateProductBodyPurchasePrices{
+body.PurchasePrices = append(body.PurchasePrices, &gosw6.UpdateProductBodyPurchasePrices{
     CurrencyId: "b7d2554b0ce847cd82f3ac9bd1c0dfca",
     Net:        11000,
     Gross:      13090,
@@ -295,12 +295,12 @@ body.PurchasePrices = append(body.PurchasePrices, gosw6.UpdateProductBodyPurchas
 })
 
 // Add tags
-body.Tags = append(body.Tags, gosw6.UpdateProductBodyTags{
+body.Tags = append(body.Tags, &gosw6.UpdateProductBodyTags{
     Name: "Neuster Scheiß",
 })
 
 // Add category
-body.Categories = append(body.Categories, gosw6.UpdateProductBodyCategories{
+body.Categories = append(body.Categories, &gosw6.UpdateProductBodyCategories{
     Id: "d9cc3869c4b64b15ad19c50088e339be",
 })
 
