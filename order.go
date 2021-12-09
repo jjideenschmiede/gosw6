@@ -19,6 +19,20 @@ import (
 )
 
 var (
+	orderTransactionState = map[int]string{
+		0:  "authorize",
+		1:  "paid",
+		2:  "remind",
+		3:  "refund",
+		4:  "fail",
+		5:  "do_pay",
+		6:  "reopen",
+		7:  "chargeback",
+		8:  "paid_partially",
+		9:  "refund_partially",
+		10: "process_unconfirmed",
+		11: "cancel",
+	}
 	orderDelieryState = map[int]string{
 		0: "reopen",
 		1: "retour",
@@ -437,6 +451,65 @@ type OrderReturn struct {
 	} `json:"errors"`
 }
 
+// OrderTransactionStateBody is to structure the body data
+type OrderTransactionStateBody struct {
+	DocumentIds []interface{} `json:"documentIds"`
+	SendMail    bool          `json:"sendMail"`
+}
+
+// OrderTransactionStateReturn is to decode the json data
+type OrderTransactionStateReturn struct {
+	Name                           string      `json:"name"`
+	TechnicalName                  string      `json:"technicalName"`
+	StateMachineId                 string      `json:"stateMachineId"`
+	StateMachine                   interface{} `json:"stateMachine"`
+	FromStateMachineTransitions    interface{} `json:"fromStateMachineTransitions"`
+	ToStateMachineTransitions      interface{} `json:"toStateMachineTransitions"`
+	Translations                   interface{} `json:"translations"`
+	Orders                         interface{} `json:"orders"`
+	OrderTransactions              interface{} `json:"orderTransactions"`
+	OrderDeliveries                interface{} `json:"orderDeliveries"`
+	FromStateMachineHistoryEntries interface{} `json:"fromStateMachineHistoryEntries"`
+	ToStateMachineHistoryEntries   interface{} `json:"toStateMachineHistoryEntries"`
+	UniqueIdentifier               string      `json:"_uniqueIdentifier"`
+	VersionId                      interface{} `json:"versionId"`
+	Translated                     struct {
+		Name         string        `json:"name"`
+		CustomFields []interface{} `json:"customFields"`
+	} `json:"translated"`
+	CreatedAt  time.Time   `json:"createdAt"`
+	UpdatedAt  interface{} `json:"updatedAt"`
+	Extensions struct {
+		ForeignKeys struct {
+			ApiAlias   interface{}   `json:"apiAlias"`
+			Extensions []interface{} `json:"extensions"`
+		} `json:"foreignKeys"`
+		InternalMappingStorage struct {
+			ApiAlias   interface{}   `json:"apiAlias"`
+			Extensions []interface{} `json:"extensions"`
+		} `json:"internal_mapping_storage"`
+	} `json:"extensions"`
+	Id           string      `json:"id"`
+	CustomFields interface{} `json:"customFields"`
+	Errors       []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
 // OrderDeliveryStateBody is to structure the body data
 type OrderDeliveryStateBody struct {
 	DocumentIds []interface{} `json:"documentIds"`
@@ -631,6 +704,44 @@ func Order(id string, r Request) (OrderReturn, error) {
 	err = json.NewDecoder(response.Body).Decode(&decode)
 	if err != nil {
 		return OrderReturn{}, err
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// OrderTransactionState are to change a transaction state of an order
+func OrderTransactionState(id string, state int, body OrderTransactionStateBody, r Request) (OrderTransactionStateReturn, error) {
+
+	// Convert body data
+	convert, err := json.Marshal(body)
+	if err != nil {
+		return OrderTransactionStateReturn{}, err
+	}
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/_action/order_transaction/" + id + "/state/" + orderTransactionState[state],
+		Method: "POST",
+		Body:   convert,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return OrderTransactionStateReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode OrderTransactionStateReturn
+
+	err = json.NewDecoder(response.Body).Decode(&decode)
+	if err != nil {
+		return OrderTransactionStateReturn{}, err
 	}
 
 	// Return data
