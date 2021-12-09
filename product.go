@@ -32,8 +32,8 @@ type ProductsReturn struct {
 		DisplayGroup   string      `json:"displayGroup"`
 		Price          []struct {
 			CurrencyId string        `json:"currencyId"`
-			Net        int           `json:"net"`
-			Gross      int           `json:"gross"`
+			Net        float64       `json:"net"`
+			Gross      float64       `json:"gross"`
 			Linked     bool          `json:"linked"`
 			ListPrice  interface{}   `json:"listPrice"`
 			Percentage interface{}   `json:"percentage"`
@@ -59,8 +59,8 @@ type ProductsReturn struct {
 		ShippingFree       bool        `json:"shippingFree"`
 		PurchasePrices     []struct {
 			CurrencyId string        `json:"currencyId"`
-			Net        int           `json:"net"`
-			Gross      int           `json:"gross"`
+			Net        float64       `json:"net"`
+			Gross      float64       `json:"gross"`
 			Linked     bool          `json:"linked"`
 			ListPrice  interface{}   `json:"listPrice"`
 			Percentage interface{}   `json:"percentage"`
@@ -127,8 +127,8 @@ type ProductsReturn struct {
 			UnitId    interface{} `json:"unitId"`
 			Price     []struct {
 				CurrencyId string        `json:"currencyId"`
-				Net        int           `json:"net"`
-				Gross      int           `json:"gross"`
+				Net        float64       `json:"net"`
+				Gross      float64       `json:"gross"`
 				Linked     bool          `json:"linked"`
 				ListPrice  interface{}   `json:"listPrice"`
 				Percentage interface{}   `json:"percentage"`
@@ -175,50 +175,7 @@ type ProductsReturn struct {
 		CanonicalProductId            interface{} `json:"canonicalProductId"`
 		CanonicalProduct              interface{} `json:"canonicalProduct"`
 		CheapestPriceContainer        struct {
-			Value struct {
-				D8865E0973F47F397Dacf5Ee8802C46 struct {
-					Default struct {
-						ParentId  string      `json:"parent_id"`
-						VariantId string      `json:"variant_id"`
-						RuleId    interface{} `json:"rule_id"`
-						IsRanged  string      `json:"is_ranged"`
-						Price     struct {
-							Cb7D2554B0Ce847Cd82F3Ac9Bd1C0Dfca struct {
-								CurrencyId string `json:"currencyId"`
-								Gross      int    `json:"gross"`
-								Net        int    `json:"net"`
-								Linked     bool   `json:"linked"`
-							} `json:"cb7d2554b0ce847cd82f3ac9bd1c0dfca"`
-						} `json:"price"`
-						MinPurchase   string      `json:"min_purchase"`
-						UnitId        interface{} `json:"unit_id"`
-						PurchaseUnit  interface{} `json:"purchase_unit"`
-						ReferenceUnit interface{} `json:"reference_unit"`
-						ChildCount    string      `json:"child_count"`
-					} `json:"default"`
-				} `json:"3d8865e0973f47f397dacf5ee8802c46,omitempty"`
-				A27Be66Bc743476089A0672290Eed674 struct {
-					Default struct {
-						ParentId  string      `json:"parent_id"`
-						VariantId string      `json:"variant_id"`
-						RuleId    interface{} `json:"rule_id"`
-						IsRanged  string      `json:"is_ranged"`
-						Price     struct {
-							Cb7D2554B0Ce847Cd82F3Ac9Bd1C0Dfca struct {
-								CurrencyId string `json:"currencyId"`
-								Gross      int    `json:"gross"`
-								Net        int    `json:"net"`
-								Linked     bool   `json:"linked"`
-							} `json:"cb7d2554b0ce847cd82f3ac9bd1c0dfca"`
-						} `json:"price"`
-						MinPurchase   string      `json:"min_purchase"`
-						UnitId        interface{} `json:"unit_id"`
-						PurchaseUnit  interface{} `json:"purchase_unit"`
-						ReferenceUnit interface{} `json:"reference_unit"`
-						ChildCount    string      `json:"child_count"`
-					} `json:"default"`
-				} `json:"a27be66bc743476089a0672290eed674,omitempty"`
-			} `json:"value"`
+			Value      interface{}   `json:"value"`
 			Default    interface{}   `json:"default"`
 			Extensions []interface{} `json:"extensions"`
 			ApiAlias   string        `json:"apiAlias"`
@@ -501,6 +458,348 @@ type ProductReturn struct {
 	} `json:"errors"`
 }
 
+// CreateProductBody is to structure the body data
+type CreateProductBody struct {
+	ParentId           interface{}                       `json:"parentId"`
+	ManufacturerId     string                            `json:"manufacturerId"`
+	Active             bool                              `json:"active"`
+	Price              []CreateProductBodyPrice          `json:"price"`
+	ManufacturerNumber string                            `json:"manufacturerNumber"`
+	Ean                string                            `json:"ean"`
+	ProductNumber      string                            `json:"productNumber"`
+	Stock              int                               `json:"stock"`
+	DeliveryTimeId     string                            `json:"deliveryTimeId"`
+	RestockTime        int                               `json:"restockTime"`
+	IsCloseout         bool                              `json:"isCloseout"`
+	PurchaseSteps      int                               `json:"purchaseSteps"`
+	MaxPurchase        int                               `json:"maxPurchase"`
+	MinPurchase        int                               `json:"minPurchase"`
+	ShippingFree       bool                              `json:"shippingFree"`
+	PurchasePrices     []CreateProductBodyPurchasePrices `json:"purchasePrices"`
+	MarkAsTopseller    bool                              `json:"markAsTopseller"`
+	Weight             interface{}                       `json:"weight"`
+	Width              interface{}                       `json:"width"`
+	Height             interface{}                       `json:"height"`
+	Length             interface{}                       `json:"length"`
+	ReleaseDate        string                            `json:"releaseDate"`
+	Name               string                            `json:"name"`
+	Keywords           interface{}                       `json:"keywords"`
+	Description        string                            `json:"description"`
+	MetaDescription    string                            `json:"metaDescription"`
+	MetaTitle          string                            `json:"metaTitle"`
+	Tax                CreateProductBodyTax              `json:"tax"`
+	CoverId            string                            `json:"coverId"`
+}
+
+type CreateProductBodyPrice struct {
+	CurrencyId string                     `json:"currencyId"`
+	Net        float64                    `json:"net"`
+	Gross      float64                    `json:"gross"`
+	Linked     bool                       `json:"linked"`
+	ListPrice  CreateProductBodyListPrice `json:"listPrice"`
+}
+
+type CreateProductBodyListPrice struct {
+	CurrencyId string  `json:"currencyId"`
+	Net        float64 `json:"net"`
+	Gross      float64 `json:"gross"`
+	Linked     bool    `json:"linked"`
+}
+
+type CreateProductBodyPurchasePrices struct {
+	CurrencyId string  `json:"currencyId"`
+	Net        float64 `json:"net"`
+	Gross      float64 `json:"gross"`
+	Linked     bool    `json:"linked"`
+}
+
+type CreateProductBodyTax struct {
+	TaxRate int    `json:"taxRate"`
+	Name    string `json:"name"`
+}
+
+// CreateProductReturn is decode the json data
+type CreateProductReturn struct {
+	Location string `json:"location"`
+	Errors   []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
+// UpdateProductBody is to structure the body data
+type UpdateProductBody struct {
+	ParentId           interface{}                       `json:"parentId"`
+	ManufacturerId     string                            `json:"manufacturerId"`
+	Active             bool                              `json:"active"`
+	Price              []UpdateProductBodyPrice          `json:"price"`
+	ManufacturerNumber string                            `json:"manufacturerNumber"`
+	Ean                string                            `json:"ean"`
+	ProductNumber      string                            `json:"productNumber"`
+	Stock              int                               `json:"stock"`
+	DeliveryTimeId     string                            `json:"deliveryTimeId"`
+	RestockTime        int                               `json:"restockTime"`
+	IsCloseout         bool                              `json:"isCloseout"`
+	PurchaseSteps      int                               `json:"purchaseSteps"`
+	MaxPurchase        int                               `json:"maxPurchase"`
+	MinPurchase        int                               `json:"minPurchase"`
+	ShippingFree       bool                              `json:"shippingFree"`
+	PurchasePrices     []UpdateProductBodyPurchasePrices `json:"purchasePrices"`
+	MarkAsTopseller    bool                              `json:"markAsTopseller"`
+	Weight             interface{}                       `json:"weight"`
+	Width              interface{}                       `json:"width"`
+	Height             interface{}                       `json:"height"`
+	Length             interface{}                       `json:"length"`
+	ReleaseDate        string                            `json:"releaseDate"`
+	Name               string                            `json:"name"`
+	Keywords           interface{}                       `json:"keywords"`
+	Description        string                            `json:"description"`
+	MetaDescription    string                            `json:"metaDescription"`
+	MetaTitle          string                            `json:"metaTitle"`
+	Tax                UpdateProductBodyTax              `json:"tax"`
+	CoverId            string                            `json:"coverId"`
+}
+
+type UpdateProductBodyPrice struct {
+	CurrencyId string                     `json:"currencyId"`
+	Net        float64                    `json:"net"`
+	Gross      float64                    `json:"gross"`
+	Linked     bool                       `json:"linked"`
+	ListPrice  UpdateProductBodyListPrice `json:"listPrice"`
+}
+
+type UpdateProductBodyListPrice struct {
+	CurrencyId string  `json:"currencyId"`
+	Net        float64 `json:"net"`
+	Gross      float64 `json:"gross"`
+	Linked     bool    `json:"linked"`
+}
+
+type UpdateProductBodyPurchasePrices struct {
+	CurrencyId string  `json:"currencyId"`
+	Net        float64 `json:"net"`
+	Gross      float64 `json:"gross"`
+	Linked     bool    `json:"linked"`
+}
+
+type UpdateProductBodyTax struct {
+	TaxRate int    `json:"taxRate"`
+	Name    string `json:"name"`
+}
+
+// UpdateProductReturn is decode the json data
+type UpdateProductReturn struct {
+	Location string `json:"location"`
+	Errors   []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
+// DeleteProductReturn is to decode the json data
+type DeleteProductReturn struct {
+	Errors []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
+// ProductMediaReturn is to decode the json data
+type ProductMediaReturn struct {
+	Total int `json:"total"`
+	Data  []struct {
+		ProductId string `json:"productId"`
+		MediaId   string `json:"mediaId"`
+		Position  int    `json:"position"`
+		Media     struct {
+			UserId        string      `json:"userId"`
+			MimeType      string      `json:"mimeType"`
+			FileExtension string      `json:"fileExtension"`
+			FileSize      int         `json:"fileSize"`
+			Title         interface{} `json:"title"`
+			MetaData      struct {
+				Width  int `json:"width"`
+				Height int `json:"height"`
+				Type   int `json:"type"`
+			} `json:"metaData"`
+			MediaType struct {
+				Name       string        `json:"name"`
+				Flags      []string      `json:"flags"`
+				Extensions []interface{} `json:"extensions"`
+				ApiAlias   string        `json:"apiAlias"`
+			} `json:"mediaType"`
+			UploadedAt           time.Time   `json:"uploadedAt"`
+			Alt                  interface{} `json:"alt"`
+			Url                  string      `json:"url"`
+			FileName             string      `json:"fileName"`
+			User                 interface{} `json:"user"`
+			Translations         interface{} `json:"translations"`
+			Categories           interface{} `json:"categories"`
+			ProductManufacturers interface{} `json:"productManufacturers"`
+			ProductMedia         interface{} `json:"productMedia"`
+			AvatarUser           interface{} `json:"avatarUser"`
+			Thumbnails           []struct {
+				Width            int           `json:"width"`
+				Height           int           `json:"height"`
+				Url              string        `json:"url"`
+				MediaId          string        `json:"mediaId"`
+				Media            interface{}   `json:"media"`
+				UniqueIdentifier string        `json:"_uniqueIdentifier"`
+				VersionId        interface{}   `json:"versionId"`
+				Translated       []interface{} `json:"translated"`
+				CreatedAt        time.Time     `json:"createdAt"`
+				UpdatedAt        interface{}   `json:"updatedAt"`
+				Extensions       struct {
+					ForeignKeys struct {
+						ApiAlias   interface{}   `json:"apiAlias"`
+						Extensions []interface{} `json:"extensions"`
+					} `json:"foreignKeys"`
+				} `json:"extensions"`
+				Id           string      `json:"id"`
+				CustomFields interface{} `json:"customFields"`
+				ApiAlias     string      `json:"apiAlias"`
+			} `json:"thumbnails"`
+			MediaFolderId               string      `json:"mediaFolderId"`
+			MediaFolder                 interface{} `json:"mediaFolder"`
+			HasFile                     bool        `json:"hasFile"`
+			Private                     bool        `json:"private"`
+			PropertyGroupOptions        interface{} `json:"propertyGroupOptions"`
+			MailTemplateMedia           interface{} `json:"mailTemplateMedia"`
+			Tags                        interface{} `json:"tags"`
+			DocumentBaseConfigs         interface{} `json:"documentBaseConfigs"`
+			ShippingMethods             interface{} `json:"shippingMethods"`
+			PaymentMethods              interface{} `json:"paymentMethods"`
+			ProductConfiguratorSettings interface{} `json:"productConfiguratorSettings"`
+			OrderLineItems              interface{} `json:"orderLineItems"`
+			CmsBlocks                   interface{} `json:"cmsBlocks"`
+			CmsSections                 interface{} `json:"cmsSections"`
+			CmsPages                    interface{} `json:"cmsPages"`
+			Documents                   interface{} `json:"documents"`
+			AppPaymentMethods           interface{} `json:"appPaymentMethods"`
+			UniqueIdentifier            string      `json:"_uniqueIdentifier"`
+			VersionId                   interface{} `json:"versionId"`
+			Translated                  struct {
+				Alt          interface{}   `json:"alt"`
+				Title        interface{}   `json:"title"`
+				CustomFields []interface{} `json:"customFields"`
+			} `json:"translated"`
+			CreatedAt  time.Time `json:"createdAt"`
+			UpdatedAt  time.Time `json:"updatedAt"`
+			Extensions struct {
+				ForeignKeys struct {
+					ApiAlias   interface{}   `json:"apiAlias"`
+					Extensions []interface{} `json:"extensions"`
+				} `json:"foreignKeys"`
+				InternalMappingStorage struct {
+					ApiAlias   interface{}   `json:"apiAlias"`
+					Extensions []interface{} `json:"extensions"`
+				} `json:"internal_mapping_storage"`
+			} `json:"extensions"`
+			Id           string      `json:"id"`
+			CustomFields interface{} `json:"customFields"`
+			ApiAlias     string      `json:"apiAlias"`
+		} `json:"media"`
+		Product          interface{}   `json:"product"`
+		UniqueIdentifier string        `json:"_uniqueIdentifier"`
+		VersionId        string        `json:"versionId"`
+		Translated       []interface{} `json:"translated"`
+		CreatedAt        time.Time     `json:"createdAt"`
+		UpdatedAt        interface{}   `json:"updatedAt"`
+		Extensions       struct {
+			ForeignKeys struct {
+				ApiAlias   interface{}   `json:"apiAlias"`
+				Extensions []interface{} `json:"extensions"`
+			} `json:"foreignKeys"`
+		} `json:"extensions"`
+		Id           string      `json:"id"`
+		CustomFields interface{} `json:"customFields"`
+		ApiAlias     string      `json:"apiAlias"`
+	} `json:"data"`
+	Aggregations []interface{} `json:"aggregations"`
+	Errors       []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
+// CreateProductMediaBody is to structure the body data
+type CreateProductMediaBody struct {
+	MediaId string `json:"mediaId"`
+}
+
+// CreateProductMediaReturn is to decode the json data
+type CreateProductMediaReturn struct {
+	Errors []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
 // Products are to get a list of all products
 func Products(parameter map[string]string, r Request) (ProductsReturn, error) {
 
@@ -577,6 +876,218 @@ func Product(id string, r Request) (ProductReturn, error) {
 	err = json.NewDecoder(response.Body).Decode(&decode)
 	if err != nil {
 		return ProductReturn{}, err
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// CreateProduct is to create a product
+func CreateProduct(body CreateProductBody, r Request) (CreateProductReturn, error) {
+
+	// Convert body data
+	convert, err := json.Marshal(body)
+	if err != nil {
+		return CreateProductReturn{}, err
+	}
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product",
+		Method: "POST",
+		Body:   convert,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return CreateProductReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode CreateProductReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return CreateProductReturn{}, err
+		}
+	}
+
+	// Get location in header & set to return struct
+	decode.Location = response.Header.Get("location")
+
+	// Return data
+	return decode, err
+
+}
+
+// UpdateProduct is to update a product
+func UpdateProduct(id string, body UpdateProductBody, r Request) (UpdateProductReturn, error) {
+
+	// Convert body data
+	convert, err := json.Marshal(body)
+	if err != nil {
+		return UpdateProductReturn{}, err
+	}
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + id,
+		Method: "PATCH",
+		Body:   convert,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return UpdateProductReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode UpdateProductReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return UpdateProductReturn{}, err
+		}
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// DeleteProduct is to delete a specific product by id
+func DeleteProduct(id string, r Request) (DeleteProductReturn, error) {
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + id,
+		Method: "DELETE",
+		Body:   nil,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return DeleteProductReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode DeleteProductReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return DeleteProductReturn{}, err
+		}
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// ProductMedia are to get a list of all product media
+func ProductMedia(parameter map[string]string, id string, r Request) (ProductMediaReturn, error) {
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + id + "/media",
+		Method: "GET",
+		Body:   nil,
+	}
+
+	// Parse url & add attributes
+	parse, err := url.Parse(c.Path)
+	if err != nil {
+		return ProductMediaReturn{}, err
+	}
+
+	newUrl, err := url.ParseQuery(parse.RawQuery)
+	if err != nil {
+		return ProductMediaReturn{}, err
+	}
+
+	for index, value := range parameter {
+		newUrl.Add(index, value)
+	}
+
+	// Set new url
+	parse.RawQuery = newUrl.Encode()
+	c.Path = fmt.Sprintf("%s", parse)
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return ProductMediaReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode ProductMediaReturn
+
+	err = json.NewDecoder(response.Body).Decode(&decode)
+	if err != nil {
+		return ProductMediaReturn{}, err
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// CreateProductMedia is to create a product media
+func CreateProductMedia(id string, body CreateProductMediaBody, r Request) (CreateProductMediaReturn, error) {
+
+	// Convert body data
+	convert, err := json.Marshal(body)
+	if err != nil {
+		return CreateProductMediaReturn{}, err
+	}
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + id + "/media",
+		Method: "POST",
+		Body:   convert,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return CreateProductMediaReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode CreateProductMediaReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return CreateProductMediaReturn{}, err
+		}
 	}
 
 	// Return data
