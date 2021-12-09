@@ -21,6 +21,7 @@ Currently we have the following functions covered:
 - [Property groups option](https://github.com/jjideenschmiede/gosw6#property-group-option)
 - [Media](https://github.com/jjideenschmiede/gosw6#media)
 - [Media folder](https://github.com/jjideenschmiede/gosw6#media-folder)
+- [Order](https://github.com/jjideenschmiede/gosw6#order)
 
 ## Access token
 
@@ -853,7 +854,7 @@ if err != nil {
 }
 ```
 
-## Orders
+## Order
 
 ### Get all orders
 
@@ -897,6 +898,49 @@ if err != nil {
     log.Fatalln(err)
 } else {
     log.Println(order)
+}
+```
+
+### Change order transaction state
+
+If you want to change the order transaction state by id, you can do it with this function.
+
+The State is deposited here as follows. Please always specify the int.
+
+| Integer |                Value                 |
+|---------|:------------------------------------:|
+| 0       |              authorize               |
+| 1       |                 paid                 |
+| 2       |                remind                |
+| 3       |                refund                |
+| 4       |                 fail                 |
+| 5       |                do_pay                |
+| 6       |                reopen                |
+| 7       |              chargeback              |
+| 8       |            paid_partially            |
+| 9       |           refund_partially           |
+| 10      |         process_unconfirmed          |
+| 11      |                cancel                |
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := OrderTransactionStateBody{
+    DocumentIds: nil,
+    SendMail:    false,
+}
+
+// Change order transaction state
+orderTransactionState, err := OrderTransactionState("10f36343f5f2440ca439569598b9a0ff", 11, body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(orderTransactionState)
 }
 ```
 
