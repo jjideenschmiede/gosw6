@@ -1,4 +1,4 @@
-# gosw6
+# Library for Shopware 6
 
 [![GitHub go.mod Go version of a Go module](https://img.shields.io/github/go-mod/go-version/jjideenschmiede/gosw6.svg)](https://golang.org/) [![Go](https://github.com/jjideenschmiede/gosw6/actions/workflows/go.yml/badge.svg)](https://github.com/jjideenschmiede/gosw6/actions/workflows/go.yml) [![Go Report Card](https://goreportcard.com/badge/github.com/jjideenschmiede/gosw6)](https://goreportcard.com/report/github.com/jjideenschmiede/gosw6) [![Go Doc](https://godoc.org/github.com/jjideenschmiede/gosw6?status.svg)](https://pkg.go.dev/github.com/jjideenschmiede/gosw6) ![Lines of code](https://img.shields.io/tokei/lines/github/jjideenschmiede/gosw6) [![Developed with <3](https://img.shields.io/badge/Developed%20with-%3C3-19ABFF)](https://jj-dev.de/)
 
@@ -124,6 +124,232 @@ if err != nil {
     log.Fatalln(err)
 } else {
     log.Println(product)
+}
+```
+
+### Create a product
+
+If you want to create a product, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := gosw6.CreateProductBody{
+    ParentId:           nil,
+    ManufacturerId:     "6b4df46cb3bc48c5a9b7cb1ecd896ae8",
+    Active:             true,
+    Price:              []gosw6.CreateProductBodyPrice{},
+    ManufacturerNumber: "JJAW2021",
+    Ean:                "1234894781274382",
+    ProductNumber:      "SW1202001",
+    Stock:              1000,
+    DeliveryTimeId:     "b40a246351694e4089d79c4f0a7dec68",
+    RestockTime:        7,
+    IsCloseout:         false,
+    PurchaseSteps:      1,
+    MaxPurchase:        100,
+    MinPurchase:        1,
+    ShippingFree:       true,
+    PurchasePrices:     []gosw6.CreateProductBodyPurchasePrices{},
+    MarkAsTopseller:    true,
+    Weight:             nil,
+    Width:              nil,
+    Height:             nil,
+    Length:             nil,
+    ReleaseDate:        time.Now().Format("2006-01-02T15:04:05.000+00:00"),
+    Name:               "J&J Afterware6",
+    Keywords:           nil,
+    Description:        "",
+    MetaDescription:    "",
+    MetaTitle:          "",
+    Tax: gosw6.CreateProductBodyTax{
+        TaxRate: 19,
+        Name:    "Standard rate",
+    },
+    CoverId: "e5b555b068d046c082f929d5d6b3db28",
+}
+
+// Add price
+body.Price = append(body.Price, gosw6.CreateProductBodyPrice{
+    CurrencyId: "b7d2554b0ce847cd82f3ac9bd1c0dfca",
+    Net:        16.806722689076,
+    Gross:      20,
+    Linked:     true,
+    ListPrice: gosw6.CreateProductBodyListPrice{
+        CurrencyId: "b7d2554b0ce847cd82f3ac9bd1c0dfca",
+        Net:        9.2436974789916,
+        Gross:      11,
+        Linked:     false,
+    },
+})
+
+// Add purchase price
+body.PurchasePrices = append(body.PurchasePrices, gosw6.CreateProductBodyPurchasePrices{
+    CurrencyId: "b7d2554b0ce847cd82f3ac9bd1c0dfca",
+    Net:        11000,
+    Gross:      13090,
+    Linked:     true,
+})
+
+// Create a product
+createProduct, err := gosw6.CreateProduct(body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(createProduct)
+}
+```
+
+### Update a product
+
+If you want to update a product, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := gosw6.UpdateProductBody{
+    ParentId:           nil,
+    ManufacturerId:     "6b4df46cb3bc48c5a9b7cb1ecd896ae8",
+    Active:             true,
+    Price:              []gosw6.UpdateProductBodyPrice{},
+    ManufacturerNumber: "JJAW2021",
+    Ean:                "1234894781274382",
+    ProductNumber:      "SW1202001",
+    Stock:              1000,
+    DeliveryTimeId:     "b40a246351694e4089d79c4f0a7dec68",
+    RestockTime:        7,
+    IsCloseout:         false,
+    PurchaseSteps:      1,
+    MaxPurchase:        100,
+    MinPurchase:        1,
+    ShippingFree:       true,
+    PurchasePrices:     []gosw6.UpdateProductBodyPurchasePrices{},
+    MarkAsTopseller:    true,
+    Weight:             nil,
+    Width:              nil,
+    Height:             nil,
+    Length:             nil,
+    ReleaseDate:        time.Now().Format("2006-01-02T15:04:05.000+00:00"),
+    Name:               "J&J Afterware6 v2",
+    Keywords:           nil,
+    Description:        "",
+    MetaDescription:    "",
+    MetaTitle:          "",
+    Tax: gosw6.UpdateProductBodyTax{
+        TaxRate: 19,
+        Name:    "Standard rate",
+    },
+    CoverId: "e5b555b068d046c082f929d5d6b3db28",
+}
+
+// Add price
+body.Price = append(body.Price, gosw6.UpdateProductBodyPrice{
+    CurrencyId: "b7d2554b0ce847cd82f3ac9bd1c0dfca",
+    Net:        16.806722689076,
+    Gross:      20,
+    Linked:     true,
+    ListPrice: gosw6.UpdateProductBodyListPrice{
+        CurrencyId: "b7d2554b0ce847cd82f3ac9bd1c0dfca",
+        Net:        9.2436974789916,
+        Gross:      11,
+        Linked:     false,
+    },
+})
+
+// Add purchase price
+body.PurchasePrices = append(body.PurchasePrices, gosw6.UpdateProductBodyPurchasePrices{
+    CurrencyId: "b7d2554b0ce847cd82f3ac9bd1c0dfca",
+    Net:        11000,
+    Gross:      13090,
+    Linked:     true,
+})
+
+// Update a product
+updateProduct, err := gosw6.UpdateProduct("07caca75115742a3bbc3692963c7e2d3", body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(updateProduct)
+}
+```
+
+### Delete a product
+
+If you want to delete a product, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Delete a product by id
+deleteProduct, err := gosw6.DeleteProduct("529eadb5f9a34946ad94caa8441f267a", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(deleteProduct)
+}
+```
+
+### Get all product media
+
+If you want to get all product media, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
+// Get all product media
+productMedia, err := gosw6.ProductMedia(parameter, "529eadb5f9a34946ad94caa8441f267a", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(productMedia)
+}
+```
+
+### Create product media
+
+If you want to create a product media to an product, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := CreateProductMediaBody{
+    MediaId: "9be5fdf920454ed78a629195c86936fe",
+}
+
+// Crate product media
+createProductMedia, err := gosw6.CreateProductMedia("07caca75115742a3bbc3692963c7e2d3", body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(createProductMedia)
 }
 ```
 
