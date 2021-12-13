@@ -127,12 +127,12 @@ type PropertyGroupReturn struct {
 // CreatePropertyGroupBody is to structure the body data
 type CreatePropertyGroupBody struct {
 	Name                       string `json:"name"`
-	DisplayType                string `json:"displayType"`
-	SortingType                string `json:"sortingType"`
-	Description                string `json:"description"`
-	Position                   int    `json:"position"`
-	Filterable                 bool   `json:"filterable"`
-	VisibleOnProductDetailPage bool   `json:"visibleOnProductDetailPage"`
+	DisplayType                string `json:"displayType,omitempty"`
+	SortingType                string `json:"sortingType,omitempty"`
+	Description                string `json:"description,omitempty"`
+	Position                   int    `json:"position,omitempty"`
+	Filterable                 bool   `json:"filterable,omitempty"`
+	VisibleOnProductDetailPage bool   `json:"visibleOnProductDetailPage,omitempty"`
 }
 
 // CreatePropertyGroupBodyReturn is to decode the json data
@@ -159,13 +159,13 @@ type CreatePropertyGroupBodyReturn struct {
 
 // UpdatePropertyGroupBody is to structure the body data
 type UpdatePropertyGroupBody struct {
-	Name                       string `json:"name"`
-	DisplayType                string `json:"displayType"`
-	SortingType                string `json:"sortingType"`
-	Description                string `json:"description"`
-	Position                   int    `json:"position"`
-	Filterable                 bool   `json:"filterable"`
-	VisibleOnProductDetailPage bool   `json:"visibleOnProductDetailPage"`
+	Name                       string `json:"name,omitempty"`
+	DisplayType                string `json:"displayType,omitempty"`
+	SortingType                string `json:"sortingType,omitempty"`
+	Description                string `json:"description,omitempty"`
+	Position                   int    `json:"position,omitempty"`
+	Filterable                 bool   `json:"filterable,omitempty"`
+	VisibleOnProductDetailPage bool   `json:"visibleOnProductDetailPage,omitempty"`
 }
 
 // UpdatePropertyGroupBodyReturn is to decode the json data
