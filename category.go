@@ -204,24 +204,24 @@ type CategoryReturn struct {
 
 // CreateCategoryBody is to structure the body data
 type CreateCategoryBody struct {
-	ParentId              string      `json:"parentId"`
-	MediaId               interface{} `json:"mediaId"`
+	ParentId              string      `json:"parentId,omitempty"`
+	MediaId               interface{} `json:"mediaId,omitempty"`
 	Name                  string      `json:"name"`
-	Active                bool        `json:"active"`
-	VisibleChildCount     int         `json:"visibleChildCount"`
-	DisplayNestedProducts bool        `json:"displayNestedProducts"`
-	CmsPageId             string      `json:"cmsPageId"`
-	LinkType              interface{} `json:"linkType"`
-	LinkNewTab            interface{} `json:"linkNewTab"`
-	InternalLink          interface{} `json:"internalLink"`
-	ExternalLink          interface{} `json:"externalLink"`
-	Visible               bool        `json:"visible"`
-	Type                  string      `json:"type"`
-	ProductAssignmentType string      `json:"productAssignmentType"`
-	Description           string      `json:"description"`
-	MetaTitle             string      `json:"metaTitle"`
-	MetaDescription       string      `json:"metaDescription"`
-	Keywords              string      `json:"keywords"`
+	Active                bool        `json:"active,omitempty"`
+	VisibleChildCount     int         `json:"visibleChildCount,omitempty"`
+	DisplayNestedProducts bool        `json:"displayNestedProducts,omitempty"`
+	CmsPageId             string      `json:"cmsPageId,omitempty"`
+	LinkType              interface{} `json:"linkType,omitempty"`
+	LinkNewTab            interface{} `json:"linkNewTab,omitempty"`
+	InternalLink          interface{} `json:"internalLink,omitempty"`
+	ExternalLink          interface{} `json:"externalLink,omitempty"`
+	Visible               bool        `json:"visible,omitempty"`
+	Type                  string      `json:"type,omitempty"`
+	ProductAssignmentType string      `json:"productAssignmentType,omitempty"`
+	Description           string      `json:"description,omitempty"`
+	MetaTitle             string      `json:"metaTitle,omitempty"`
+	MetaDescription       string      `json:"metaDescription,omitempty"`
+	Keywords              string      `json:"keywords,omitempty"`
 }
 
 // CreateCategoryReturn is to decode the json data
@@ -248,24 +248,24 @@ type CreateCategoryReturn struct {
 
 // UpdateCategoryBody is to structure the body data
 type UpdateCategoryBody struct {
-	ParentId              string      `json:"parentId"`
-	MediaId               interface{} `json:"mediaId"`
-	Name                  string      `json:"name"`
-	Active                bool        `json:"active"`
-	VisibleChildCount     int         `json:"visibleChildCount"`
-	DisplayNestedProducts bool        `json:"displayNestedProducts"`
-	CmsPageId             string      `json:"cmsPageId"`
-	LinkType              interface{} `json:"linkType"`
-	LinkNewTab            interface{} `json:"linkNewTab"`
-	InternalLink          interface{} `json:"internalLink"`
-	ExternalLink          interface{} `json:"externalLink"`
-	Visible               bool        `json:"visible"`
-	Type                  string      `json:"type"`
-	ProductAssignmentType string      `json:"productAssignmentType"`
-	Description           string      `json:"description"`
-	MetaTitle             string      `json:"metaTitle"`
-	MetaDescription       string      `json:"metaDescription"`
-	Keywords              string      `json:"keywords"`
+	ParentId              string      `json:"parentId,omitempty"`
+	MediaId               interface{} `json:"mediaId,omitempty"`
+	Name                  string      `json:"name,omitempty"`
+	Active                bool        `json:"active,omitempty"`
+	VisibleChildCount     int         `json:"visibleChildCount,omitempty"`
+	DisplayNestedProducts bool        `json:"displayNestedProducts,omitempty"`
+	CmsPageId             string      `json:"cmsPageId,omitempty"`
+	LinkType              interface{} `json:"linkType,omitempty"`
+	LinkNewTab            interface{} `json:"linkNewTab,omitempty"`
+	InternalLink          interface{} `json:"internalLink,omitempty"`
+	ExternalLink          interface{} `json:"externalLink,omitempty"`
+	Visible               bool        `json:"visible,omitempty"`
+	Type                  string      `json:"type,omitempty"`
+	ProductAssignmentType string      `json:"productAssignmentType,omitempty"`
+	Description           string      `json:"description,omitempty"`
+	MetaTitle             string      `json:"metaTitle,omitempty"`
+	MetaDescription       string      `json:"metaDescription,omitempty"`
+	Keywords              string      `json:"keywords,omitempty"`
 }
 
 // UpdateCategoryReturn is to decode the json data

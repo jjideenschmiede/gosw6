@@ -128,10 +128,10 @@ type PropertyGroupOptionReturn struct {
 
 // CreatePropertyGroupOptionBody is to structure the body data
 type CreatePropertyGroupOptionBody struct {
-	Name         string      `json:"name"`
-	Position     int         `json:"position"`
-	ColorHexCode interface{} `json:"colorHexCode"`
-	MediaId      interface{} `json:"mediaId"`
+	Name         string `json:"name"`
+	Position     int    `json:"position,omitempty"`
+	ColorHexCode string `json:"colorHexCode,omitempty"`
+	MediaId      string `json:"mediaId,omitempty"`
 }
 
 // CreatePropertyGroupOptionReturn is to decode the json data
@@ -158,10 +158,10 @@ type CreatePropertyGroupOptionReturn struct {
 
 // UpdatePropertyGroupOptionBody is to structure the body data
 type UpdatePropertyGroupOptionBody struct {
-	Name         string      `json:"name"`
-	Position     int         `json:"position"`
-	ColorHexCode interface{} `json:"colorHexCode"`
-	MediaId      interface{} `json:"mediaId"`
+	Name         string `json:"name,omitempty"`
+	Position     int    `json:"position,omitempty"`
+	ColorHexCode string `json:"colorHexCode,omitempty"`
+	MediaId      string `json:"mediaId,omitempty"`
 }
 
 // UpdatePropertyGroupOptionReturn is to decode the json data

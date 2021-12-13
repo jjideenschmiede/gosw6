@@ -120,10 +120,10 @@ type ProductManufacturerReturn struct {
 
 // CreateProductManufacturerBody is to structure the body data
 type CreateProductManufacturerBody struct {
-	MediaId     string `json:"mediaId"`
+	MediaId     string `json:"mediaId,omitempty"`
 	Name        string `json:"name"`
-	Link        string `json:"link"`
-	Description string `json:"description"`
+	Link        string `json:"link,omitempty"`
+	Description string `json:"description,omitempty"`
 }
 
 // CreateProductManufacturerReturn is to decode the json data
@@ -150,10 +150,10 @@ type CreateProductManufacturerReturn struct {
 
 // UpdateProductManufacturerBody is to structure the body data
 type UpdateProductManufacturerBody struct {
-	MediaId     string `json:"mediaId"`
-	Name        string `json:"name"`
-	Link        string `json:"link"`
-	Description string `json:"description"`
+	MediaId     string `json:"mediaId,omitempty"`
+	Name        string `json:"name,omitempty"`
+	Link        string `json:"link,omitempty"`
+	Description string `json:"description,omitempty"`
 }
 
 // UpdateProductManufacturerReturn is to decode the json data
