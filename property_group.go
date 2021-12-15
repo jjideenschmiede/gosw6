@@ -124,8 +124,8 @@ type PropertyGroupReturn struct {
 	} `json:"errors"`
 }
 
-// CreatePropertyGroupBody is to structure the body data
-type CreatePropertyGroupBody struct {
+// PropertyGroupBody is to structure the body data
+type PropertyGroupBody struct {
 	Name                       string `json:"name"`
 	DisplayType                string `json:"displayType,omitempty"`
 	SortingType                string `json:"sortingType,omitempty"`
@@ -135,8 +135,8 @@ type CreatePropertyGroupBody struct {
 	VisibleOnProductDetailPage bool   `json:"visibleOnProductDetailPage,omitempty"`
 }
 
-// CreatePropertyGroupBodyReturn is to decode the json data
-type CreatePropertyGroupBodyReturn struct {
+// CreatePropertyGroupReturn is to decode the json data
+type CreatePropertyGroupReturn struct {
 	Location string `json:"location"`
 	Errors   []struct {
 		Code   string `json:"code"`
@@ -155,17 +155,6 @@ type CreatePropertyGroupBodyReturn struct {
 			Line int    `json:"line"`
 		} `json:"meta"`
 	} `json:"errors"`
-}
-
-// UpdatePropertyGroupBody is to structure the body data
-type UpdatePropertyGroupBody struct {
-	Name                       string `json:"name,omitempty"`
-	DisplayType                string `json:"displayType,omitempty"`
-	SortingType                string `json:"sortingType,omitempty"`
-	Description                string `json:"description,omitempty"`
-	Position                   int    `json:"position,omitempty"`
-	Filterable                 bool   `json:"filterable,omitempty"`
-	VisibleOnProductDetailPage bool   `json:"visibleOnProductDetailPage,omitempty"`
 }
 
 // UpdatePropertyGroupBodyReturn is to decode the json data
@@ -294,12 +283,12 @@ func PropertyGroup(id string, r Request) (PropertyGroupReturn, error) {
 }
 
 // CreatePropertyGroup is to create a product property group
-func CreatePropertyGroup(body CreatePropertyGroupBody, r Request) (CreatePropertyGroupBodyReturn, error) {
+func CreatePropertyGroup(body PropertyGroupBody, r Request) (CreatePropertyGroupReturn, error) {
 
 	// Convert body data
 	convert, err := json.Marshal(body)
 	if err != nil {
-		return CreatePropertyGroupBodyReturn{}, err
+		return CreatePropertyGroupReturn{}, err
 	}
 
 	// Set config for request
@@ -312,20 +301,20 @@ func CreatePropertyGroup(body CreatePropertyGroupBody, r Request) (CreatePropert
 	// Send request
 	response, err := c.Send(r)
 	if err != nil {
-		return CreatePropertyGroupBodyReturn{}, err
+		return CreatePropertyGroupReturn{}, err
 	}
 
 	// Close request
 	defer response.Body.Close()
 
 	// Decode data
-	var decode CreatePropertyGroupBodyReturn
+	var decode CreatePropertyGroupReturn
 
 	// Check response header
 	if response.Status != "204 No Content" {
 		err = json.NewDecoder(response.Body).Decode(&decode)
 		if err != nil {
-			return CreatePropertyGroupBodyReturn{}, err
+			return CreatePropertyGroupReturn{}, err
 		}
 	}
 
@@ -338,7 +327,7 @@ func CreatePropertyGroup(body CreatePropertyGroupBody, r Request) (CreatePropert
 }
 
 // UpdatePropertyGroup is to update a product property group
-func UpdatePropertyGroup(id string, body UpdatePropertyGroupBody, r Request) (UpdatePropertyGroupBodyReturn, error) {
+func UpdatePropertyGroup(id string, body PropertyGroupBody, r Request) (UpdatePropertyGroupBodyReturn, error) {
 
 	// Convert body data
 	convert, err := json.Marshal(body)

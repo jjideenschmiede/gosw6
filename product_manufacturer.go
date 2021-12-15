@@ -118,8 +118,8 @@ type ProductManufacturerReturn struct {
 	} `json:"errors"`
 }
 
-// CreateProductManufacturerBody is to structure the body data
-type CreateProductManufacturerBody struct {
+// ProductManufacturerBody is to structure the body data
+type ProductManufacturerBody struct {
 	MediaId     string `json:"mediaId,omitempty"`
 	Name        string `json:"name"`
 	Link        string `json:"link,omitempty"`
@@ -146,14 +146,6 @@ type CreateProductManufacturerReturn struct {
 			Line int    `json:"line"`
 		} `json:"meta"`
 	} `json:"errors"`
-}
-
-// UpdateProductManufacturerBody is to structure the body data
-type UpdateProductManufacturerBody struct {
-	MediaId     string `json:"mediaId,omitempty"`
-	Name        string `json:"name,omitempty"`
-	Link        string `json:"link,omitempty"`
-	Description string `json:"description,omitempty"`
 }
 
 // UpdateProductManufacturerReturn is to decode the json data
@@ -282,7 +274,7 @@ func ProductManufacturer(id string, r Request) (ProductManufacturerReturn, error
 }
 
 // CreateProductManufacturer is to create a new product manufacturer
-func CreateProductManufacturer(body CreateProductManufacturerBody, r Request) (CreateProductManufacturerReturn, error) {
+func CreateProductManufacturer(body ProductManufacturerBody, r Request) (CreateProductManufacturerReturn, error) {
 
 	// Convert body data
 	convert, err := json.Marshal(body)
@@ -326,7 +318,7 @@ func CreateProductManufacturer(body CreateProductManufacturerBody, r Request) (C
 }
 
 // UpdateProductManufacturer is to update a new product manufacturer
-func UpdateProductManufacturer(id string, body UpdateProductManufacturerBody, r Request) (UpdateProductManufacturerReturn, error) {
+func UpdateProductManufacturer(id string, body ProductManufacturerBody, r Request) (UpdateProductManufacturerReturn, error) {
 
 	// Convert body data
 	convert, err := json.Marshal(body)

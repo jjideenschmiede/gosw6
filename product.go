@@ -458,78 +458,78 @@ type ProductReturn struct {
 	} `json:"errors"`
 }
 
-// CreateProductBody is to structure the body data
-type CreateProductBody struct {
-	ParentId             interface{}                        `json:"parentId"`
-	ManufacturerId       string                             `json:"manufacturerId"`
-	Active               bool                               `json:"active"`
-	Price                []*CreateProductBodyPrice          `json:"price"`
-	ManufacturerNumber   string                             `json:"manufacturerNumber"`
-	Ean                  string                             `json:"ean"`
-	ProductNumber        string                             `json:"productNumber"`
-	Stock                int                                `json:"stock"`
-	DeliveryTimeId       string                             `json:"deliveryTimeId"`
-	RestockTime          int                                `json:"restockTime"`
-	IsCloseout           bool                               `json:"isCloseout"`
-	PurchaseSteps        int                                `json:"purchaseSteps"`
-	MaxPurchase          int                                `json:"maxPurchase"`
-	MinPurchase          int                                `json:"minPurchase"`
-	ShippingFree         bool                               `json:"shippingFree"`
-	PurchasePrices       []*CreateProductBodyPurchasePrices `json:"purchasePrices"`
-	MarkAsTopseller      bool                               `json:"markAsTopseller"`
-	Weight               interface{}                        `json:"weight"`
-	Width                interface{}                        `json:"width"`
-	Height               interface{}                        `json:"height"`
-	Length               interface{}                        `json:"length"`
-	ReleaseDate          string                             `json:"releaseDate"`
-	Name                 string                             `json:"name"`
-	Tags                 []*CreateProductBodyTags           `json:"tags"`
-	Description          string                             `json:"description"`
-	MetaDescription      string                             `json:"metaDescription"`
-	MetaTitle            string                             `json:"metaTitle"`
-	Tax                  *CreateProductBodyTax              `json:"tax"`
-	CoverId              string                             `json:"coverId"`
-	Properties           []*CreateProductBodyProperties     `json:"properties"`
-	Categories           []*CreateProductBodyCategories     `json:"categories"`
-	CustomSearchKeywords []string                           `json:"customSearchKeywords"`
+// ProductBody is to structure the body data
+type ProductBody struct {
+	ParentId             interface{}                  `json:"parentId"`
+	ManufacturerId       string                       `json:"manufacturerId"`
+	Active               bool                         `json:"active"`
+	Price                []*ProductBodyPrice          `json:"price"`
+	ManufacturerNumber   string                       `json:"manufacturerNumber"`
+	Ean                  string                       `json:"ean"`
+	ProductNumber        string                       `json:"productNumber"`
+	Stock                int                          `json:"stock"`
+	DeliveryTimeId       string                       `json:"deliveryTimeId"`
+	RestockTime          int                          `json:"restockTime"`
+	IsCloseout           bool                         `json:"isCloseout"`
+	PurchaseSteps        int                          `json:"purchaseSteps"`
+	MaxPurchase          int                          `json:"maxPurchase"`
+	MinPurchase          int                          `json:"minPurchase"`
+	ShippingFree         bool                         `json:"shippingFree"`
+	PurchasePrices       []*ProductBodyPurchasePrices `json:"purchasePrices"`
+	MarkAsTopseller      bool                         `json:"markAsTopseller"`
+	Weight               interface{}                  `json:"weight"`
+	Width                interface{}                  `json:"width"`
+	Height               interface{}                  `json:"height"`
+	Length               interface{}                  `json:"length"`
+	ReleaseDate          string                       `json:"releaseDate"`
+	Name                 string                       `json:"name"`
+	Tags                 []*ProductBodyTags           `json:"tags"`
+	Description          string                       `json:"description"`
+	MetaDescription      string                       `json:"metaDescription"`
+	MetaTitle            string                       `json:"metaTitle"`
+	Tax                  *ProductBodyTax              `json:"tax"`
+	CoverId              string                       `json:"coverId"`
+	Properties           []*ProductBodyProperties     `json:"properties"`
+	Categories           []*ProductBodyCategories     `json:"categories"`
+	CustomSearchKeywords []string                     `json:"customSearchKeywords"`
 }
 
-type CreateProductBodyPrice struct {
-	CurrencyId string                     `json:"currencyId"`
-	Net        float64                    `json:"net"`
-	Gross      float64                    `json:"gross"`
-	Linked     bool                       `json:"linked"`
-	ListPrice  CreateProductBodyListPrice `json:"listPrice"`
+type ProductBodyPrice struct {
+	CurrencyId string               `json:"currencyId"`
+	Net        float64              `json:"net"`
+	Gross      float64              `json:"gross"`
+	Linked     bool                 `json:"linked"`
+	ListPrice  ProductBodyListPrice `json:"listPrice"`
 }
 
-type CreateProductBodyListPrice struct {
+type ProductBodyListPrice struct {
 	CurrencyId string  `json:"currencyId"`
 	Net        float64 `json:"net"`
 	Gross      float64 `json:"gross"`
 	Linked     bool    `json:"linked"`
 }
 
-type CreateProductBodyPurchasePrices struct {
+type ProductBodyPurchasePrices struct {
 	CurrencyId string  `json:"currencyId"`
 	Net        float64 `json:"net"`
 	Gross      float64 `json:"gross"`
 	Linked     bool    `json:"linked"`
 }
 
-type CreateProductBodyTags struct {
+type ProductBodyTags struct {
 	Name string `json:"name"`
 }
 
-type CreateProductBodyTax struct {
+type ProductBodyTax struct {
 	TaxRate int    `json:"taxRate"`
 	Name    string `json:"name"`
 }
 
-type CreateProductBodyProperties struct {
+type ProductBodyProperties struct {
 	Id string `json:"id"`
 }
 
-type CreateProductBodyCategories struct {
+type ProductBodyCategories struct {
 	Id string `json:"id"`
 }
 
@@ -555,85 +555,9 @@ type CreateProductReturn struct {
 	} `json:"errors"`
 }
 
-// UpdateProductBody is to structure the body data
-type UpdateProductBody struct {
-	ParentId             interface{}                        `json:"parentId"`
-	ManufacturerId       string                             `json:"manufacturerId"`
-	Active               bool                               `json:"active"`
-	Price                []*UpdateProductBodyPrice          `json:"price"`
-	ManufacturerNumber   string                             `json:"manufacturerNumber"`
-	Ean                  string                             `json:"ean"`
-	ProductNumber        string                             `json:"productNumber"`
-	Stock                int                                `json:"stock"`
-	DeliveryTimeId       string                             `json:"deliveryTimeId"`
-	RestockTime          int                                `json:"restockTime"`
-	IsCloseout           bool                               `json:"isCloseout"`
-	PurchaseSteps        int                                `json:"purchaseSteps"`
-	MaxPurchase          int                                `json:"maxPurchase"`
-	MinPurchase          int                                `json:"minPurchase"`
-	ShippingFree         bool                               `json:"shippingFree"`
-	PurchasePrices       []*UpdateProductBodyPurchasePrices `json:"purchasePrices"`
-	MarkAsTopseller      bool                               `json:"markAsTopseller"`
-	Weight               interface{}                        `json:"weight"`
-	Width                interface{}                        `json:"width"`
-	Height               interface{}                        `json:"height"`
-	Length               interface{}                        `json:"length"`
-	ReleaseDate          string                             `json:"releaseDate"`
-	Name                 string                             `json:"name"`
-	Tags                 []*UpdateProductBodyTags           `json:"tags"`
-	Description          string                             `json:"description"`
-	MetaDescription      string                             `json:"metaDescription"`
-	MetaTitle            string                             `json:"metaTitle"`
-	Tax                  UpdateProductBodyTax               `json:"tax"`
-	CoverId              string                             `json:"coverId"`
-	Properties           []*UpdateProductBodyProperties     `json:"properties"`
-	Categories           []*UpdateProductBodyCategories     `json:"categories"`
-	CustomSearchKeywords []string                           `json:"customSearchKeywords"`
-}
-
-type UpdateProductBodyPrice struct {
-	CurrencyId string                     `json:"currencyId"`
-	Net        float64                    `json:"net"`
-	Gross      float64                    `json:"gross"`
-	Linked     bool                       `json:"linked"`
-	ListPrice  UpdateProductBodyListPrice `json:"listPrice"`
-}
-
-type UpdateProductBodyListPrice struct {
-	CurrencyId string  `json:"currencyId"`
-	Net        float64 `json:"net"`
-	Gross      float64 `json:"gross"`
-	Linked     bool    `json:"linked"`
-}
-
-type UpdateProductBodyPurchasePrices struct {
-	CurrencyId string  `json:"currencyId"`
-	Net        float64 `json:"net"`
-	Gross      float64 `json:"gross"`
-	Linked     bool    `json:"linked"`
-}
-
-type UpdateProductBodyTags struct {
-	Name string `json:"name"`
-}
-
-type UpdateProductBodyTax struct {
-	TaxRate int    `json:"taxRate"`
-	Name    string `json:"name"`
-}
-
-type UpdateProductBodyProperties struct {
-	Id string `json:"id"`
-}
-
-type UpdateProductBodyCategories struct {
-	Id string `json:"id"`
-}
-
 // UpdateProductReturn is decode the json data
 type UpdateProductReturn struct {
-	Location string `json:"location"`
-	Errors   []struct {
+	Errors []struct {
 		Code   string `json:"code"`
 		Status string `json:"status"`
 		Title  string `json:"title"`
@@ -914,7 +838,7 @@ func Product(id string, r Request) (ProductReturn, error) {
 }
 
 // CreateProduct is to create a product
-func CreateProduct(body CreateProductBody, r Request) (CreateProductReturn, error) {
+func CreateProduct(body ProductBody, r Request) (CreateProductReturn, error) {
 
 	// Convert body data
 	convert, err := json.Marshal(body)
@@ -958,7 +882,7 @@ func CreateProduct(body CreateProductBody, r Request) (CreateProductReturn, erro
 }
 
 // UpdateProduct is to update a product
-func UpdateProduct(id string, body UpdateProductBody, r Request) (UpdateProductReturn, error) {
+func UpdateProduct(id string, body ProductBody, r Request) (UpdateProductReturn, error) {
 
 	// Convert body data
 	convert, err := json.Marshal(body)

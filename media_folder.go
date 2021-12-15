@@ -116,8 +116,8 @@ type MediaFolderReturn struct {
 	} `json:"errors"`
 }
 
-// CreateMediaFolderBody is to structure the body data
-type CreateMediaFolderBody struct {
+// MediaFolderBody is to structure the body data
+type MediaFolderBody struct {
 	ConfigurationId        string `json:"configurationId"`
 	Name                   string `json:"name"`
 	ParentId               string `json:"parentId"`
@@ -146,18 +146,9 @@ type CreateMediaFolderReturn struct {
 	} `json:"errors"`
 }
 
-// UpdateMediaFolderBody is to structure the body data
-type UpdateMediaFolderBody struct {
-	ConfigurationId        string `json:"configurationId"`
-	Name                   string `json:"name"`
-	ParentId               string `json:"parentId"`
-	UseParentConfiguration bool   `json:"useParentConfiguration"`
-}
-
 // UpdateMediaFolderReturn is to decode the json data
 type UpdateMediaFolderReturn struct {
-	Location string `json:"location"`
-	Errors   []struct {
+	Errors []struct {
 		Code   string `json:"code"`
 		Status string `json:"status"`
 		Title  string `json:"title"`
@@ -282,7 +273,7 @@ func MediaFolder(id string, r Request) (MediaFolderReturn, error) {
 }
 
 // CreateMediaFolder is to create a media folder
-func CreateMediaFolder(body CreateMediaFolderBody, r Request) (CreateMediaFolderReturn, error) {
+func CreateMediaFolder(body MediaFolderBody, r Request) (CreateMediaFolderReturn, error) {
 
 	// Convert body data
 	convert, err := json.Marshal(body)
@@ -326,7 +317,7 @@ func CreateMediaFolder(body CreateMediaFolderBody, r Request) (CreateMediaFolder
 }
 
 // UpdateMediaFolder is to update a media folder
-func UpdateMediaFolder(id string, body UpdateMediaFolderBody, r Request) (UpdateMediaFolderReturn, error) {
+func UpdateMediaFolder(id string, body MediaFolderBody, r Request) (UpdateMediaFolderReturn, error) {
 
 	// Convert body data
 	convert, err := json.Marshal(body)
