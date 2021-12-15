@@ -202,8 +202,8 @@ type CategoryReturn struct {
 	} `json:"errors"`
 }
 
-// CreateCategoryBody is to structure the body data
-type CreateCategoryBody struct {
+// CategoryBody is to structure the body data
+type CategoryBody struct {
 	ParentId              string      `json:"parentId,omitempty"`
 	MediaId               interface{} `json:"mediaId,omitempty"`
 	Name                  string      `json:"name"`
@@ -244,28 +244,6 @@ type CreateCategoryReturn struct {
 			Line int    `json:"line"`
 		} `json:"meta"`
 	} `json:"errors"`
-}
-
-// UpdateCategoryBody is to structure the body data
-type UpdateCategoryBody struct {
-	ParentId              string      `json:"parentId,omitempty"`
-	MediaId               interface{} `json:"mediaId,omitempty"`
-	Name                  string      `json:"name,omitempty"`
-	Active                bool        `json:"active,omitempty"`
-	VisibleChildCount     int         `json:"visibleChildCount,omitempty"`
-	DisplayNestedProducts bool        `json:"displayNestedProducts,omitempty"`
-	CmsPageId             string      `json:"cmsPageId,omitempty"`
-	LinkType              interface{} `json:"linkType,omitempty"`
-	LinkNewTab            interface{} `json:"linkNewTab,omitempty"`
-	InternalLink          interface{} `json:"internalLink,omitempty"`
-	ExternalLink          interface{} `json:"externalLink,omitempty"`
-	Visible               bool        `json:"visible,omitempty"`
-	Type                  string      `json:"type,omitempty"`
-	ProductAssignmentType string      `json:"productAssignmentType,omitempty"`
-	Description           string      `json:"description,omitempty"`
-	MetaTitle             string      `json:"metaTitle,omitempty"`
-	MetaDescription       string      `json:"metaDescription,omitempty"`
-	Keywords              string      `json:"keywords,omitempty"`
 }
 
 // UpdateCategoryReturn is to decode the json data
@@ -373,7 +351,7 @@ func Category(id string, r Request) (CategoryReturn, error) {
 }
 
 // CreateCategory is to create a new category
-func CreateCategory(body CreateCategoryBody, r Request) (CreateCategoryReturn, error) {
+func CreateCategory(body CategoryBody, r Request) (CreateCategoryReturn, error) {
 
 	// Convert body data
 	convert, err := json.Marshal(body)
@@ -417,7 +395,7 @@ func CreateCategory(body CreateCategoryBody, r Request) (CreateCategoryReturn, e
 }
 
 // UpdateCategory is to update an update category
-func UpdateCategory(id string, body UpdateCategoryBody, r Request) (UpdateCategoryReturn, error) {
+func UpdateCategory(id string, body CategoryBody, r Request) (UpdateCategoryReturn, error) {
 
 	// Convert body data
 	convert, err := json.Marshal(body)

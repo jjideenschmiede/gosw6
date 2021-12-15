@@ -126,8 +126,8 @@ type PropertyGroupOptionReturn struct {
 	} `json:"errors"`
 }
 
-// CreatePropertyGroupOptionBody is to structure the body data
-type CreatePropertyGroupOptionBody struct {
+// PropertyGroupOptionBody is to structure the body data
+type PropertyGroupOptionBody struct {
 	Name         string `json:"name"`
 	Position     int    `json:"position,omitempty"`
 	ColorHexCode string `json:"colorHexCode,omitempty"`
@@ -154,14 +154,6 @@ type CreatePropertyGroupOptionReturn struct {
 			Line int    `json:"line"`
 		} `json:"meta"`
 	} `json:"errors"`
-}
-
-// UpdatePropertyGroupOptionBody is to structure the body data
-type UpdatePropertyGroupOptionBody struct {
-	Name         string `json:"name,omitempty"`
-	Position     int    `json:"position,omitempty"`
-	ColorHexCode string `json:"colorHexCode,omitempty"`
-	MediaId      string `json:"mediaId,omitempty"`
 }
 
 // UpdatePropertyGroupOptionReturn is to decode the json data
@@ -269,7 +261,7 @@ func PropertyGroupOption(id string, r Request) (PropertyGroupOptionReturn, error
 }
 
 // CreatePropertyGroupOption is to create a property group option
-func CreatePropertyGroupOption(id string, body CreatePropertyGroupOptionBody, r Request) (CreatePropertyGroupOptionReturn, error) {
+func CreatePropertyGroupOption(id string, body PropertyGroupOptionBody, r Request) (CreatePropertyGroupOptionReturn, error) {
 
 	// Convert body data
 	convert, err := json.Marshal(body)
@@ -313,7 +305,7 @@ func CreatePropertyGroupOption(id string, body CreatePropertyGroupOptionBody, r 
 }
 
 // UpdatePropertyGroupOption is to update a property group option
-func UpdatePropertyGroupOption(id string, body UpdatePropertyGroupOptionBody, r Request) (UpdatePropertyGroupOptionReturn, error) {
+func UpdatePropertyGroupOption(id string, body PropertyGroupOptionBody, r Request) (UpdatePropertyGroupOptionReturn, error) {
 
 	// Convert body data
 	convert, err := json.Marshal(body)
