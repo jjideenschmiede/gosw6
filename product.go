@@ -463,7 +463,6 @@ type ProductBody struct {
 	ParentId             interface{}                  `json:"parentId"`
 	ManufacturerId       string                       `json:"manufacturerId"`
 	Active               bool                         `json:"active"`
-	DisplayGroup         string                       `json:"displayGroup"`
 	Price                []*ProductBodyPrice          `json:"price"`
 	ManufacturerNumber   string                       `json:"manufacturerNumber"`
 	Ean                  string                       `json:"ean"`
