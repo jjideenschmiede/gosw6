@@ -139,11 +139,12 @@ r := gosw6.Request{
 }
 
 // Define body
-body := gosw6.CreateProductBody{
+body := gosw6.ProductBody{
     ParentId:           nil,
     ManufacturerId:     "6b4df46cb3bc48c5a9b7cb1ecd896ae8",
     Active:             true,
-    Price:              []*gosw6.CreateProductBodyPrice{},
+    DisplayGroup:       "jkr2143kj4214214214jk2142414214h",
+    Price:              []*gosw6.ProductBodyPrice{},
     ManufacturerNumber: "JJAW2021",
     Ean:                "1234894781274382",
     ProductNumber:      "SW1202001",
@@ -155,7 +156,7 @@ body := gosw6.CreateProductBody{
     MaxPurchase:        100,
     MinPurchase:        1,
     ShippingFree:       true,
-    PurchasePrices:     []*gosw6.CreateProductBodyPurchasePrices{},
+    PurchasePrices:     []*gosw6.ProductBodyPurchasePrices{},
     MarkAsTopseller:    true,
     Weight:             nil,
     Width:              nil,
@@ -163,29 +164,29 @@ body := gosw6.CreateProductBody{
     Length:             nil,
     ReleaseDate:        time.Now().Format("2006-01-02T15:04:05.000+00:00"),
     Name:               "J&J Afterware6",
-    Tags:               []*gosw6.CreateProductBodyTags{},
+    Tags:               []*gosw6.ProductBodyTags{},
     Description:        "",
     MetaDescription:    "",
     MetaTitle:          "",
-    Tax: &gosw6.CreateProductBodyTax{
+    Tax: &gosw6.ProductBodyTax{
         TaxRate: 19,
         Name:    "Standard rate",
     },
     CoverId: "e5b555b068d046c082f929d5d6b3db28",
-    Properties: []*gosw6.CreateProductBodyProperties{},
-    Categories: []*gosw6.CreateProductBodyCategories{},
+    Properties: []*gosw6.ProductBodyProperties{},
+    Categories: []*gosw6.ProductBodyCategories{},
     CustomSearchKeywords: []string{
         "New custom search keyword",
     },
 }
 
 // Add price
-body.Price = append(body.Price, &gosw6.CreateProductBodyPrice{
+body.Price = append(body.Price, &gosw6.ProductBodyPrice{
     CurrencyId: "b7d2554b0ce847cd82f3ac9bd1c0dfca",
     Net:        16.806722689076,
     Gross:      20,
     Linked:     true,
-    ListPrice: gosw6.CreateProductBodyListPrice{
+    ListPrice: gosw6.ProductBodyListPrice{
         CurrencyId: "b7d2554b0ce847cd82f3ac9bd1c0dfca",
         Net:        9.2436974789916,
         Gross:      11,
@@ -194,7 +195,7 @@ body.Price = append(body.Price, &gosw6.CreateProductBodyPrice{
 })
 
 // Add purchase price
-body.PurchasePrices = append(body.PurchasePrices, &gosw6.CreateProductBodyPurchasePrices{
+body.PurchasePrices = append(body.PurchasePrices, &gosw6.ProductBodyPurchasePrices{
     CurrencyId: "b7d2554b0ce847cd82f3ac9bd1c0dfca",
     Net:        11000,
     Gross:      13090,
@@ -202,17 +203,17 @@ body.PurchasePrices = append(body.PurchasePrices, &gosw6.CreateProductBodyPurcha
 })
 
 // Add tags
-body.Tags = append(body.Tags, &gosw6.CreateProductBodyTags{
+body.Tags = append(body.Tags, &gosw6.ProductBodyTags{
     Name: "Neuster Scheiß",
 })
 
 // Add category
-body.Categories = append(body.Categories, &gosw6.CreateProductBodyCategories{
+body.Categories = append(body.Categories, &gosw6.ProductBodyCategories{
     Id: "d9cc3869c4b64b15ad19c50088e339be",
 })
 
 // Create a product
-createProduct, err := gosw6.CreateProduct(body, r)
+createProduct, err := gosw6.Product(body, r)
 if err != nil {
     log.Fatalln(err)
 } else {
@@ -232,11 +233,12 @@ r := gosw6.Request{
 }
 
 // Define body
-body := gosw6.UpdateProductBody{
+body := gosw6.ProductBody{
     ParentId:           nil,
     ManufacturerId:     "6b4df46cb3bc48c5a9b7cb1ecd896ae8",
     Active:             true,
-    Price:              []*gosw6.UpdateProductBodyPrice{},
+    DisplayGroup:       "jkr2143kj4214214214jk2142414214h",
+    Price:              []*gosw6.ProductBodyPrice{},
     ManufacturerNumber: "JJAW2021",
     Ean:                "1234894781274382",
     ProductNumber:      "SW1202001",
@@ -248,7 +250,7 @@ body := gosw6.UpdateProductBody{
     MaxPurchase:        100,
     MinPurchase:        1,
     ShippingFree:       true,
-    PurchasePrices:     []*gosw6.UpdateProductBodyPurchasePrices{},
+    PurchasePrices:     []*gosw6.ProductBodyPurchasePrices{},
     MarkAsTopseller:    true,
     Weight:             nil,
     Width:              nil,
@@ -256,29 +258,29 @@ body := gosw6.UpdateProductBody{
     Length:             nil,
     ReleaseDate:        time.Now().Format("2006-01-02T15:04:05.000+00:00"),
     Name:               "J&J Afterware6 v2",
-    Tags:               []*gosw6.UpdateProductBodyTags{},
+    Tags:               []*gosw6.ProductBodyTags{},
     Description:        "",
     MetaDescription:    "",
     MetaTitle:          "",
-    Tax: &gosw6.UpdateProductBodyTax{
+    Tax: &gosw6.ProductBodyTax{
         TaxRate: 19,
         Name:    "Standard rate",
     },
     CoverId: "e5b555b068d046c082f929d5d6b3db28",
-    Properties: []*gosw6.UpdateProductBodyProperties{},
-    Categories: []*gosw6.UpdateProductBodyCategories{},
+    Properties: []*gosw6.ProductBodyProperties{},
+    Categories: []*gosw6.ProductBodyCategories{},
     CustomSearchKeywords: []string{
         "New custom search keyword",
     },
 }
 
 // Add price
-body.Price = append(body.Price, &gosw6.UpdateProductBodyPrice{
+body.Price = append(body.Price, &gosw6.ProductBodyPrice{
     CurrencyId: "b7d2554b0ce847cd82f3ac9bd1c0dfca",
     Net:        16.806722689076,
     Gross:      20,
     Linked:     true,
-    ListPrice: gosw6.UpdateProductBodyListPrice{
+    ListPrice: gosw6.ProductBodyListPrice{
         CurrencyId: "b7d2554b0ce847cd82f3ac9bd1c0dfca",
         Net:        9.2436974789916,
         Gross:      11,
@@ -287,7 +289,7 @@ body.Price = append(body.Price, &gosw6.UpdateProductBodyPrice{
 })
 
 // Add purchase price
-body.PurchasePrices = append(body.PurchasePrices, &gosw6.UpdateProductBodyPurchasePrices{
+body.PurchasePrices = append(body.PurchasePrices, &gosw6.ProductBodyPurchasePrices{
     CurrencyId: "b7d2554b0ce847cd82f3ac9bd1c0dfca",
     Net:        11000,
     Gross:      13090,
@@ -295,12 +297,12 @@ body.PurchasePrices = append(body.PurchasePrices, &gosw6.UpdateProductBodyPurcha
 })
 
 // Add tags
-body.Tags = append(body.Tags, &gosw6.UpdateProductBodyTags{
+body.Tags = append(body.Tags, &gosw6.ProductBodyTags{
     Name: "Neuster Scheiß",
 })
 
 // Add category
-body.Categories = append(body.Categories, &gosw6.UpdateProductBodyCategories{
+body.Categories = append(body.Categories, &gosw6.ProductBodyCategories{
     Id: "d9cc3869c4b64b15ad19c50088e339be",
 })
 
@@ -442,7 +444,7 @@ r := gosw6.Request{
 }
 
 // Define body
-body := gosw6.CreateCategoryBody{
+body := gosw6.CategoryBody{
     ParentId:              "ec1dc66781f04ec3bd7e5df94cb74b5a",
     MediaId:               nil,
     Name:                  "New category",
@@ -484,7 +486,7 @@ r := gosw6.Request{
 }
 
 // Define body
-body := gosw6.UpdateCategoryBody{
+body := gosw6.CategoryBody{
     ParentId:              "ec1dc66781f04ec3bd7e5df94cb74b5a",
     MediaId:               nil,
     Name:                  "New category v2",
@@ -593,7 +595,7 @@ r := gosw6.Request{
 }
 
 // Define body
-body := gosw6.CreateProductManufacturerBody{
+body := gosw6.ProductManufacturerBody{
     MediaId:     "7ae758e4c3cb457e8b023b2c859616f7",
     Name:        "Afterbuy",
     Link:        "https://www.afterbuy.de",
@@ -621,7 +623,7 @@ r := gosw6.Request{
 }
 
 // Define body
-body := gosw6.UpdateProductManufacturerBody{
+body := gosw6.ProductManufacturerBody{
     MediaId:     "7ae758e4c3cb457e8b023b2c859616f7",
     Name:        "Afterbuy2",
     Link:        "https://www.afterbuy.de",
@@ -716,7 +718,7 @@ r := gosw6.Request{
 }
 
 // Define body
-body := gosw6.CreatePropertyGroupBody{
+body := gosw6.PropertyGroupBody{
     Name:                       "Size",
     DisplayType:                "text",
     SortingType:                "alphanumeric",
@@ -747,7 +749,7 @@ r := gosw6.Request{
 }
 
 // Define body
-body := gosw6.UpdatePropertyGroupBody{
+body := gosw6.PropertyGroupBody{
     Name:                       "Size",
     DisplayType:                "text",
     SortingType:                "alphanumeric",
@@ -845,7 +847,7 @@ r := gosw6.Request{
 }
 
 // Define body
-body := gosw6.CreatePropertyGroupOptionBody{
+body := gosw6.PropertyGroupOptionBody{
     Name:         "Test1",
     Position:     1,
     ColorHexCode: "",
@@ -873,7 +875,7 @@ r := gosw6.Request{
 }
 
 // Define body
-body := gosw6.UpdatePropertyGroupOptionBody{
+body := gosw6.PropertyGroupOptionBody{
     Name:         "Test2",
     Position:     1,
     ColorHexCode: "",
@@ -1046,7 +1048,7 @@ r := gosw6.Request{
 }
 
 // Define body
-body := gosw6.CreateMediaFolderBody{
+body := gosw6.MediaFolderBody{
     ConfigurationId:        "a0ae2934fc094b3086b06196a1125320",
     Name:                   "test-product",
     ParentId:               "bce5a570d3004c9c86471c7acb661593",
@@ -1074,7 +1076,7 @@ r := gosw6.Request{
 }
 
 // Define body
-body := gosw6.UpdateMediaFolderBody{
+body := gosw6.MediaFolderBody{
     ConfigurationId:        "a0ae2934fc094b3086b06196a1125320",
     Name:                   "test-product-v2",
     ParentId:               "bce5a570d3004c9c86471c7acb661593",
