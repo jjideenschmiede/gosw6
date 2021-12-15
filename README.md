@@ -848,8 +848,8 @@ r := gosw6.Request{
 body := gosw6.CreatePropertyGroupOptionBody{
     Name:         "Test1",
     Position:     1,
-    ColorHexCode: nil,
-    MediaId:      nil,
+    ColorHexCode: "",
+    MediaId:      "",
 }
 
 // Create a property group option
@@ -876,8 +876,8 @@ r := gosw6.Request{
 body := gosw6.UpdatePropertyGroupOptionBody{
     Name:         "Test2",
     Position:     1,
-    ColorHexCode: nil,
-    MediaId:      nil,
+    ColorHexCode: "",
+    MediaId:      "",
     }
 
 // Update a property group option
@@ -952,12 +952,12 @@ body := gosw6.UploadUrlMediaBody{
     Url: "https://jj-ideenschmiede.de/img/jan-droste.de11537e.jpg",
 }
 
-// Get all property groups
-createMedia, err := gosw6.UploadUrlMedia("jan-droste", "jpg", "1e3c74f2e6f448eeb660251a27e41165", body, r)
+// Upload a media via url
+uploadMedia, err := gosw6.UploadUrlMedia("jan-droste", "jpg", "1e3c74f2e6f448eeb660251a27e41165", body, r)
 if err != nil {
     log.Fatalln(err)
 } else {
-    log.Println(createMedia)
+    log.Println(uploadMedia)
 }
 ```
 
@@ -978,7 +978,7 @@ if err != nil {
     log.Fatalln(err)
 }
 
-// Get all property groups
+// Upload a media from local
 uploadMedia, err := gosw6.UploadLocalMedia(file, "weihnachts-postkarte", "pdf", "e747cc2d5a684131b972469c1e2bc815", r)
 if err != nil {
     log.Fatalln(err)
