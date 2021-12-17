@@ -167,6 +167,7 @@ body := gosw6.ProductBody{
     Description:        "",
     MetaDescription:    "",
     MetaTitle:          "",
+    TaxId:              "",
     Tax: &gosw6.ProductBodyTax{
         TaxRate: 19,
         Name:    "Standard rate",
@@ -260,6 +261,7 @@ body := gosw6.ProductBody{
     Description:        "",
     MetaDescription:    "",
     MetaTitle:          "",
+    TaxId:              "",
     Tax: &gosw6.ProductBodyTax{
         TaxRate: 19,
         Name:    "Standard rate",
