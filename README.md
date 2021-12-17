@@ -372,8 +372,9 @@ r := gosw6.Request{
 }
 
 // Define body
-body := gosw6.ProductMediaBody{
-    MediaId: "9be5fdf920454ed78a629195c86936fe",
+createProductMediaBody := ProductMediaBody{
+    MediaId:  "9be5fdf920454ed78a629195c86936fe",
+    Position: 1,
 }
 
 // Crate product media

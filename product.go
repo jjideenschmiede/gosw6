@@ -730,7 +730,8 @@ type ProductMediaReturn struct {
 
 // ProductMediaBody is to structure the body data
 type ProductMediaBody struct {
-	MediaId string `json:"mediaId"`
+	MediaId  string `json:"mediaId"`
+	Position int    `json:"position"`
 }
 
 // CreateProductMediaReturn is to decode the json data
