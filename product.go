@@ -259,7 +259,6 @@ type ProductBody struct {
 	MetaTitle            string                       `json:"metaTitle,omitempty"`
 	TaxId                string                       `json:"taxId"`
 	Tax                  *ProductBodyTax              `json:"tax,omitempty"`
-	CoverId              string                       `json:"coverId,omitempty"`
 	Properties           []*ProductBodyProperties     `json:"properties"`
 	Categories           []*ProductBodyCategories     `json:"categories"`
 	CustomSearchKeywords []*string                    `json:"customSearchKeywords"`
