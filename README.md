@@ -174,7 +174,6 @@ body := gosw6.ProductBody{
         TaxRate: 19,
         Name:    "Standard rate",
     },
-    CoverId: "e5b555b068d046c082f929d5d6b3db28",
     Properties: []*gosw6.ProductBodyProperties{},
     Categories: []*gosw6.ProductBodyCategories{},
     CustomSearchKeywords: []string{
@@ -268,7 +267,6 @@ body := gosw6.ProductBody{
         TaxRate: 19,
         Name:    "Standard rate",
     },
-    CoverId: "e5b555b068d046c082f929d5d6b3db28",
     Properties: []*gosw6.ProductBodyProperties{},
     Categories: []*gosw6.ProductBodyCategories{},
     CustomSearchKeywords: []string{
