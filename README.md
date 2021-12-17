@@ -387,9 +387,55 @@ if err != nil {
 }
 ```
 
+### Get all product covers
+
+If you want to get all covers of a product, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Get all product covers
+productCover, err := ProductCover(map[string]string{}, "dddbf38937df464690f25b18a32cdeb0", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(productCover)
+}
+```
+
+### Create product cover
+
+If you want to create a cover to an product, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+createProductCoverBody := CreateProductCoverBody{
+    ProductId: "dddbf38937df464690f25b18a32cdeb0",
+    MediaId:   "c97dc00288574ed394c5f9ee6012cd9a",
+}
+
+// Create a product cover
+createProductCover, err := CreateProductCover("dddbf38937df464690f25b18a32cdeb0", createProductCoverBody, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(createProductCover)
+}
+```
+
 ### Get all product visibilities
 
-If you want to get all product visibilities of a product, you can do it with this function.
+If you want to get all visibilities of a product, you can do it with this function.
 
 ```go
 // Define the request
@@ -409,7 +455,7 @@ if err != nil {
 
 ### Create product visibility
 
-If you want to create a product visibility to an product, you can do it with this function.
+If you want to create a visibility to an product, you can do it with this function.
 
 ```go
 // Define the request
