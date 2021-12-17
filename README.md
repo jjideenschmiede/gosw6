@@ -19,6 +19,8 @@ Currently we have the following functions covered:
 - [Product manufacturer](https://github.com/jjideenschmiede/gosw6#product-manufacturer)
 - [Property groups](https://github.com/jjideenschmiede/gosw6#property-group)
 - [Property groups option](https://github.com/jjideenschmiede/gosw6#property-group-option)
+- [Tax](https://github.com/jjideenschmiede/gosw6#tax)
+- [Sale channels](https://github.com/jjideenschmiede/gosw6#sale-channels)
 - [Media](https://github.com/jjideenschmiede/gosw6#media)
 - [Media folder](https://github.com/jjideenschmiede/gosw6#media-folder)
 - [Order](https://github.com/jjideenschmiede/gosw6#order)
@@ -372,7 +374,7 @@ r := gosw6.Request{
 }
 
 // Define body
-body := CreateProductMediaBody{
+body := gosw6.ProductMediaBody{
     MediaId: "9be5fdf920454ed78a629195c86936fe",
 }
 
@@ -382,6 +384,52 @@ if err != nil {
     log.Fatalln(err)
 } else {
     log.Println(createProductMedia)
+}
+```
+
+### Get all product visibilities
+
+If you want to get all product visibilities of a product, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Get all product visibilities
+productVisibilities, err := ProductVisibilities(map[string]string{}, "a88079a02bf146179d706c58d7294031", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(productVisibilities)
+}
+```
+
+### Create product visibility
+
+If you want to create a product visibility to an product, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+createProductVisibilityBody := gosw6.ProductVisibilityBody{
+    Visibility:     30,
+    SalesChannelId: "1ac37e86b4f1408f8319c99cee52d772",
+}
+
+// Create product visibility
+createProductVisibility, err := gosw6.CreateProductVisibility("a88079a02bf146179d706c58d7294031", createProductVisibilityBody, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(createProductVisibility)
 }
 ```
 
