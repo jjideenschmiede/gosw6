@@ -909,6 +909,60 @@ if err != nil {
 }
 ```
 
+## Tax
+
+### Get all taxes
+
+If you want to read all taxes, you can do it with the following function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
+// Get all taxes
+taxes, err := gosw6.Taxes(parameter, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(taxes)
+}
+```
+
+## Sale channels
+
+### Get all sale channels
+
+If you want to read all sale channels, you can do it with the following function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
+// Get all sale channels
+saleChannels, err := gosw6.SalesChannels(parameter, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(saleChannels)
+}
+```
+
 ## Media
 
 ### Create a media
