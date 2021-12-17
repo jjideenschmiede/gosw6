@@ -755,6 +755,140 @@ type CreateProductMediaReturn struct {
 	} `json:"errors"`
 }
 
+// ProductCoverReturn is to decode the json return
+type ProductCoverReturn struct {
+	Total int `json:"total"`
+	Data  []struct {
+		ProductId string `json:"productId"`
+		MediaId   string `json:"mediaId"`
+		Position  int    `json:"position"`
+		Media     struct {
+			UserId        string      `json:"userId"`
+			MimeType      string      `json:"mimeType"`
+			FileExtension string      `json:"fileExtension"`
+			FileSize      int         `json:"fileSize"`
+			Title         interface{} `json:"title"`
+			MetaData      interface{} `json:"metaData"`
+			MediaType     struct {
+				Name       string        `json:"name"`
+				Flags      []interface{} `json:"flags"`
+				Extensions []interface{} `json:"extensions"`
+				ApiAlias   string        `json:"apiAlias"`
+			} `json:"mediaType"`
+			UploadedAt                  time.Time     `json:"uploadedAt"`
+			Alt                         interface{}   `json:"alt"`
+			Url                         string        `json:"url"`
+			FileName                    string        `json:"fileName"`
+			User                        interface{}   `json:"user"`
+			Translations                interface{}   `json:"translations"`
+			Categories                  interface{}   `json:"categories"`
+			ProductManufacturers        interface{}   `json:"productManufacturers"`
+			ProductMedia                interface{}   `json:"productMedia"`
+			AvatarUser                  interface{}   `json:"avatarUser"`
+			Thumbnails                  []interface{} `json:"thumbnails"`
+			MediaFolderId               string        `json:"mediaFolderId"`
+			MediaFolder                 interface{}   `json:"mediaFolder"`
+			HasFile                     bool          `json:"hasFile"`
+			Private                     bool          `json:"private"`
+			PropertyGroupOptions        interface{}   `json:"propertyGroupOptions"`
+			MailTemplateMedia           interface{}   `json:"mailTemplateMedia"`
+			Tags                        interface{}   `json:"tags"`
+			DocumentBaseConfigs         interface{}   `json:"documentBaseConfigs"`
+			ShippingMethods             interface{}   `json:"shippingMethods"`
+			PaymentMethods              interface{}   `json:"paymentMethods"`
+			ProductConfiguratorSettings interface{}   `json:"productConfiguratorSettings"`
+			OrderLineItems              interface{}   `json:"orderLineItems"`
+			CmsBlocks                   interface{}   `json:"cmsBlocks"`
+			CmsSections                 interface{}   `json:"cmsSections"`
+			CmsPages                    interface{}   `json:"cmsPages"`
+			Documents                   interface{}   `json:"documents"`
+			AppPaymentMethods           interface{}   `json:"appPaymentMethods"`
+			UniqueIdentifier            string        `json:"_uniqueIdentifier"`
+			VersionId                   interface{}   `json:"versionId"`
+			Translated                  struct {
+				Alt          interface{}   `json:"alt"`
+				Title        interface{}   `json:"title"`
+				CustomFields []interface{} `json:"customFields"`
+			} `json:"translated"`
+			CreatedAt  time.Time `json:"createdAt"`
+			UpdatedAt  time.Time `json:"updatedAt"`
+			Extensions struct {
+				ForeignKeys struct {
+					ApiAlias   interface{}   `json:"apiAlias"`
+					Extensions []interface{} `json:"extensions"`
+				} `json:"foreignKeys"`
+				InternalMappingStorage struct {
+					ApiAlias   interface{}   `json:"apiAlias"`
+					Extensions []interface{} `json:"extensions"`
+				} `json:"internal_mapping_storage"`
+			} `json:"extensions"`
+			Id           string      `json:"id"`
+			CustomFields interface{} `json:"customFields"`
+			ApiAlias     string      `json:"apiAlias"`
+		} `json:"media"`
+		Product          interface{}   `json:"product"`
+		UniqueIdentifier string        `json:"_uniqueIdentifier"`
+		VersionId        string        `json:"versionId"`
+		Translated       []interface{} `json:"translated"`
+		CreatedAt        time.Time     `json:"createdAt"`
+		UpdatedAt        interface{}   `json:"updatedAt"`
+		Extensions       struct {
+			ForeignKeys struct {
+				ApiAlias   interface{}   `json:"apiAlias"`
+				Extensions []interface{} `json:"extensions"`
+			} `json:"foreignKeys"`
+		} `json:"extensions"`
+		Id           string      `json:"id"`
+		CustomFields interface{} `json:"customFields"`
+		ApiAlias     string      `json:"apiAlias"`
+	} `json:"data"`
+	Aggregations []interface{} `json:"aggregations"`
+	Errors       []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
+// CreateProductCoverBody is to structure the body data
+type CreateProductCoverBody struct {
+	ProductId string `json:"productId"`
+	MediaId   string `json:"mediaId"`
+}
+
+// CreateProductCoverReturn is to decode the json data
+type CreateProductCoverReturn struct {
+	Errors []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
 // ProductVisibilitiesReturn is to decode the json return
 type ProductVisibilitiesReturn struct {
 	Total int `json:"total"`
@@ -1120,6 +1254,98 @@ func CreateProductMedia(id string, body ProductMediaBody, r Request) (CreateProd
 
 }
 
+// ProductCover are to get a list of all product covers
+func ProductCover(parameter map[string]string, id string, r Request) (ProductCoverReturn, error) {
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + id + "/cover",
+		Method: "GET",
+		Body:   nil,
+	}
+
+	// Parse url & add attributes
+	parse, err := url.Parse(c.Path)
+	if err != nil {
+		return ProductCoverReturn{}, err
+	}
+
+	newUrl, err := url.ParseQuery(parse.RawQuery)
+	if err != nil {
+		return ProductCoverReturn{}, err
+	}
+
+	for index, value := range parameter {
+		newUrl.Add(index, value)
+	}
+
+	// Set new url
+	parse.RawQuery = newUrl.Encode()
+	c.Path = fmt.Sprintf("%s", parse)
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return ProductCoverReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode ProductCoverReturn
+
+	err = json.NewDecoder(response.Body).Decode(&decode)
+	if err != nil {
+		return ProductCoverReturn{}, err
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// CreateProductCover is to create a product cover
+func CreateProductCover(id string, body CreateProductCoverBody, r Request) (CreateProductCoverReturn, error) {
+
+	// Convert body data
+	convert, err := json.Marshal(body)
+	if err != nil {
+		return CreateProductCoverReturn{}, err
+	}
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + id + "/cover",
+		Method: "POST",
+		Body:   convert,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return CreateProductCoverReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode CreateProductCoverReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return CreateProductCoverReturn{}, err
+		}
+	}
+
+	// Return data
+	return decode, err
+
+}
+
 // ProductVisibilities are to get a list of all product visibilities
 func ProductVisibilities(parameter map[string]string, id string, r Request) (ProductVisibilitiesReturn, error) {
 
@@ -1171,7 +1397,7 @@ func ProductVisibilities(parameter map[string]string, id string, r Request) (Pro
 
 }
 
-// CreateProductVisibility is to create a product media visibility
+// CreateProductVisibility is to create a product visibility
 func CreateProductVisibility(id string, body ProductVisibilityBody, r Request) (CreateProductVisibilityReturn, error) {
 
 	// Convert body data
