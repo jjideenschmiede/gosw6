@@ -262,7 +262,6 @@ type ProductBody struct {
 	CoverId              string                       `json:"coverId,omitempty"`
 	Properties           []*ProductBodyProperties     `json:"properties"`
 	Categories           []*ProductBodyCategories     `json:"categories"`
-	Visibilities         []*ProductBodyVisibilities   `json:"visibilities"`
 	CustomSearchKeywords []*string                    `json:"customSearchKeywords"`
 }
 
@@ -303,12 +302,6 @@ type ProductBodyProperties struct {
 
 type ProductBodyCategories struct {
 	Id string `json:"id"`
-}
-
-type ProductBodyVisibilities struct {
-	Id             string `json:"id"`
-	SalesChannelId string `json:"salesChannelId"`
-	Visibility     int    `json:"visibility"`
 }
 
 // ProductReturn is to decode the json return
@@ -736,13 +729,83 @@ type ProductMediaReturn struct {
 	} `json:"errors"`
 }
 
-// CreateProductMediaBody is to structure the body data
-type CreateProductMediaBody struct {
+// ProductMediaBody is to structure the body data
+type ProductMediaBody struct {
 	MediaId string `json:"mediaId"`
 }
 
 // CreateProductMediaReturn is to decode the json data
 type CreateProductMediaReturn struct {
+	Errors []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
+// ProductVisibilitiesReturn is to decode the json return
+type ProductVisibilitiesReturn struct {
+	Total int `json:"total"`
+	Data  []struct {
+		Visibility       int           `json:"visibility"`
+		ProductId        string        `json:"productId"`
+		SalesChannelId   string        `json:"salesChannelId"`
+		Product          interface{}   `json:"product"`
+		SalesChannel     interface{}   `json:"salesChannel"`
+		UniqueIdentifier string        `json:"_uniqueIdentifier"`
+		VersionId        interface{}   `json:"versionId"`
+		Translated       []interface{} `json:"translated"`
+		CreatedAt        time.Time     `json:"createdAt"`
+		UpdatedAt        interface{}   `json:"updatedAt"`
+		Extensions       struct {
+			ForeignKeys struct {
+				ApiAlias   interface{}   `json:"apiAlias"`
+				Extensions []interface{} `json:"extensions"`
+			} `json:"foreignKeys"`
+		} `json:"extensions"`
+		Id       string `json:"id"`
+		ApiAlias string `json:"apiAlias"`
+	} `json:"data"`
+	Aggregations []interface{} `json:"aggregations"`
+	Errors       []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
+// ProductVisibilityBody is to structure the data
+type ProductVisibilityBody struct {
+	Visibility     int    `json:"visibility"`
+	SalesChannelId string `json:"salesChannelId"`
+}
+
+// CreateProductVisibilityReturn is to decode the json return
+type CreateProductVisibilityReturn struct {
 	Errors []struct {
 		Code   string `json:"code"`
 		Status string `json:"status"`
@@ -1017,7 +1080,7 @@ func ProductMedia(parameter map[string]string, id string, r Request) (ProductMed
 }
 
 // CreateProductMedia is to create a product media
-func CreateProductMedia(id string, body CreateProductMediaBody, r Request) (CreateProductMediaReturn, error) {
+func CreateProductMedia(id string, body ProductMediaBody, r Request) (CreateProductMediaReturn, error) {
 
 	// Convert body data
 	convert, err := json.Marshal(body)
@@ -1049,6 +1112,98 @@ func CreateProductMedia(id string, body CreateProductMediaBody, r Request) (Crea
 		err = json.NewDecoder(response.Body).Decode(&decode)
 		if err != nil {
 			return CreateProductMediaReturn{}, err
+		}
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// ProductVisibilities are to get a list of all product visibilities
+func ProductVisibilities(parameter map[string]string, id string, r Request) (ProductVisibilitiesReturn, error) {
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + id + "/visibilities",
+		Method: "GET",
+		Body:   nil,
+	}
+
+	// Parse url & add attributes
+	parse, err := url.Parse(c.Path)
+	if err != nil {
+		return ProductVisibilitiesReturn{}, err
+	}
+
+	newUrl, err := url.ParseQuery(parse.RawQuery)
+	if err != nil {
+		return ProductVisibilitiesReturn{}, err
+	}
+
+	for index, value := range parameter {
+		newUrl.Add(index, value)
+	}
+
+	// Set new url
+	parse.RawQuery = newUrl.Encode()
+	c.Path = fmt.Sprintf("%s", parse)
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return ProductVisibilitiesReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode ProductVisibilitiesReturn
+
+	err = json.NewDecoder(response.Body).Decode(&decode)
+	if err != nil {
+		return ProductVisibilitiesReturn{}, err
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// CreateProductVisibility is to create a product media visibility
+func CreateProductVisibility(id string, body ProductVisibilityBody, r Request) (CreateProductVisibilityReturn, error) {
+
+	// Convert body data
+	convert, err := json.Marshal(body)
+	if err != nil {
+		return CreateProductVisibilityReturn{}, err
+	}
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + id + "/visibilities",
+		Method: "POST",
+		Body:   convert,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return CreateProductVisibilityReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode CreateProductVisibilityReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return CreateProductVisibilityReturn{}, err
 		}
 	}
 
