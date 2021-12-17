@@ -257,6 +257,7 @@ type ProductBody struct {
 	Description          string                       `json:"description,omitempty"`
 	MetaDescription      string                       `json:"metaDescription,omitempty"`
 	MetaTitle            string                       `json:"metaTitle,omitempty"`
+	TaxId                string                       `json:"taxId"`
 	Tax                  *ProductBodyTax              `json:"tax,omitempty"`
 	CoverId              string                       `json:"coverId,omitempty"`
 	Properties           []*ProductBodyProperties     `json:"properties"`
