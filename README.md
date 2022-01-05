@@ -22,6 +22,7 @@ Currently we have the following functions covered:
 - [Tax](https://github.com/jjideenschmiede/gosw6#tax)
 - [Sale channels](https://github.com/jjideenschmiede/gosw6#sale-channels)
 - [Currencies](https://github.com/jjideenschmiede/gosw6#currencies)
+- [Delivery time](https://github.com/jjideenschmiede/gosw6#delivery-time)
 - [Media](https://github.com/jjideenschmiede/gosw6#media)
 - [Media folder](https://github.com/jjideenschmiede/gosw6#media-folder)
 - [Order](https://github.com/jjideenschmiede/gosw6#order)
@@ -1083,6 +1084,33 @@ if err != nil {
     log.Fatalln(err)
 } else {
     log.Println(saleChannels)
+}
+```
+
+## Delivery time
+
+### Get all delivery times
+
+If you want to read all delivery times, you can do it with the following function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
+// Get all delivery times
+deliveryTimes, err := gosw6.DeliveryTimes(parameter, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(deliveryTimes)
 }
 ```
 
