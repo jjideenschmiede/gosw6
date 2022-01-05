@@ -21,6 +21,7 @@ Currently we have the following functions covered:
 - [Property groups option](https://github.com/jjideenschmiede/gosw6#property-group-option)
 - [Tax](https://github.com/jjideenschmiede/gosw6#tax)
 - [Sale channels](https://github.com/jjideenschmiede/gosw6#sale-channels)
+- [Currencies](https://github.com/jjideenschmiede/gosw6#currencies)
 - [Media](https://github.com/jjideenschmiede/gosw6#media)
 - [Media folder](https://github.com/jjideenschmiede/gosw6#media-folder)
 - [Order](https://github.com/jjideenschmiede/gosw6#order)
@@ -1051,6 +1052,33 @@ parameter["page"] = "1"
 
 // Get all sale channels
 saleChannels, err := gosw6.SalesChannels(parameter, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(saleChannels)
+}
+```
+
+## Currencies
+
+### Get all currencies
+
+If you want to read all currencies, you can do it with the following function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
+// Get all currencies
+saleChannels, err := gosw6.Currencies(parameter, r)
 if err != nil {
     log.Fatalln(err)
 } else {
