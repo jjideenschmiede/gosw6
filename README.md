@@ -161,7 +161,7 @@ body := gosw6.ProductBody{
     ShippingFree:       true,
     PurchasePrices:     []*gosw6.ProductBodyPurchasePrices{},
     MarkAsTopseller:    true,
-    Weight:             nil,
+    Weight:             0.00,
     Width:              nil,
     Height:             nil,
     Length:             nil,

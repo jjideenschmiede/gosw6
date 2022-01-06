@@ -247,7 +247,7 @@ type ProductBody struct {
 	ShippingFree         bool                         `json:"shippingFree,omitempty"`
 	PurchasePrices       []*ProductBodyPurchasePrices `json:"purchasePrices"`
 	MarkAsTopseller      bool                         `json:"markAsTopseller,omitempty"`
-	Weight               interface{}                  `json:"weight,omitempty"`
+	Weight               float64                      `json:"weight,omitempty"`
 	Width                interface{}                  `json:"width,omitempty"`
 	Height               interface{}                  `json:"height,omitempty"`
 	Length               interface{}                  `json:"length,omitempty"`
