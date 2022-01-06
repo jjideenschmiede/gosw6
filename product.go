@@ -231,34 +231,34 @@ type ProductsReturn struct {
 // ProductBody is to structure the body data
 type ProductBody struct {
 	ParentId             interface{}                  `json:"parentId,omitempty"`
-	ManufacturerId       string                       `json:"manufacturerId"`
-	Active               bool                         `json:"active"`
+	ManufacturerId       string                       `json:"manufacturerId,omitempty"`
+	Active               bool                         `json:"active,omitempty"`
 	Price                []*ProductBodyPrice          `json:"price"`
-	ManufacturerNumber   string                       `json:"manufacturerNumber"`
+	ManufacturerNumber   string                       `json:"manufacturerNumber,omitempty"`
 	Ean                  string                       `json:"ean,omitempty"`
 	ProductNumber        string                       `json:"productNumber"`
 	Stock                int                          `json:"stock"`
-	DeliveryTimeId       string                       `json:"deliveryTimeId"`
-	RestockTime          int                          `json:"restockTime"`
-	IsCloseout           bool                         `json:"isCloseout"`
-	PurchaseSteps        int                          `json:"purchaseSteps"`
-	MaxPurchase          int                          `json:"maxPurchase"`
-	MinPurchase          int                          `json:"minPurchase"`
-	ShippingFree         bool                         `json:"shippingFree"`
+	DeliveryTimeId       string                       `json:"deliveryTimeId,omitempty"`
+	RestockTime          int                          `json:"restockTime,omitempty"`
+	IsCloseout           bool                         `json:"isCloseout,omitempty"`
+	PurchaseSteps        int                          `json:"purchaseSteps,omitempty"`
+	MaxPurchase          int                          `json:"maxPurchase,omitempty"`
+	MinPurchase          int                          `json:"minPurchase,omitempty"`
+	ShippingFree         bool                         `json:"shippingFree,omitempty"`
 	PurchasePrices       []*ProductBodyPurchasePrices `json:"purchasePrices"`
-	MarkAsTopseller      bool                         `json:"markAsTopseller"`
-	Weight               float64                      `json:"weight"`
-	Width                float64                      `json:"width"`
-	Height               float64                      `json:"height"`
-	Length               float64                      `json:"length"`
-	ReleaseDate          string                       `json:"releaseDate"`
+	MarkAsTopseller      bool                         `json:"markAsTopseller,omitempty"`
+	Weight               float64                      `json:"weight,omitempty"`
+	Width                float64                      `json:"width,omitempty"`
+	Height               float64                      `json:"height,omitempty"`
+	Length               float64                      `json:"length,omitempty"`
+	ReleaseDate          string                       `json:"releaseDate,omitempty"`
 	Name                 string                       `json:"name"`
 	Tags                 []*ProductBodyTags           `json:"tags"`
-	Description          string                       `json:"description"`
-	MetaDescription      string                       `json:"metaDescription"`
-	MetaTitle            string                       `json:"metaTitle"`
-	Keywords             string                       `json:"keywords"`
-	TaxId                string                       `json:"taxId"`
+	Description          string                       `json:"description,omitempty"`
+	MetaDescription      string                       `json:"metaDescription,omitempty"`
+	MetaTitle            string                       `json:"metaTitle,omitempty"`
+	Keywords             string                       `json:"keywords,omitempty"`
+	TaxId                string                       `json:"taxId,omitempty"`
 	Properties           []*ProductBodyProperties     `json:"properties"`
 	Categories           []*ProductBodyCategories     `json:"categories"`
 	CustomSearchKeywords []*string                    `json:"customSearchKeywords"`
