@@ -248,9 +248,9 @@ type ProductBody struct {
 	PurchasePrices       []*ProductBodyPurchasePrices `json:"purchasePrices"`
 	MarkAsTopseller      bool                         `json:"markAsTopseller,omitempty"`
 	Weight               float64                      `json:"weight,omitempty"`
-	Width                interface{}                  `json:"width,omitempty"`
-	Height               interface{}                  `json:"height,omitempty"`
-	Length               interface{}                  `json:"length,omitempty"`
+	Width                float64                      `json:"width,omitempty"`
+	Height               float64                      `json:"height,omitempty"`
+	Length               float64                      `json:"length,omitempty"`
 	ReleaseDate          string                       `json:"releaseDate,omitempty"`
 	Name                 string                       `json:"name,omitempty"`
 	Tags                 []*ProductBodyTags           `json:"tags"`
