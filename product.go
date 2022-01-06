@@ -516,21 +516,18 @@ type ProductReturn struct {
 		ApiAlias     string      `json:"apiAlias"`
 	} `json:"data"`
 	Errors []struct {
-		Code   string `json:"code"`
-		Status string `json:"status"`
-		Title  string `json:"title"`
-		Detail string `json:"detail"`
-		Meta   struct {
-			Trace []struct {
-				File     string `json:"file"`
-				Line     int    `json:"line"`
-				Function string `json:"function"`
-				Class    string `json:"class"`
-				Type     string `json:"type"`
-			} `json:"trace"`
-			File string `json:"file"`
-			Line int    `json:"line"`
+		Code     string `json:"code"`
+		Status   string `json:"status"`
+		Detail   string `json:"detail"`
+		Template string `json:"template"`
+		Meta     struct {
+			Parameters struct {
+				Value string `json:"{{ value }}"`
+			} `json:"parameters"`
 		} `json:"meta"`
+		Source struct {
+			Pointer string `json:"pointer"`
+		} `json:"source"`
 	} `json:"errors"`
 }
 
