@@ -171,6 +171,7 @@ body := gosw6.ProductBody{
     Description:        "",
     MetaDescription:    "",
     MetaTitle:          "",
+	Keywords:           "",
     TaxId:              "",
     Tax: &gosw6.ProductBodyTax{
         TaxRate: 19,
