@@ -242,8 +242,8 @@ type ProductBody struct {
 	RestockTime          int                          `json:"restockTime,omitempty"`
 	IsCloseout           bool                         `json:"isCloseout,omitempty"`
 	PurchaseSteps        int                          `json:"purchaseSteps,omitempty"`
-	MaxPurchase          int                          `json:"maxPurchase,omitempty"`
-	MinPurchase          int                          `json:"minPurchase,omitempty"`
+	MaxPurchase          int                          `json:"maxPurchase"`
+	MinPurchase          int                          `json:"minPurchase"`
 	ShippingFree         bool                         `json:"shippingFree,omitempty"`
 	PurchasePrices       []*ProductBodyPurchasePrices `json:"purchasePrices"`
 	MarkAsTopseller      bool                         `json:"markAsTopseller,omitempty"`
