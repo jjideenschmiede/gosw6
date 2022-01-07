@@ -173,10 +173,6 @@ body := gosw6.ProductBody{
     MetaTitle:          "",
 	Keywords:           "",
     TaxId:              "",
-    Tax: &gosw6.ProductBodyTax{
-        TaxRate: 19,
-        Name:    "Standard rate",
-    },
     Properties: []*gosw6.ProductBodyProperties{},
     Categories: []*gosw6.ProductBodyCategories{},
     CustomSearchKeywords: []string{
@@ -266,10 +262,6 @@ body := gosw6.ProductBody{
     MetaDescription:    "",
     MetaTitle:          "",
     TaxId:              "",
-    Tax: &gosw6.ProductBodyTax{
-        TaxRate: 19,
-        Name:    "Standard rate",
-    },
     Properties: []*gosw6.ProductBodyProperties{},
     Categories: []*gosw6.ProductBodyCategories{},
     CustomSearchKeywords: []string{
@@ -335,6 +327,139 @@ if err != nil {
     log.Fatalln(err)
 } else {
     log.Println(deleteProduct)
+}
+```
+
+### Get all product properties
+
+If you want to get all product properties, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
+// Get all product properties
+productProperties, err := ProductProperties(parameter, "c1ed726029374656bdf22f551dd7fbea", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(productProperties)
+}
+```
+
+### Delete a product property
+
+If you want to delete a product property, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Delete a product property
+delteProductProperty, err := DeleteProductProperty("c1ed726029374656bdf22f551dd7fbea", "177996f2c2674d49ac3c863d4f643c5f", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(delteProductProperty)
+}
+```
+
+### Get all product categories
+
+If you want to get all product categories, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
+// Get all product categories
+productCategories, err := ProductCategories(parameter, "c1ed726029374656bdf22f551dd7fbea", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(productCategories)
+}
+```
+
+### Delete a product category
+
+If you want to delete a product categories, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Delete a product category
+delteProductCategory, err := DeleteProductCategory("c1ed726029374656bdf22f551dd7fbea", "12aee528abbb446cb46444a0c1fd3361", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(delteProductCategory)
+}
+```
+
+### Get all product tags
+
+If you want to get all product tags, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
+// Get all product tags
+productTags, err := ProductTags(parameter, "c1ed726029374656bdf22f551dd7fbea", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(productTags)
+}
+```
+
+### Delete a product tag
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Delete a product tag
+delteProductTags, err := DeleteProductTag("c1ed726029374656bdf22f551dd7fbea", "08cf4f62c02a48858928db7a40377c18", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(delteProductTags)
 }
 ```
 

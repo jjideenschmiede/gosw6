@@ -231,7 +231,7 @@ type ProductsReturn struct {
 // ProductBody is to structure the body data
 type ProductBody struct {
 	ParentId             interface{}                  `json:"parentId,omitempty"`
-	ManufacturerId       string                       `json:"manufacturerId,omitempty"`
+	ManufacturerId       string                       `json:"manufacturerId"`
 	Active               bool                         `json:"active,omitempty"`
 	Price                []*ProductBodyPrice          `json:"price"`
 	ManufacturerNumber   string                       `json:"manufacturerNumber,omitempty"`
@@ -247,17 +247,17 @@ type ProductBody struct {
 	ShippingFree         bool                         `json:"shippingFree,omitempty"`
 	PurchasePrices       []*ProductBodyPurchasePrices `json:"purchasePrices"`
 	MarkAsTopseller      bool                         `json:"markAsTopseller,omitempty"`
-	Weight               float64                      `json:"weight,omitempty"`
-	Width                float64                      `json:"width,omitempty"`
-	Height               float64                      `json:"height,omitempty"`
-	Length               float64                      `json:"length,omitempty"`
+	Weight               float64                      `json:"weight"`
+	Width                float64                      `json:"width"`
+	Height               float64                      `json:"height"`
+	Length               float64                      `json:"length"`
 	ReleaseDate          string                       `json:"releaseDate,omitempty"`
 	Name                 string                       `json:"name"`
 	Tags                 []*ProductBodyTags           `json:"tags"`
 	Description          string                       `json:"description,omitempty"`
-	MetaDescription      string                       `json:"metaDescription,omitempty"`
-	MetaTitle            string                       `json:"metaTitle,omitempty"`
-	Keywords             string                       `json:"keywords,omitempty"`
+	MetaDescription      string                       `json:"metaDescription"`
+	MetaTitle            string                       `json:"metaTitle"`
+	Keywords             string                       `json:"keywords"`
 	TaxId                string                       `json:"taxId,omitempty"`
 	Properties           []*ProductBodyProperties     `json:"properties"`
 	Categories           []*ProductBodyCategories     `json:"categories"`
@@ -567,6 +567,264 @@ type UpdateProductReturn struct {
 
 // DeleteProductReturn is to decode the json data
 type DeleteProductReturn struct {
+	Errors []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
+// ProductPropertiesReturn is to decode the json data
+type ProductPropertiesReturn struct {
+	Total int `json:"total"`
+	Data  []struct {
+		GroupId                     string      `json:"groupId"`
+		Name                        string      `json:"name"`
+		Position                    int         `json:"position"`
+		ColorHexCode                interface{} `json:"colorHexCode"`
+		MediaId                     interface{} `json:"mediaId"`
+		Group                       interface{} `json:"group"`
+		Translations                interface{} `json:"translations"`
+		ProductConfiguratorSettings interface{} `json:"productConfiguratorSettings"`
+		ProductProperties           interface{} `json:"productProperties"`
+		ProductOptions              interface{} `json:"productOptions"`
+		Media                       interface{} `json:"media"`
+		UniqueIdentifier            string      `json:"_uniqueIdentifier"`
+		VersionId                   interface{} `json:"versionId"`
+		Translated                  struct {
+			Name         string `json:"name"`
+			Position     int    `json:"position"`
+			CustomFields struct {
+			} `json:"customFields"`
+		} `json:"translated"`
+		CreatedAt  time.Time   `json:"createdAt"`
+		UpdatedAt  interface{} `json:"updatedAt"`
+		Extensions struct {
+			ForeignKeys struct {
+				ApiAlias   interface{}   `json:"apiAlias"`
+				Extensions []interface{} `json:"extensions"`
+			} `json:"foreignKeys"`
+		} `json:"extensions"`
+		Id           string      `json:"id"`
+		CustomFields interface{} `json:"customFields"`
+		ApiAlias     string      `json:"apiAlias"`
+	} `json:"data"`
+	Aggregations []interface{} `json:"aggregations"`
+	Errors       []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
+// DeleteProductPropertyReturn is to decode the json data
+type DeleteProductPropertyReturn struct {
+	Errors []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
+// ProductCategoriesReturn is to decode the json data
+type ProductCategoriesReturn struct {
+	Total int `json:"total"`
+	Data  []struct {
+		ParentId                string      `json:"parentId"`
+		AutoIncrement           int         `json:"autoIncrement"`
+		MediaId                 interface{} `json:"mediaId"`
+		Name                    string      `json:"name"`
+		Breadcrumb              []string    `json:"breadcrumb"`
+		Path                    string      `json:"path"`
+		Level                   int         `json:"level"`
+		Active                  bool        `json:"active"`
+		ChildCount              int         `json:"childCount"`
+		VisibleChildCount       int         `json:"visibleChildCount"`
+		DisplayNestedProducts   bool        `json:"displayNestedProducts"`
+		Parent                  interface{} `json:"parent"`
+		Children                interface{} `json:"children"`
+		Translations            interface{} `json:"translations"`
+		Media                   interface{} `json:"media"`
+		Products                interface{} `json:"products"`
+		NestedProducts          interface{} `json:"nestedProducts"`
+		AfterCategoryId         interface{} `json:"afterCategoryId"`
+		Tags                    interface{} `json:"tags"`
+		CmsPageId               string      `json:"cmsPageId"`
+		CmsPage                 interface{} `json:"cmsPage"`
+		ProductStreamId         interface{} `json:"productStreamId"`
+		ProductStream           interface{} `json:"productStream"`
+		SlotConfig              interface{} `json:"slotConfig"`
+		NavigationSalesChannels interface{} `json:"navigationSalesChannels"`
+		FooterSalesChannels     interface{} `json:"footerSalesChannels"`
+		ServiceSalesChannels    interface{} `json:"serviceSalesChannels"`
+		LinkType                interface{} `json:"linkType"`
+		LinkNewTab              interface{} `json:"linkNewTab"`
+		InternalLink            interface{} `json:"internalLink"`
+		ExternalLink            interface{} `json:"externalLink"`
+		Visible                 bool        `json:"visible"`
+		Type                    string      `json:"type"`
+		ProductAssignmentType   string      `json:"productAssignmentType"`
+		Description             interface{} `json:"description"`
+		MetaTitle               interface{} `json:"metaTitle"`
+		MetaDescription         interface{} `json:"metaDescription"`
+		Keywords                interface{} `json:"keywords"`
+		MainCategories          interface{} `json:"mainCategories"`
+		SeoUrls                 interface{} `json:"seoUrls"`
+		UniqueIdentifier        string      `json:"_uniqueIdentifier"`
+		VersionId               string      `json:"versionId"`
+		Translated              struct {
+			Breadcrumb   []string `json:"breadcrumb"`
+			Name         string   `json:"name"`
+			CustomFields struct {
+			} `json:"customFields"`
+			SlotConfig      interface{} `json:"slotConfig"`
+			LinkType        interface{} `json:"linkType"`
+			InternalLink    interface{} `json:"internalLink"`
+			ExternalLink    interface{} `json:"externalLink"`
+			LinkNewTab      interface{} `json:"linkNewTab"`
+			Description     interface{} `json:"description"`
+			MetaTitle       interface{} `json:"metaTitle"`
+			MetaDescription interface{} `json:"metaDescription"`
+			Keywords        interface{} `json:"keywords"`
+		} `json:"translated"`
+		CreatedAt  time.Time `json:"createdAt"`
+		UpdatedAt  time.Time `json:"updatedAt"`
+		Extensions struct {
+			ForeignKeys struct {
+				ApiAlias   interface{}   `json:"apiAlias"`
+				Extensions []interface{} `json:"extensions"`
+			} `json:"foreignKeys"`
+		} `json:"extensions"`
+		Id           string      `json:"id"`
+		CustomFields interface{} `json:"customFields"`
+		ApiAlias     string      `json:"apiAlias"`
+	} `json:"data"`
+	Aggregations []interface{} `json:"aggregations"`
+	Errors       []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
+// DeleteProductCategoryReturn is to decode the json data
+type DeleteProductCategoryReturn struct {
+	Errors []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
+// ProductTagsReturn is to decode the json data
+type ProductTagsReturn struct {
+	Total int `json:"total"`
+	Data  []struct {
+		Name                 string        `json:"name"`
+		Products             interface{}   `json:"products"`
+		Media                interface{}   `json:"media"`
+		Categories           interface{}   `json:"categories"`
+		Customers            interface{}   `json:"customers"`
+		Orders               interface{}   `json:"orders"`
+		ShippingMethods      interface{}   `json:"shippingMethods"`
+		NewsletterRecipients interface{}   `json:"newsletterRecipients"`
+		LandingPages         interface{}   `json:"landingPages"`
+		UniqueIdentifier     string        `json:"_uniqueIdentifier"`
+		VersionId            interface{}   `json:"versionId"`
+		Translated           []interface{} `json:"translated"`
+		CreatedAt            time.Time     `json:"createdAt"`
+		UpdatedAt            interface{}   `json:"updatedAt"`
+		Extensions           struct {
+			ForeignKeys struct {
+				ApiAlias   interface{}   `json:"apiAlias"`
+				Extensions []interface{} `json:"extensions"`
+			} `json:"foreignKeys"`
+		} `json:"extensions"`
+		Id       string `json:"id"`
+		ApiAlias string `json:"apiAlias"`
+	} `json:"data"`
+	Aggregations []interface{} `json:"aggregations"`
+	Errors       []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
+// DeleteProductTagReturn is to decode the json data
+type DeleteProductTagReturn struct {
 	Errors []struct {
 		Code   string `json:"code"`
 		Status string `json:"status"`
@@ -1143,6 +1401,264 @@ func DeleteProduct(id string, r Request) (DeleteProductReturn, error) {
 		err = json.NewDecoder(response.Body).Decode(&decode)
 		if err != nil {
 			return DeleteProductReturn{}, err
+		}
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// ProductProperties are to get a list of all product properties
+func ProductProperties(parameter map[string]string, id string, r Request) (ProductPropertiesReturn, error) {
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + id + "/properties",
+		Method: "GET",
+		Body:   nil,
+	}
+
+	// Parse url & add attributes
+	parse, err := url.Parse(c.Path)
+	if err != nil {
+		return ProductPropertiesReturn{}, err
+	}
+
+	newUrl, err := url.ParseQuery(parse.RawQuery)
+	if err != nil {
+		return ProductPropertiesReturn{}, err
+	}
+
+	for index, value := range parameter {
+		newUrl.Add(index, value)
+	}
+
+	// Set new url
+	parse.RawQuery = newUrl.Encode()
+	c.Path = fmt.Sprintf("%s", parse)
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return ProductPropertiesReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode ProductPropertiesReturn
+
+	err = json.NewDecoder(response.Body).Decode(&decode)
+	if err != nil {
+		return ProductPropertiesReturn{}, err
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// DeleteProductProperty is to delete a product property
+func DeleteProductProperty(productId, propertyId string, r Request) (DeleteProductPropertyReturn, error) {
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + productId + "/properties/" + propertyId,
+		Method: "DELETE",
+		Body:   nil,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return DeleteProductPropertyReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode DeleteProductPropertyReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return DeleteProductPropertyReturn{}, err
+		}
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// ProductCategories are to get a list of all product categories
+func ProductCategories(parameter map[string]string, id string, r Request) (ProductCategoriesReturn, error) {
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + id + "/categories",
+		Method: "GET",
+		Body:   nil,
+	}
+
+	// Parse url & add attributes
+	parse, err := url.Parse(c.Path)
+	if err != nil {
+		return ProductCategoriesReturn{}, err
+	}
+
+	newUrl, err := url.ParseQuery(parse.RawQuery)
+	if err != nil {
+		return ProductCategoriesReturn{}, err
+	}
+
+	for index, value := range parameter {
+		newUrl.Add(index, value)
+	}
+
+	// Set new url
+	parse.RawQuery = newUrl.Encode()
+	c.Path = fmt.Sprintf("%s", parse)
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return ProductCategoriesReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode ProductCategoriesReturn
+
+	err = json.NewDecoder(response.Body).Decode(&decode)
+	if err != nil {
+		return ProductCategoriesReturn{}, err
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// DeleteProductCategory is to delete a product category
+func DeleteProductCategory(productId, categoryId string, r Request) (DeleteProductCategoryReturn, error) {
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + productId + "/categories/" + categoryId,
+		Method: "DELETE",
+		Body:   nil,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return DeleteProductCategoryReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode DeleteProductCategoryReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return DeleteProductCategoryReturn{}, err
+		}
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// ProductTags are to get a list of all product tags
+func ProductTags(parameter map[string]string, id string, r Request) (ProductTagsReturn, error) {
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + id + "/tags",
+		Method: "GET",
+		Body:   nil,
+	}
+
+	// Parse url & add attributes
+	parse, err := url.Parse(c.Path)
+	if err != nil {
+		return ProductTagsReturn{}, err
+	}
+
+	newUrl, err := url.ParseQuery(parse.RawQuery)
+	if err != nil {
+		return ProductTagsReturn{}, err
+	}
+
+	for index, value := range parameter {
+		newUrl.Add(index, value)
+	}
+
+	// Set new url
+	parse.RawQuery = newUrl.Encode()
+	c.Path = fmt.Sprintf("%s", parse)
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return ProductTagsReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode ProductTagsReturn
+
+	err = json.NewDecoder(response.Body).Decode(&decode)
+	if err != nil {
+		return ProductTagsReturn{}, err
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// DeleteProductTag is to delete a product tag
+func DeleteProductTag(productId, tagId string, r Request) (DeleteProductTagReturn, error) {
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + productId + "/tags/" + tagId,
+		Method: "DELETE",
+		Body:   nil,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return DeleteProductTagReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode DeleteProductTagReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return DeleteProductTagReturn{}, err
 		}
 	}
 
