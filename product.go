@@ -231,7 +231,7 @@ type ProductsReturn struct {
 // ProductBody is to structure the body data
 type ProductBody struct {
 	ParentId             interface{}                  `json:"parentId,omitempty"`
-	ManufacturerId       string                       `json:"manufacturerId"`
+	ManufacturerId       string                       `json:"manufacturerId,omitempty"`
 	Active               bool                         `json:"active,omitempty"`
 	Price                []*ProductBodyPrice          `json:"price"`
 	ManufacturerNumber   string                       `json:"manufacturerNumber,omitempty"`
