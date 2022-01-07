@@ -1287,6 +1287,34 @@ if err != nil {
 }
 ```
 
+### Create a delivery time
+
+If you want to create a delivery time, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := gosw6.CreateDeliveryTimesBody{
+    Name: "Nicht angegeben",
+    Min:  1,
+    Max:  7,
+    Unit: "day",
+}
+
+// Create a delivery time
+createDeliveryTime, err := gosw6.CreateDeliveryTimes(body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(createDeliveryTime)
+}
+```
+
 ## Media
 
 ### Create a media
