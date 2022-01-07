@@ -238,7 +238,7 @@ type ProductBody struct {
 	Ean                  string                       `json:"ean,omitempty"`
 	ProductNumber        string                       `json:"productNumber"`
 	Stock                int                          `json:"stock"`
-	DeliveryTimeId       string                       `json:"deliveryTimeId,omitempty"`
+	DeliveryTimeId       string                       `json:"deliveryTimeId"`
 	RestockTime          int                          `json:"restockTime,omitempty"`
 	IsCloseout           bool                         `json:"isCloseout,omitempty"`
 	PurchaseSteps        int                          `json:"purchaseSteps,omitempty"`
