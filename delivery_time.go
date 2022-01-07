@@ -78,7 +78,8 @@ type CreateDeliveryTimesBody struct {
 
 // CreateDeliveryTimesReturn is to decode the json data
 type CreateDeliveryTimesReturn struct {
-	Errors []struct {
+	Location string `json:"location"`
+	Errors   []struct {
 		Code   string `json:"code"`
 		Status string `json:"status"`
 		Title  string `json:"title"`
@@ -183,6 +184,9 @@ func CreateDeliveryTimes(body CreateDeliveryTimesBody, r Request) (CreateDeliver
 			return CreateDeliveryTimesReturn{}, err
 		}
 	}
+
+	// Get location in header & set to return struct
+	decode.Location = response.Header.Get("location")
 
 	// Return data
 	return decode, err
