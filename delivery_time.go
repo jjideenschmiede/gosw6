@@ -68,6 +68,35 @@ type DeliveryTimesReturn struct {
 	} `json:"errors"`
 }
 
+// CreateDeliveryTimesBody is to structure the body data
+type CreateDeliveryTimesBody struct {
+	Name string `json:"name"`
+	Min  int    `json:"min"`
+	Max  int    `json:"max"`
+	Unit string `json:"unit"`
+}
+
+// CreateDeliveryTimesReturn is to decode the json data
+type CreateDeliveryTimesReturn struct {
+	Errors []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
 // DeliveryTimes is to get a list of all delivery times
 func DeliveryTimes(parameter map[string]string, r Request) (DeliveryTimesReturn, error) {
 
@@ -112,6 +141,47 @@ func DeliveryTimes(parameter map[string]string, r Request) (DeliveryTimesReturn,
 	err = json.NewDecoder(response.Body).Decode(&decode)
 	if err != nil {
 		return DeliveryTimesReturn{}, err
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// CreateDeliveryTimes is to create a delivery time
+func CreateDeliveryTimes(body CreateDeliveryTimesBody, r Request) (CreateDeliveryTimesReturn, error) {
+
+	// Convert body data
+	convert, err := json.Marshal(body)
+	if err != nil {
+		return CreateDeliveryTimesReturn{}, err
+	}
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/delivery-time",
+		Method: "POST",
+		Body:   convert,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return CreateDeliveryTimesReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode CreateDeliveryTimesReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return CreateDeliveryTimesReturn{}, err
+		}
 	}
 
 	// Return data
