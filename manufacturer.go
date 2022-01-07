@@ -18,8 +18,8 @@ import (
 	"time"
 )
 
-// ProductManufacturersReturn is to decode the json data
-type ProductManufacturersReturn struct {
+// ManufacturersReturn is to decode the json data
+type ManufacturersReturn struct {
 	Total int `json:"total"`
 	Data  []struct {
 		MediaId          interface{} `json:"mediaId"`
@@ -69,8 +69,8 @@ type ProductManufacturersReturn struct {
 	} `json:"errors"`
 }
 
-// ProductManufacturerReturn is to decode the json return
-type ProductManufacturerReturn struct {
+// ManufacturerReturn is to decode the json return
+type ManufacturerReturn struct {
 	Data struct {
 		MediaId          interface{} `json:"mediaId"`
 		Name             string      `json:"name"`
@@ -118,16 +118,16 @@ type ProductManufacturerReturn struct {
 	} `json:"errors"`
 }
 
-// ProductManufacturerBody is to structure the body data
-type ProductManufacturerBody struct {
+// ManufacturerBody is to structure the body data
+type ManufacturerBody struct {
 	MediaId     string `json:"mediaId,omitempty"`
 	Name        string `json:"name"`
 	Link        string `json:"link,omitempty"`
 	Description string `json:"description,omitempty"`
 }
 
-// CreateProductManufacturerReturn is to decode the json data
-type CreateProductManufacturerReturn struct {
+// CreateManufacturerReturn is to decode the json data
+type CreateManufacturerReturn struct {
 	Location string `json:"location"`
 	Errors   []struct {
 		Code   string `json:"code"`
@@ -148,8 +148,8 @@ type CreateProductManufacturerReturn struct {
 	} `json:"errors"`
 }
 
-// UpdateProductManufacturerReturn is to decode the json data
-type UpdateProductManufacturerReturn struct {
+// UpdateManufacturerReturn is to decode the json data
+type UpdateManufacturerReturn struct {
 	Errors []struct {
 		Code   string `json:"code"`
 		Status string `json:"status"`
@@ -169,8 +169,8 @@ type UpdateProductManufacturerReturn struct {
 	} `json:"errors"`
 }
 
-// DeleteProductManufacturerReturn is to decode the json data
-type DeleteProductManufacturerReturn struct {
+// DeleteManufacturerReturn is to decode the json data
+type DeleteManufacturerReturn struct {
 	Errors []struct {
 		Code   string `json:"code"`
 		Status string `json:"status"`
@@ -190,8 +190,8 @@ type DeleteProductManufacturerReturn struct {
 	} `json:"errors"`
 }
 
-// ProductManufacturers are to get a list of all product manufacturers
-func ProductManufacturers(parameter map[string]string, r Request) (ProductManufacturersReturn, error) {
+// Manufacturers are to get a list of all product manufacturers
+func Manufacturers(parameter map[string]string, r Request) (ManufacturersReturn, error) {
 
 	// Set config for request
 	c := Config{
@@ -203,12 +203,12 @@ func ProductManufacturers(parameter map[string]string, r Request) (ProductManufa
 	// Parse url & add attributes
 	parse, err := url.Parse(c.Path)
 	if err != nil {
-		return ProductManufacturersReturn{}, err
+		return ManufacturersReturn{}, err
 	}
 
 	newUrl, err := url.ParseQuery(parse.RawQuery)
 	if err != nil {
-		return ProductManufacturersReturn{}, err
+		return ManufacturersReturn{}, err
 	}
 
 	for index, value := range parameter {
@@ -222,18 +222,18 @@ func ProductManufacturers(parameter map[string]string, r Request) (ProductManufa
 	// Send request
 	response, err := c.Send(r)
 	if err != nil {
-		return ProductManufacturersReturn{}, err
+		return ManufacturersReturn{}, err
 	}
 
 	// Close request
 	defer response.Body.Close()
 
 	// Decode data
-	var decode ProductManufacturersReturn
+	var decode ManufacturersReturn
 
 	err = json.NewDecoder(response.Body).Decode(&decode)
 	if err != nil {
-		return ProductManufacturersReturn{}, err
+		return ManufacturersReturn{}, err
 	}
 
 	// Return data
@@ -241,8 +241,8 @@ func ProductManufacturers(parameter map[string]string, r Request) (ProductManufa
 
 }
 
-// ProductManufacturer is to get a specific product manufacturer by id
-func ProductManufacturer(id string, r Request) (ProductManufacturerReturn, error) {
+// Manufacturer is to get a specific product manufacturer by id
+func Manufacturer(id string, r Request) (ManufacturerReturn, error) {
 
 	// Set config for request
 	c := Config{
@@ -254,18 +254,18 @@ func ProductManufacturer(id string, r Request) (ProductManufacturerReturn, error
 	// Send request
 	response, err := c.Send(r)
 	if err != nil {
-		return ProductManufacturerReturn{}, err
+		return ManufacturerReturn{}, err
 	}
 
 	// Close request
 	defer response.Body.Close()
 
 	// Decode data
-	var decode ProductManufacturerReturn
+	var decode ManufacturerReturn
 
 	err = json.NewDecoder(response.Body).Decode(&decode)
 	if err != nil {
-		return ProductManufacturerReturn{}, err
+		return ManufacturerReturn{}, err
 	}
 
 	// Return data
@@ -273,13 +273,13 @@ func ProductManufacturer(id string, r Request) (ProductManufacturerReturn, error
 
 }
 
-// CreateProductManufacturer is to create a new product manufacturer
-func CreateProductManufacturer(body ProductManufacturerBody, r Request) (CreateProductManufacturerReturn, error) {
+// CreateManufacturer is to create a new product manufacturer
+func CreateManufacturer(body ManufacturerBody, r Request) (CreateManufacturerReturn, error) {
 
 	// Convert body data
 	convert, err := json.Marshal(body)
 	if err != nil {
-		return CreateProductManufacturerReturn{}, err
+		return CreateManufacturerReturn{}, err
 	}
 
 	// Set config for request
@@ -292,20 +292,20 @@ func CreateProductManufacturer(body ProductManufacturerBody, r Request) (CreateP
 	// Send request
 	response, err := c.Send(r)
 	if err != nil {
-		return CreateProductManufacturerReturn{}, err
+		return CreateManufacturerReturn{}, err
 	}
 
 	// Close request
 	defer response.Body.Close()
 
 	// Decode data
-	var decode CreateProductManufacturerReturn
+	var decode CreateManufacturerReturn
 
 	// Check response header
 	if response.Status != "204 No Content" {
 		err = json.NewDecoder(response.Body).Decode(&decode)
 		if err != nil {
-			return CreateProductManufacturerReturn{}, err
+			return CreateManufacturerReturn{}, err
 		}
 	}
 
@@ -317,13 +317,13 @@ func CreateProductManufacturer(body ProductManufacturerBody, r Request) (CreateP
 
 }
 
-// UpdateProductManufacturer is to update a new product manufacturer
-func UpdateProductManufacturer(id string, body ProductManufacturerBody, r Request) (UpdateProductManufacturerReturn, error) {
+// UpdateManufacturer is to update a new product manufacturer
+func UpdateManufacturer(id string, body ManufacturerBody, r Request) (UpdateManufacturerReturn, error) {
 
 	// Convert body data
 	convert, err := json.Marshal(body)
 	if err != nil {
-		return UpdateProductManufacturerReturn{}, err
+		return UpdateManufacturerReturn{}, err
 	}
 
 	// Set config for request
@@ -336,20 +336,20 @@ func UpdateProductManufacturer(id string, body ProductManufacturerBody, r Reques
 	// Send request
 	response, err := c.Send(r)
 	if err != nil {
-		return UpdateProductManufacturerReturn{}, err
+		return UpdateManufacturerReturn{}, err
 	}
 
 	// Close request
 	defer response.Body.Close()
 
 	// Decode data
-	var decode UpdateProductManufacturerReturn
+	var decode UpdateManufacturerReturn
 
 	// Check response header
 	if response.Status != "204 No Content" {
 		err = json.NewDecoder(response.Body).Decode(&decode)
 		if err != nil {
-			return UpdateProductManufacturerReturn{}, err
+			return UpdateManufacturerReturn{}, err
 		}
 	}
 
@@ -358,8 +358,8 @@ func UpdateProductManufacturer(id string, body ProductManufacturerBody, r Reques
 
 }
 
-// DeleteProductManufacturer is to delete a new product manufacturer
-func DeleteProductManufacturer(id string, r Request) (DeleteProductManufacturerReturn, error) {
+// DeleteManufacturer is to delete a new product manufacturer
+func DeleteManufacturer(id string, r Request) (DeleteManufacturerReturn, error) {
 
 	// Set config for request
 	c := Config{
@@ -371,20 +371,20 @@ func DeleteProductManufacturer(id string, r Request) (DeleteProductManufacturerR
 	// Send request
 	response, err := c.Send(r)
 	if err != nil {
-		return DeleteProductManufacturerReturn{}, err
+		return DeleteManufacturerReturn{}, err
 	}
 
 	// Close request
 	defer response.Body.Close()
 
 	// Decode data
-	var decode DeleteProductManufacturerReturn
+	var decode DeleteManufacturerReturn
 
 	// Check response header
 	if response.Status != "204 No Content" {
 		err = json.NewDecoder(response.Body).Decode(&decode)
 		if err != nil {
-			return DeleteProductManufacturerReturn{}, err
+			return DeleteManufacturerReturn{}, err
 		}
 	}
 
