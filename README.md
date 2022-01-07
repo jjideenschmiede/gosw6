@@ -447,6 +447,8 @@ if err != nil {
 
 ### Delete a product tag
 
+If you want to delete a product tag, you can do it with this function.
+
 ```go
 // Define the request
 r := gosw6.Request{
@@ -460,6 +462,51 @@ if err != nil {
     log.Fatalln(err)
 } else {
     log.Println(delteProductTags)
+}
+```
+
+### Get all product manufacturers
+
+If you want to get all product manufacturers, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
+// Get all product manufacturers
+productManufacturer, err := gosw6.ProductManufacturers(parameter, "b398f53c50f243aaacc38a68659f71e1", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(productManufacturer)
+}
+```
+
+### Delete a product manufacturer
+
+If you want to delete a product manufacturer, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Delete a product manufacturer
+delteProductManufacturer, err := gosw6.DeleteProductManufacturer("b398f53c50f243aaacc38a68659f71e1", "a1b5a538e2ff4ac78034741873cee064", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(delteProductManufacturer)
 }
 ```
 
