@@ -16,7 +16,7 @@ Currently we have the following functions covered:
 - [Access token](https://github.com/jjideenschmiede/gosw6#access-token)
 - [Product](https://github.com/jjideenschmiede/gosw6#product)
 - [Category](https://github.com/jjideenschmiede/gosw6#category)
-- [Product manufacturer](https://github.com/jjideenschmiede/gosw6#product-manufacturer)
+- [Manufacturer](https://github.com/jjideenschmiede/gosw6#manufacturer)
 - [Property groups](https://github.com/jjideenschmiede/gosw6#property-group)
 - [Property groups option](https://github.com/jjideenschmiede/gosw6#property-group-option)
 - [Tax](https://github.com/jjideenschmiede/gosw6#tax)
@@ -347,7 +347,7 @@ parameter["limit"] = "5"
 parameter["page"] = "1"
 
 // Get all product properties
-productProperties, err := ProductProperties(parameter, "c1ed726029374656bdf22f551dd7fbea", r)
+productProperties, err := gosw6.ProductProperties(parameter, "c1ed726029374656bdf22f551dd7fbea", r)
 if err != nil {
     log.Fatalln(err)
 } else {
@@ -367,7 +367,7 @@ r := gosw6.Request{
 }
 
 // Delete a product property
-delteProductProperty, err := DeleteProductProperty("c1ed726029374656bdf22f551dd7fbea", "177996f2c2674d49ac3c863d4f643c5f", r)
+delteProductProperty, err := gosw6.DeleteProductProperty("c1ed726029374656bdf22f551dd7fbea", "177996f2c2674d49ac3c863d4f643c5f", r)
 if err != nil {
     log.Fatalln(err)
 } else {
@@ -392,7 +392,7 @@ parameter["limit"] = "5"
 parameter["page"] = "1"
 
 // Get all product categories
-productCategories, err := ProductCategories(parameter, "c1ed726029374656bdf22f551dd7fbea", r)
+productCategories, err := gosw6.ProductCategories(parameter, "c1ed726029374656bdf22f551dd7fbea", r)
 if err != nil {
     log.Fatalln(err)
 } else {
@@ -412,7 +412,7 @@ r := gosw6.Request{
 }
 
 // Delete a product category
-delteProductCategory, err := DeleteProductCategory("c1ed726029374656bdf22f551dd7fbea", "12aee528abbb446cb46444a0c1fd3361", r)
+delteProductCategory, err := gosw6.DeleteProductCategory("c1ed726029374656bdf22f551dd7fbea", "12aee528abbb446cb46444a0c1fd3361", r)
 if err != nil {
     log.Fatalln(err)
 } else {
@@ -437,7 +437,7 @@ parameter["limit"] = "5"
 parameter["page"] = "1"
 
 // Get all product tags
-productTags, err := ProductTags(parameter, "c1ed726029374656bdf22f551dd7fbea", r)
+productTags, err := gosw6.ProductTags(parameter, "c1ed726029374656bdf22f551dd7fbea", r)
 if err != nil {
     log.Fatalln(err)
 } else {
@@ -447,6 +447,8 @@ if err != nil {
 
 ### Delete a product tag
 
+If you want to delete a product tag, you can do it with this function.
+
 ```go
 // Define the request
 r := gosw6.Request{
@@ -455,11 +457,56 @@ r := gosw6.Request{
 }
 
 // Delete a product tag
-delteProductTags, err := DeleteProductTag("c1ed726029374656bdf22f551dd7fbea", "08cf4f62c02a48858928db7a40377c18", r)
+delteProductTags, err := gosw6.DeleteProductTag("c1ed726029374656bdf22f551dd7fbea", "08cf4f62c02a48858928db7a40377c18", r)
 if err != nil {
     log.Fatalln(err)
 } else {
     log.Println(delteProductTags)
+}
+```
+
+### Get all product manufacturers
+
+If you want to get all product manufacturers, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
+// Get all product manufacturers
+productManufacturer, err := gosw6.ProductManufacturers(parameter, "b398f53c50f243aaacc38a68659f71e1", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(productManufacturer)
+}
+```
+
+### Delete a product manufacturer
+
+If you want to delete a product manufacturer, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Delete a product manufacturer
+delteProductManufacturer, err := gosw6.DeleteProductManufacturer("b398f53c50f243aaacc38a68659f71e1", "a1b5a538e2ff4ac78034741873cee064", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(delteProductManufacturer)
 }
 ```
 
@@ -552,7 +599,7 @@ createProductCoverBody := CreateProductCoverBody{
 }
 
 // Create a product cover
-createProductCover, err := CreateProductCover("dddbf38937df464690f25b18a32cdeb0", createProductCoverBody, r)
+createProductCover, err := gosw6.CreateProductCover("dddbf38937df464690f25b18a32cdeb0", createProductCoverBody, r)
 if err != nil {
     log.Fatalln(err)
 } else {
@@ -572,7 +619,7 @@ r := gosw6.Request{
 }
 
 // Get all product visibilities
-productVisibilities, err := ProductVisibilities(map[string]string{}, "a88079a02bf146179d706c58d7294031", r)
+productVisibilities, err := gosw6.ProductVisibilities(map[string]string{}, "a88079a02bf146179d706c58d7294031", r)
 if err != nil {
     log.Fatalln(err)
 } else {
@@ -757,11 +804,11 @@ if err != nil {
 }
 ```
 
-## Product manufacturer
+## Manufacturer
 
-### Get all product manufacturers
+### Get all manufacturers
 
-If you want to read all product manufacturers, you can do it with the following function.
+If you want to read all manufacturers, you can do it with the following function.
 
 ```go
 // Define the request
@@ -775,18 +822,18 @@ parameter := make(map[string]string)
 parameter["limit"] = "5"
 parameter["page"] = "1"
 
-// Get all product manufacturers
-productManufacturers, err := gosw6.ProductManufacturers(parameter, r)
+// Get all manufacturers
+manufacturers, err := gosw6.Manufacturers(parameter, r)
 if err != nil {
     log.Fatalln(err)
 } else {
-    log.Println(productManufacturers)
+    log.Println(manufacturers)
 }
 ```
 
-### Get a product manufacturer
+### Get a manufacturer
 
-If you want to read a specific product manufacturer, you can do it with this function.
+If you want to read a specific manufacturer, you can do it with this function.
 
 ```go
 // Define the request
@@ -795,18 +842,18 @@ r := gosw6.Request{
     BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
 }
 
-// Get a product manufacturer by id
-productManufacturer, err := gosw6.ProductManufacturer("a27be66bc743476089a0672290eed674", r)
+// Get a manufacturer by id
+manufacturer, err := gosw6.Manufacturer("a27be66bc743476089a0672290eed674", r)
 if err != nil {
     log.Fatalln(err)
 } else {
-    log.Println(productManufacturer)
+    log.Println(manufacturer)
 }
 ```
 
-### Create a product manufacturer
+### Create a manufacturer
 
-If you want to create a product manufacturer, you can do it with this function.
+If you want to create a manufacturer, you can do it with this function.
 
 ```go
 // Define the request
@@ -816,25 +863,25 @@ r := gosw6.Request{
 }
 
 // Define body
-body := gosw6.ProductManufacturerBody{
+body := gosw6.ManufacturerBody{
     MediaId:     "7ae758e4c3cb457e8b023b2c859616f7",
     Name:        "Afterbuy",
     Link:        "https://www.afterbuy.de",
     Description: "Nutzen Sie die führende All-in-One-Lösung für den E-Commerce",
 }
 
-// Create a product manufacturer
-createProductManufacturer, err := gosw6.CreateProductManufacturer(body, r)
+// Create a manufacturer
+createManufacturer, err := gosw6.CreateManufacturer(body, r)
 if err != nil {
     log.Fatalln(err)
 } else {
-    log.Println(createProductManufacturer)
+    log.Println(createManufacturer)
 }
 ```
 
-### Update a product manufacturer
+### Update a manufacturer
 
-If you want to update a product manufacturer, you can do it with this function.
+If you want to update a manufacturer, you can do it with this function.
 
 ```go
 // Define the request
@@ -844,7 +891,7 @@ r := gosw6.Request{
 }
 
 // Define body
-body := gosw6.ProductManufacturerBody{
+body := gosw6.ManufacturerBody{
     MediaId:     "7ae758e4c3cb457e8b023b2c859616f7",
     Name:        "Afterbuy2",
     Link:        "https://www.afterbuy.de",
@@ -860,9 +907,9 @@ if err != nil {
 }
 ```
 
-### Delete a product manufacturer
+### Delete a manufacturer
 
-If you want to delete a product manufacturer, you can do it with this function.
+If you want to delete a manufacturer, you can do it with this function.
 
 ```go
 // Define the request
@@ -871,12 +918,12 @@ r := gosw6.Request{
     BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
 }
 
-// Delete a product manufacturer by id
-deleteProductManufacturer, err := gosw6.DeleteProductManufacturer("cd38ccc066ff4400a80373ba86058df3", r)
+// Delete a manufacturer by id
+deleteManufacturer, err := gosw6.DeleteManufacturer("cd38ccc066ff4400a80373ba86058df3", r)
 if err != nil {
     log.Fatalln(err)
 } else {
-    log.Println(deleteProductManufacturer)
+    log.Println(deleteManufacturer)
 }
 ```
 

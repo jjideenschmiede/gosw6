@@ -844,6 +844,78 @@ type DeleteProductTagReturn struct {
 	} `json:"errors"`
 }
 
+// ProductManufacturersReturn is to decode the json data
+type ProductManufacturersReturn struct {
+	Total int `json:"total"`
+	Data  []struct {
+		MediaId          interface{} `json:"mediaId"`
+		Name             string      `json:"name"`
+		Link             interface{} `json:"link"`
+		Description      interface{} `json:"description"`
+		Media            interface{} `json:"media"`
+		Translations     interface{} `json:"translations"`
+		Products         interface{} `json:"products"`
+		UniqueIdentifier string      `json:"_uniqueIdentifier"`
+		VersionId        string      `json:"versionId"`
+		Translated       struct {
+			Name         string      `json:"name"`
+			Description  interface{} `json:"description"`
+			CustomFields struct {
+			} `json:"customFields"`
+		} `json:"translated"`
+		CreatedAt  time.Time   `json:"createdAt"`
+		UpdatedAt  interface{} `json:"updatedAt"`
+		Extensions struct {
+			ForeignKeys struct {
+				ApiAlias   interface{}   `json:"apiAlias"`
+				Extensions []interface{} `json:"extensions"`
+			} `json:"foreignKeys"`
+		} `json:"extensions"`
+		Id           string      `json:"id"`
+		CustomFields interface{} `json:"customFields"`
+		ApiAlias     string      `json:"apiAlias"`
+	} `json:"data"`
+	Aggregations []interface{} `json:"aggregations"`
+	Errors       []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
+// DeleteProductManufacturerReturn is to decode the json data
+type DeleteProductManufacturerReturn struct {
+	Errors []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
 // ProductMediaReturn is to decode the json data
 type ProductMediaReturn struct {
 	Total int `json:"total"`
@@ -1659,6 +1731,92 @@ func DeleteProductTag(productId, tagId string, r Request) (DeleteProductTagRetur
 		err = json.NewDecoder(response.Body).Decode(&decode)
 		if err != nil {
 			return DeleteProductTagReturn{}, err
+		}
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// ProductManufacturers are to get a list of all manufacturers
+func ProductManufacturers(parameter map[string]string, id string, r Request) (ProductManufacturersReturn, error) {
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + id + "/manufacturer",
+		Method: "GET",
+		Body:   nil,
+	}
+
+	// Parse url & add attributes
+	parse, err := url.Parse(c.Path)
+	if err != nil {
+		return ProductManufacturersReturn{}, err
+	}
+
+	newUrl, err := url.ParseQuery(parse.RawQuery)
+	if err != nil {
+		return ProductManufacturersReturn{}, err
+	}
+
+	for index, value := range parameter {
+		newUrl.Add(index, value)
+	}
+
+	// Set new url
+	parse.RawQuery = newUrl.Encode()
+	c.Path = fmt.Sprintf("%s", parse)
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return ProductManufacturersReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode ProductManufacturersReturn
+
+	err = json.NewDecoder(response.Body).Decode(&decode)
+	if err != nil {
+		return ProductManufacturersReturn{}, err
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// DeleteProductManufacturer is to delete a product manufacturer
+func DeleteProductManufacturer(productId, manufacturerId string, r Request) (DeleteProductManufacturerReturn, error) {
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + productId + "/manufacturer/" + manufacturerId,
+		Method: "DELETE",
+		Body:   nil,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return DeleteProductManufacturerReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode DeleteProductManufacturerReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return DeleteProductManufacturerReturn{}, err
 		}
 	}
 
