@@ -232,7 +232,7 @@ type ProductsReturn struct {
 type ProductBody struct {
 	ParentId             interface{}                  `json:"parentId,omitempty"`
 	ManufacturerId       string                       `json:"manufacturerId,omitempty"`
-	Active               bool                         `json:"active,omitempty"`
+	Active               bool                         `json:"active"`
 	Price                []*ProductBodyPrice          `json:"price"`
 	ManufacturerNumber   string                       `json:"manufacturerNumber,omitempty"`
 	Ean                  string                       `json:"ean,omitempty"`
