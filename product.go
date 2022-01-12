@@ -621,6 +621,33 @@ type UpdateProductConfiguratorSettingsReturn struct {
 	} `json:"errors"`
 }
 
+// UpdateProductStockBody is to structure the body data
+type UpdateProductStockBody struct {
+	Stock       int `json:"stock"`
+	MaxPurchase int `json:"maxPurchase"`
+}
+
+// UpdateProductStockReturn is to decode the json data
+type UpdateProductStockReturn struct {
+	Errors []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
 // ProductPropertiesReturn is to decode the json data
 type ProductPropertiesReturn struct {
 	Total int `json:"total"`
@@ -1549,6 +1576,47 @@ func UpdateProductConfiguratorSettings(id string, body UpdateProductConfigurator
 		err = json.NewDecoder(response.Body).Decode(&decode)
 		if err != nil {
 			return UpdateProductConfiguratorSettingsReturn{}, err
+		}
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// UpdateProductStock is to update the stock of an product
+func UpdateProductStock(id string, body UpdateProductStockBody, r Request) (UpdateProductStockReturn, error) {
+
+	// Convert body data
+	convert, err := json.Marshal(body)
+	if err != nil {
+		return UpdateProductStockReturn{}, err
+	}
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + id,
+		Method: "PATCH",
+		Body:   convert,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return UpdateProductStockReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode UpdateProductStockReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return UpdateProductStockReturn{}, err
 		}
 	}
 
