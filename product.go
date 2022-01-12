@@ -591,6 +591,36 @@ type DeleteProductReturn struct {
 	} `json:"errors"`
 }
 
+// UpdateProductConfiguratorSettingsBody is to structure the body data
+type UpdateProductConfiguratorSettingsBody struct {
+	ConfiguratorSettings []UpdateProductConfiguratorSettingsBodyConfiguratorSettings `json:"configuratorSettings"`
+}
+
+type UpdateProductConfiguratorSettingsBodyConfiguratorSettings struct {
+	OptionId string `json:"optionId"`
+}
+
+// UpdateProductConfiguratorSettingsReturn is to decode the json data
+type UpdateProductConfiguratorSettingsReturn struct {
+	Errors []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
 // ProductPropertiesReturn is to decode the json data
 type ProductPropertiesReturn struct {
 	Total int `json:"total"`
@@ -1478,6 +1508,47 @@ func DeleteProduct(id string, r Request) (DeleteProductReturn, error) {
 		err = json.NewDecoder(response.Body).Decode(&decode)
 		if err != nil {
 			return DeleteProductReturn{}, err
+		}
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// UpdateProductConfiguratorSettings is to update the configurator settings
+func UpdateProductConfiguratorSettings(id string, body UpdateProductConfiguratorSettingsBody, r Request) (UpdateProductConfiguratorSettingsReturn, error) {
+
+	// Convert body data
+	convert, err := json.Marshal(body)
+	if err != nil {
+		return UpdateProductConfiguratorSettingsReturn{}, err
+	}
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + id,
+		Method: "PATCH",
+		Body:   convert,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return UpdateProductConfiguratorSettingsReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode UpdateProductConfiguratorSettingsReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return UpdateProductConfiguratorSettingsReturn{}, err
 		}
 	}
 

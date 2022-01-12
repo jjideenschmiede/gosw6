@@ -332,6 +332,33 @@ if err != nil {
 }
 ```
 
+### Update a product configuration settings
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := gosw6.UpdateProductConfiguratorSettingsBody{
+    ConfiguratorSettings: []gosw6.UpdateProductConfiguratorSettingsBodyConfiguratorSettings{},
+}
+
+body.ConfiguratorSettings = append(body.ConfiguratorSettings, gosw6.UpdateProductConfiguratorSettingsBodyConfiguratorSettings{"83f39523e6af4e248b5fb0bbb7b8837b"})
+body.ConfiguratorSettings = append(body.ConfiguratorSettings, gosw6.UpdateProductConfiguratorSettingsBodyConfiguratorSettings{"c41d245ae1c6416f94267dba8104437a"})
+body.ConfiguratorSettings = append(body.ConfiguratorSettings, gosw6.UpdateProductConfiguratorSettingsBodyConfiguratorSettings{"9513190a41a44347b054c47eb62e247d"})
+
+// Update product configuration settings
+updateProductConfiguratorSettings, err := gosw6.UpdateProductConfiguratorSettings("9553fd97f5af4d77a2e8befcb83ed697", body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(updateProductConfiguratorSettings)
+}
+```
+
 ### Get all product properties
 
 If you want to get all product properties, you can do it with this function.
