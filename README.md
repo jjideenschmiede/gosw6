@@ -173,8 +173,9 @@ body := gosw6.ProductBody{
     MetaTitle:          "",
 	Keywords:           "",
     TaxId:              "",
-    Properties: []*gosw6.ProductBodyProperties{},
-    Categories: []*gosw6.ProductBodyCategories{},
+    Properties:         []*gosw6.ProductBodyProperties{},
+	Options:            []*gosw6.ProductBodyOptions{},
+    Categories:         []*gosw6.ProductBodyCategories{},
     CustomSearchKeywords: []string{
         "New custom search keyword",
     },
@@ -262,8 +263,9 @@ body := gosw6.ProductBody{
     MetaDescription:    "",
     MetaTitle:          "",
     TaxId:              "",
-    Properties: []*gosw6.ProductBodyProperties{},
-    Categories: []*gosw6.ProductBodyCategories{},
+    Properties:         []*gosw6.ProductBodyProperties{},
+    Options:            []*gosw6.ProductBodyOptions{},
+    Categories:         []*gosw6.ProductBodyCategories{},
     CustomSearchKeywords: []string{
         "New custom search keyword",
     },
