@@ -332,7 +332,9 @@ if err != nil {
 }
 ```
 
-### Update a product configuration settings
+### Update product configuration settings
+
+If you want to update product configuration settings, you can do it with this function.
 
 ```go
 // Define the request
@@ -356,6 +358,32 @@ if err != nil {
     log.Fatalln(err)
 } else {
     log.Println(updateProductConfiguratorSettings)
+}
+```
+
+### Update product stock
+
+If you want to update product stock, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := gosw6.UpdateProductStockBody{
+    Stock:       31,
+    MaxPurchase: 31,
+}
+
+// Update product stock
+updateProductStock, err := gosw6.UpdateProductStock("24c3b6ebf71746b08ec8a6a1283ff0cb", body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(updateProductStock)
 }
 ```
 
