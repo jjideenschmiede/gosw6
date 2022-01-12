@@ -260,7 +260,7 @@ type ProductBody struct {
 	Keywords             string                       `json:"keywords"`
 	TaxId                string                       `json:"taxId,omitempty"`
 	Properties           []*ProductBodyProperties     `json:"properties"`
-	Options              []*OptionsBodyProperties     `json:"options"`
+	Options              []*ProductBodyOptions        `json:"options"`
 	Categories           []*ProductBodyCategories     `json:"categories"`
 	CustomSearchKeywords []*string                    `json:"customSearchKeywords"`
 }
@@ -295,7 +295,7 @@ type ProductBodyProperties struct {
 	Id string `json:"id"`
 }
 
-type OptionsBodyProperties struct {
+type ProductBodyOptions struct {
 	Id string `json:"id"`
 }
 
