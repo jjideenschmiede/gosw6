@@ -120,7 +120,11 @@ With this function you get all information you need for an order. We use the `as
                 "salutation": {}
             }
         },
-        "transactions": {}
+        "transactions": {
+            "associations": {
+                "paymentMethod": {}
+            }
+        }
     }
 }
 ```

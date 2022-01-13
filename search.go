@@ -125,13 +125,13 @@ type CustomOrderSearchReturn struct {
 			LastName         string        `json:"lastName"`
 			Title            interface{}   `json:"title"`
 			VatIds           []interface{} `json:"vatIds"`
-			Company          *string       `json:"company"`
+			Company          string        `json:"company"`
 			CustomerNumber   string        `json:"customerNumber"`
 			CustomerId       string        `json:"customerId"`
 			Customer         interface{}   `json:"customer"`
 			Salutation       interface{}   `json:"salutation"`
 			Order            interface{}   `json:"order"`
-			RemoteAddress    *string       `json:"remoteAddress"`
+			RemoteAddress    string        `json:"remoteAddress"`
 			UniqueIdentifier string        `json:"_uniqueIdentifier"`
 			VersionId        string        `json:"versionId"`
 			Translated       []interface{} `json:"translated"`
@@ -219,11 +219,11 @@ type CustomOrderSearchReturn struct {
 			Street                 string      `json:"street"`
 			Zipcode                string      `json:"zipcode"`
 			City                   string      `json:"city"`
-			Company                *string     `json:"company"`
-			Department             *string     `json:"department"`
+			Company                string      `json:"company"`
+			Department             string      `json:"department"`
 			Title                  interface{} `json:"title"`
 			VatId                  interface{} `json:"vatId"`
-			PhoneNumber            *string     `json:"phoneNumber"`
+			PhoneNumber            string      `json:"phoneNumber"`
 			AdditionalAddressLine1 interface{} `json:"additionalAddressLine1"`
 			AdditionalAddressLine2 interface{} `json:"additionalAddressLine2"`
 			Country                struct {
@@ -374,15 +374,15 @@ type CustomOrderSearchReturn struct {
 			OrderId      string  `json:"orderId"`
 			Identifier   string  `json:"identifier"`
 			ReferencedId string  `json:"referencedId"`
-			ProductId    *string `json:"productId"`
+			ProductId    string  `json:"productId"`
 			Quantity     int     `json:"quantity"`
 			UnitPrice    float64 `json:"unitPrice"`
 			TotalPrice   float64 `json:"totalPrice"`
 			Label        string  `json:"label"`
-			Description  *string `json:"description"`
+			Description  string  `json:"description"`
 			Good         bool    `json:"good"`
 			Removable    bool    `json:"removable"`
-			CoverId      *string `json:"coverId"`
+			CoverId      string  `json:"coverId"`
 			Stackable    bool    `json:"stackable"`
 			Position     int     `json:"position"`
 			Price        struct {
@@ -475,7 +475,51 @@ type CustomOrderSearchReturn struct {
 				Extensions     []interface{} `json:"extensions"`
 				ApiAlias       string        `json:"apiAlias"`
 			} `json:"amount"`
-			PaymentMethod     interface{} `json:"paymentMethod"`
+			PaymentMethod struct {
+				PluginId                       interface{} `json:"pluginId"`
+				Name                           string      `json:"name"`
+				DistinguishableName            string      `json:"distinguishableName"`
+				Description                    string      `json:"description"`
+				Position                       int         `json:"position"`
+				Active                         bool        `json:"active"`
+				AfterOrderEnabled              bool        `json:"afterOrderEnabled"`
+				Plugin                         interface{} `json:"plugin"`
+				Translations                   interface{} `json:"translations"`
+				OrderTransactions              interface{} `json:"orderTransactions"`
+				Customers                      interface{} `json:"customers"`
+				SalesChannelDefaultAssignments interface{} `json:"salesChannelDefaultAssignments"`
+				SalesChannels                  interface{} `json:"salesChannels"`
+				AvailabilityRule               interface{} `json:"availabilityRule"`
+				AvailabilityRuleId             interface{} `json:"availabilityRuleId"`
+				MediaId                        interface{} `json:"mediaId"`
+				Media                          interface{} `json:"media"`
+				FormattedHandlerIdentifier     string      `json:"formattedHandlerIdentifier"`
+				ShortName                      string      `json:"shortName"`
+				AppPaymentMethod               interface{} `json:"appPaymentMethod"`
+				UniqueIdentifier               string      `json:"_uniqueIdentifier"`
+				VersionId                      interface{} `json:"versionId"`
+				Translated                     struct {
+					Name                string        `json:"name"`
+					DistinguishableName string        `json:"distinguishableName"`
+					Description         string        `json:"description"`
+					CustomFields        []interface{} `json:"customFields"`
+				} `json:"translated"`
+				CreatedAt  time.Time `json:"createdAt"`
+				UpdatedAt  time.Time `json:"updatedAt"`
+				Extensions struct {
+					ForeignKeys struct {
+						ApiAlias   interface{}   `json:"apiAlias"`
+						Extensions []interface{} `json:"extensions"`
+					} `json:"foreignKeys"`
+					InternalMappingStorage struct {
+						ApiAlias   interface{}   `json:"apiAlias"`
+						Extensions []interface{} `json:"extensions"`
+					} `json:"internal_mapping_storage"`
+				} `json:"extensions"`
+				Id           string      `json:"id"`
+				CustomFields interface{} `json:"customFields"`
+				ApiAlias     string      `json:"apiAlias"`
+			} `json:"paymentMethod"`
 			Order             interface{} `json:"order"`
 			StateMachineState struct {
 				Name                           string      `json:"name"`
@@ -517,7 +561,7 @@ type CustomOrderSearchReturn struct {
 			VersionId        string        `json:"versionId"`
 			Translated       []interface{} `json:"translated"`
 			CreatedAt        time.Time     `json:"createdAt"`
-			UpdatedAt        *time.Time    `json:"updatedAt"`
+			UpdatedAt        time.Time     `json:"updatedAt"`
 			Extensions       struct {
 				ForeignKeys struct {
 					ApiAlias   interface{}   `json:"apiAlias"`
@@ -573,9 +617,9 @@ type CustomOrderSearchReturn struct {
 		CampaignCode    interface{} `json:"campaignCode"`
 		CustomerComment interface{} `json:"customerComment"`
 		RuleIds         []string    `json:"ruleIds"`
-		CreatedById     *string     `json:"createdById"`
+		CreatedById     string      `json:"createdById"`
 		CreatedBy       interface{} `json:"createdBy"`
-		UpdatedById     *string     `json:"updatedById"`
+		UpdatedById     string      `json:"updatedById"`
 		UpdatedBy       interface{} `json:"updatedBy"`
 		ItemRounding    struct {
 			Decimals    int           `json:"decimals"`
@@ -595,7 +639,7 @@ type CustomOrderSearchReturn struct {
 		VersionId        string        `json:"versionId"`
 		Translated       []interface{} `json:"translated"`
 		CreatedAt        time.Time     `json:"createdAt"`
-		UpdatedAt        *time.Time    `json:"updatedAt"`
+		UpdatedAt        time.Time     `json:"updatedAt"`
 		Extensions       struct {
 			ForeignKeys struct {
 				ApiAlias   interface{}   `json:"apiAlias"`
