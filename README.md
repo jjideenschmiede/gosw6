@@ -119,7 +119,8 @@ With this function you get all information you need for an order. We use the `as
                 "countryState": {},
                 "salutation": {}
             }
-        }
+        },
+        "transactions": {}
     }
 }
 ```

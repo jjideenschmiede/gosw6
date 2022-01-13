@@ -37,6 +37,8 @@ type CustomOrderSearchBody struct {
 				} `json:"salutation"`
 			} `json:"associations"`
 		} `json:"addresses"`
+		Transactions struct {
+		} `json:"transactions"`
 	} `json:"associations"`
 }
 
@@ -123,13 +125,13 @@ type CustomOrderSearchReturn struct {
 			LastName         string        `json:"lastName"`
 			Title            interface{}   `json:"title"`
 			VatIds           []interface{} `json:"vatIds"`
-			Company          string        `json:"company"`
+			Company          *string       `json:"company"`
 			CustomerNumber   string        `json:"customerNumber"`
 			CustomerId       string        `json:"customerId"`
 			Customer         interface{}   `json:"customer"`
 			Salutation       interface{}   `json:"salutation"`
 			Order            interface{}   `json:"order"`
-			RemoteAddress    string        `json:"remoteAddress"`
+			RemoteAddress    *string       `json:"remoteAddress"`
 			UniqueIdentifier string        `json:"_uniqueIdentifier"`
 			VersionId        string        `json:"versionId"`
 			Translated       []interface{} `json:"translated"`
@@ -217,11 +219,11 @@ type CustomOrderSearchReturn struct {
 			Street                 string      `json:"street"`
 			Zipcode                string      `json:"zipcode"`
 			City                   string      `json:"city"`
-			Company                string      `json:"company"`
-			Department             string      `json:"department"`
+			Company                *string     `json:"company"`
+			Department             *string     `json:"department"`
 			Title                  interface{} `json:"title"`
 			VatId                  interface{} `json:"vatId"`
-			PhoneNumber            string      `json:"phoneNumber"`
+			PhoneNumber            *string     `json:"phoneNumber"`
 			AdditionalAddressLine1 interface{} `json:"additionalAddressLine1"`
 			AdditionalAddressLine2 interface{} `json:"additionalAddressLine2"`
 			Country                struct {
@@ -372,15 +374,15 @@ type CustomOrderSearchReturn struct {
 			OrderId      string  `json:"orderId"`
 			Identifier   string  `json:"identifier"`
 			ReferencedId string  `json:"referencedId"`
-			ProductId    string  `json:"productId"`
+			ProductId    *string `json:"productId"`
 			Quantity     int     `json:"quantity"`
 			UnitPrice    float64 `json:"unitPrice"`
 			TotalPrice   float64 `json:"totalPrice"`
 			Label        string  `json:"label"`
-			Description  string  `json:"description"`
+			Description  *string `json:"description"`
 			Good         bool    `json:"good"`
 			Removable    bool    `json:"removable"`
-			CoverId      string  `json:"coverId"`
+			CoverId      *string `json:"coverId"`
 			Stackable    bool    `json:"stackable"`
 			Position     int     `json:"position"`
 			Price        struct {
@@ -448,9 +450,87 @@ type CustomOrderSearchReturn struct {
 			ParentVersionId  string      `json:"parentVersionId"`
 			ApiAlias         string      `json:"apiAlias"`
 		} `json:"lineItems"`
-		Transactions      interface{} `json:"transactions"`
-		DeepLinkCode      string      `json:"deepLinkCode"`
-		AutoIncrement     int         `json:"autoIncrement"`
+		Transactions []struct {
+			OrderId         string `json:"orderId"`
+			PaymentMethodId string `json:"paymentMethodId"`
+			Amount          struct {
+				UnitPrice       float64 `json:"unitPrice"`
+				Quantity        int     `json:"quantity"`
+				TotalPrice      float64 `json:"totalPrice"`
+				CalculatedTaxes []struct {
+					Tax        float64       `json:"tax"`
+					TaxRate    int           `json:"taxRate"`
+					Price      float64       `json:"price"`
+					Extensions []interface{} `json:"extensions"`
+					ApiAlias   string        `json:"apiAlias"`
+				} `json:"calculatedTaxes"`
+				TaxRules []struct {
+					TaxRate    int           `json:"taxRate"`
+					Percentage int           `json:"percentage"`
+					Extensions []interface{} `json:"extensions"`
+					ApiAlias   string        `json:"apiAlias"`
+				} `json:"taxRules"`
+				ReferencePrice interface{}   `json:"referencePrice"`
+				ListPrice      interface{}   `json:"listPrice"`
+				Extensions     []interface{} `json:"extensions"`
+				ApiAlias       string        `json:"apiAlias"`
+			} `json:"amount"`
+			PaymentMethod     interface{} `json:"paymentMethod"`
+			Order             interface{} `json:"order"`
+			StateMachineState struct {
+				Name                           string      `json:"name"`
+				TechnicalName                  string      `json:"technicalName"`
+				StateMachineId                 string      `json:"stateMachineId"`
+				StateMachine                   interface{} `json:"stateMachine"`
+				FromStateMachineTransitions    interface{} `json:"fromStateMachineTransitions"`
+				ToStateMachineTransitions      interface{} `json:"toStateMachineTransitions"`
+				Translations                   interface{} `json:"translations"`
+				Orders                         interface{} `json:"orders"`
+				OrderTransactions              interface{} `json:"orderTransactions"`
+				OrderDeliveries                interface{} `json:"orderDeliveries"`
+				FromStateMachineHistoryEntries interface{} `json:"fromStateMachineHistoryEntries"`
+				ToStateMachineHistoryEntries   interface{} `json:"toStateMachineHistoryEntries"`
+				UniqueIdentifier               string      `json:"_uniqueIdentifier"`
+				VersionId                      interface{} `json:"versionId"`
+				Translated                     struct {
+					Name         string        `json:"name"`
+					CustomFields []interface{} `json:"customFields"`
+				} `json:"translated"`
+				CreatedAt  time.Time   `json:"createdAt"`
+				UpdatedAt  interface{} `json:"updatedAt"`
+				Extensions struct {
+					ForeignKeys struct {
+						ApiAlias   interface{}   `json:"apiAlias"`
+						Extensions []interface{} `json:"extensions"`
+					} `json:"foreignKeys"`
+					InternalMappingStorage struct {
+						ApiAlias   interface{}   `json:"apiAlias"`
+						Extensions []interface{} `json:"extensions"`
+					} `json:"internal_mapping_storage"`
+				} `json:"extensions"`
+				Id           string      `json:"id"`
+				CustomFields interface{} `json:"customFields"`
+				ApiAlias     string      `json:"apiAlias"`
+			} `json:"stateMachineState"`
+			StateId          string        `json:"stateId"`
+			UniqueIdentifier string        `json:"_uniqueIdentifier"`
+			VersionId        string        `json:"versionId"`
+			Translated       []interface{} `json:"translated"`
+			CreatedAt        time.Time     `json:"createdAt"`
+			UpdatedAt        *time.Time    `json:"updatedAt"`
+			Extensions       struct {
+				ForeignKeys struct {
+					ApiAlias   interface{}   `json:"apiAlias"`
+					Extensions []interface{} `json:"extensions"`
+				} `json:"foreignKeys"`
+			} `json:"extensions"`
+			Id             string      `json:"id"`
+			CustomFields   interface{} `json:"customFields"`
+			OrderVersionId string      `json:"orderVersionId"`
+			ApiAlias       string      `json:"apiAlias"`
+		} `json:"transactions"`
+		DeepLinkCode      string `json:"deepLinkCode"`
+		AutoIncrement     int    `json:"autoIncrement"`
 		StateMachineState struct {
 			Name                           string      `json:"name"`
 			TechnicalName                  string      `json:"technicalName"`
@@ -493,9 +573,9 @@ type CustomOrderSearchReturn struct {
 		CampaignCode    interface{} `json:"campaignCode"`
 		CustomerComment interface{} `json:"customerComment"`
 		RuleIds         []string    `json:"ruleIds"`
-		CreatedById     string      `json:"createdById"`
+		CreatedById     *string     `json:"createdById"`
 		CreatedBy       interface{} `json:"createdBy"`
-		UpdatedById     string      `json:"updatedById"`
+		UpdatedById     *string     `json:"updatedById"`
 		UpdatedBy       interface{} `json:"updatedBy"`
 		ItemRounding    struct {
 			Decimals    int           `json:"decimals"`
@@ -515,7 +595,7 @@ type CustomOrderSearchReturn struct {
 		VersionId        string        `json:"versionId"`
 		Translated       []interface{} `json:"translated"`
 		CreatedAt        time.Time     `json:"createdAt"`
-		UpdatedAt        time.Time     `json:"updatedAt"`
+		UpdatedAt        *time.Time    `json:"updatedAt"`
 		Extensions       struct {
 			ForeignKeys struct {
 				ApiAlias   interface{}   `json:"apiAlias"`
@@ -528,9 +608,26 @@ type CustomOrderSearchReturn struct {
 		ApiAlias                string      `json:"apiAlias"`
 	} `json:"data"`
 	Aggregations []interface{} `json:"aggregations"`
+	Errors       []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
 }
 
-// CustomOrderSearch is to search orders from date x with currency, lineItems & addresses
+// CustomOrderSearch is to search orders from date x with currency, lineItems, addresses & transactions
 func CustomOrderSearch(page, limit int, date string, r Request) (CustomOrderSearchReturn, error) {
 
 	// Define body
