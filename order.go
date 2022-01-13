@@ -62,11 +62,11 @@ type OrdersReturn struct {
 		OrderDate        time.Time `json:"orderDate"`
 		Price            struct {
 			NetPrice        float64 `json:"netPrice"`
-			TotalPrice      int     `json:"totalPrice"`
+			TotalPrice      float64 `json:"totalPrice"`
 			CalculatedTaxes []struct {
 				Tax        float64       `json:"tax"`
 				TaxRate    int           `json:"taxRate"`
-				Price      int           `json:"price"`
+				Price      float64       `json:"price"`
 				Extensions []interface{} `json:"extensions"`
 				ApiAlias   string        `json:"apiAlias"`
 			} `json:"calculatedTaxes"`
@@ -76,15 +76,15 @@ type OrdersReturn struct {
 				Extensions []interface{} `json:"extensions"`
 				ApiAlias   string        `json:"apiAlias"`
 			} `json:"taxRules"`
-			PositionPrice int           `json:"positionPrice"`
+			PositionPrice float64       `json:"positionPrice"`
 			TaxStatus     string        `json:"taxStatus"`
-			RawTotal      int           `json:"rawTotal"`
+			RawTotal      float64       `json:"rawTotal"`
 			Extensions    []interface{} `json:"extensions"`
 			ApiAlias      string        `json:"apiAlias"`
 		} `json:"price"`
-		AmountTotal   int     `json:"amountTotal"`
+		AmountTotal   float64 `json:"amountTotal"`
 		AmountNet     float64 `json:"amountNet"`
-		PositionPrice int     `json:"positionPrice"`
+		PositionPrice float64 `json:"positionPrice"`
 		TaxStatus     string  `json:"taxStatus"`
 		ShippingCosts struct {
 			UnitPrice       int `json:"unitPrice"`
@@ -123,7 +123,7 @@ type OrdersReturn struct {
 			Customer         interface{}   `json:"customer"`
 			Salutation       interface{}   `json:"salutation"`
 			Order            interface{}   `json:"order"`
-			RemoteAddress    interface{}   `json:"remoteAddress"`
+			RemoteAddress    string        `json:"remoteAddress"`
 			UniqueIdentifier string        `json:"_uniqueIdentifier"`
 			VersionId        string        `json:"versionId"`
 			Translated       []interface{} `json:"translated"`
