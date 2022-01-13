@@ -14,6 +14,7 @@ go get github.com/jjideenschmiede/gosw6
 Currently we have the following functions covered:
 
 - [Access token](https://github.com/jjideenschmiede/gosw6#access-token)
+- [Search](https://github.com/jjideenschmiede/gosw6#search)
 - [Product](https://github.com/jjideenschmiede/gosw6#product)
 - [Category](https://github.com/jjideenschmiede/gosw6#category)
 - [Manufacturer](https://github.com/jjideenschmiede/gosw6#manufacturer)
@@ -81,6 +82,63 @@ if err != nil {
     log.Fatalln(err)
 } else {
     log.Println(accessToken)
+}
+```
+
+## Search
+
+## Custom order search 
+
+With this function you get all information you need for an order. We use the `associations` for that. Here is the request body:
+
+```json
+{
+    "page": 1,
+    "limit": 200,
+    "filter": [
+        {
+            "type": "range",
+            "field": "orderDate",
+            "parameters": {
+                "gte": "2021-01-09T00:00:00.000+00:00"
+            }
+        }
+    ],
+    "sort": [
+        {
+            "field": "orderDate",
+            "order": "ASC"
+        }
+    ],
+    "associations": {
+        "currency": {},
+        "lineItems": {},
+        "addresses": {
+            "associations": {
+                "country": {},
+                "countryState": {},
+                "salutation": {}
+            }
+        }
+    }
+}
+```
+
+And here you can find an example for the function. You can define the page, limit & the date since which all orders should be recorded. 
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Get all orders since date (with all information you need)
+orders, err := CustomOrderSearch(1, 200, "2021-12-01", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(orders)
 }
 ```
 
