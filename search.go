@@ -423,7 +423,28 @@ type CustomOrderSearchReturn struct {
 				Type                     string        `json:"type"`
 				ApiAlias                 string        `json:"apiAlias"`
 			} `json:"priceDefinition"`
-			Payload                interface{}   `json:"payload"`
+			Payload struct {
+				IsCloseout      bool          `json:"isCloseout"`
+				CustomFields    []interface{} `json:"customFields"`
+				CreatedAt       string        `json:"createdAt"`
+				ReleaseDate     string        `json:"releaseDate"`
+				IsNew           bool          `json:"isNew"`
+				MarkAsTopseller interface{}   `json:"markAsTopseller"`
+				PurchasePrices  string        `json:"purchasePrices"`
+				ProductNumber   string        `json:"productNumber"`
+				ManufacturerId  string        `json:"manufacturerId"`
+				TaxId           string        `json:"taxId"`
+				TagIds          interface{}   `json:"tagIds"`
+				CategoryIds     []string      `json:"categoryIds"`
+				PropertyIds     interface{}   `json:"propertyIds"`
+				OptionIds       []string      `json:"optionIds"`
+				Options         []struct {
+					Group  string `json:"group"`
+					Option string `json:"option"`
+				} `json:"options"`
+				StreamIds interface{}   `json:"streamIds"`
+				Features  []interface{} `json:"features"`
+			} `json:"payload"`
 			ParentId               interface{}   `json:"parentId"`
 			Parent                 interface{}   `json:"parent"`
 			Type                   string        `json:"type"`
@@ -443,12 +464,13 @@ type CustomOrderSearchReturn struct {
 					Extensions []interface{} `json:"extensions"`
 				} `json:"foreignKeys"`
 			} `json:"extensions"`
-			Id               string      `json:"id"`
-			CustomFields     interface{} `json:"customFields"`
-			OrderVersionId   string      `json:"orderVersionId"`
-			ProductVersionId string      `json:"productVersionId"`
-			ParentVersionId  string      `json:"parentVersionId"`
-			ApiAlias         string      `json:"apiAlias"`
+			Id           string `json:"id"`
+			CustomFields interface {
+			} `json:"customFields"`
+			OrderVersionId   string `json:"orderVersionId"`
+			ProductVersionId string `json:"productVersionId"`
+			ParentVersionId  string `json:"parentVersionId"`
+			ApiAlias         string `json:"apiAlias"`
 		} `json:"lineItems"`
 		Transactions []struct {
 			OrderId         string `json:"orderId"`
