@@ -95,13 +95,13 @@ type CustomOrderSearchReturn struct {
 		PositionPrice float64 `json:"positionPrice"`
 		TaxStatus     string  `json:"taxStatus"`
 		ShippingCosts struct {
-			UnitPrice       int `json:"unitPrice"`
-			Quantity        int `json:"quantity"`
-			TotalPrice      int `json:"totalPrice"`
+			UnitPrice       float64 `json:"unitPrice"`
+			Quantity        int     `json:"quantity"`
+			TotalPrice      float64 `json:"totalPrice"`
 			CalculatedTaxes []struct {
-				Tax        int           `json:"tax"`
+				Tax        float64       `json:"tax"`
 				TaxRate    int           `json:"taxRate"`
-				Price      int           `json:"price"`
+				Price      float64       `json:"price"`
 				Extensions []interface{} `json:"extensions"`
 				ApiAlias   string        `json:"apiAlias"`
 			} `json:"calculatedTaxes"`
@@ -116,7 +116,7 @@ type CustomOrderSearchReturn struct {
 			Extensions     []interface{} `json:"extensions"`
 			ApiAlias       string        `json:"apiAlias"`
 		} `json:"shippingCosts"`
-		ShippingTotal int `json:"shippingTotal"`
+		ShippingTotal float64 `json:"shippingTotal"`
 		OrderCustomer struct {
 			Email            string        `json:"email"`
 			OrderId          string        `json:"orderId"`
