@@ -721,8 +721,8 @@ func CustomOrderSearch(page, limit int, date string, r Request) (CustomOrderSear
 	})
 
 	body.Sort = append(body.Sort, CustomOrderSearchBodySort{
-		Field: "orderDate",
-		Order: "ASC",
+		Field: "orderNumber",
+		Order: "DESC",
 	})
 
 	// Convert body data
