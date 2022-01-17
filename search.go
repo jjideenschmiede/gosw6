@@ -645,7 +645,7 @@ type CustomOrderSearchReturn struct {
 		Tags            interface{} `json:"tags"`
 		AffiliateCode   interface{} `json:"affiliateCode"`
 		CampaignCode    interface{} `json:"campaignCode"`
-		CustomerComment interface{} `json:"customerComment"`
+		CustomerComment string      `json:"customerComment"`
 		RuleIds         []string    `json:"ruleIds"`
 		CreatedById     string      `json:"createdById"`
 		CreatedBy       interface{} `json:"createdBy"`
