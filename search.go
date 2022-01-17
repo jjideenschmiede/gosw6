@@ -47,6 +47,7 @@ type CustomOrderSearchBody struct {
 				} `json:"paymentMethod"`
 			} `json:"associations"`
 		} `json:"transactions"`
+		Deliveries struct{} `json:"deliveries"`
 	} `json:"associations"`
 }
 
@@ -377,8 +378,162 @@ type CustomOrderSearchReturn struct {
 			ApiAlias       string      `json:"apiAlias"`
 		} `json:"addresses"`
 		BillingAddress interface{} `json:"billingAddress"`
-		Deliveries     interface{} `json:"deliveries"`
-		LineItems      []struct {
+		Deliveries     []struct {
+			OrderId                string        `json:"orderId"`
+			ShippingOrderAddressId string        `json:"shippingOrderAddressId"`
+			ShippingMethodId       string        `json:"shippingMethodId"`
+			TrackingCodes          []interface{} `json:"trackingCodes"`
+			ShippingDateEarliest   time.Time     `json:"shippingDateEarliest"`
+			ShippingDateLatest     time.Time     `json:"shippingDateLatest"`
+			ShippingCosts          struct {
+				UnitPrice       float64 `json:"unitPrice"`
+				Quantity        int     `json:"quantity"`
+				TotalPrice      float64 `json:"totalPrice"`
+				CalculatedTaxes []struct {
+					Tax        float64       `json:"tax"`
+					TaxRate    int           `json:"taxRate"`
+					Price      float64       `json:"price"`
+					Extensions []interface{} `json:"extensions"`
+					ApiAlias   string        `json:"apiAlias"`
+				} `json:"calculatedTaxes"`
+				TaxRules []struct {
+					TaxRate    int           `json:"taxRate"`
+					Percentage int           `json:"percentage"`
+					Extensions []interface{} `json:"extensions"`
+					ApiAlias   string        `json:"apiAlias"`
+				} `json:"taxRules"`
+				ReferencePrice interface{}   `json:"referencePrice"`
+				ListPrice      interface{}   `json:"listPrice"`
+				Extensions     []interface{} `json:"extensions"`
+				ApiAlias       string        `json:"apiAlias"`
+			} `json:"shippingCosts"`
+			ShippingOrderAddress struct {
+				CountryId              string      `json:"countryId"`
+				CountryStateId         string      `json:"countryStateId"`
+				SalutationId           string      `json:"salutationId"`
+				FirstName              string      `json:"firstName"`
+				LastName               string      `json:"lastName"`
+				Street                 string      `json:"street"`
+				Zipcode                string      `json:"zipcode"`
+				City                   string      `json:"city"`
+				Company                interface{} `json:"company"`
+				Department             interface{} `json:"department"`
+				Title                  interface{} `json:"title"`
+				VatId                  interface{} `json:"vatId"`
+				PhoneNumber            interface{} `json:"phoneNumber"`
+				AdditionalAddressLine1 interface{} `json:"additionalAddressLine1"`
+				AdditionalAddressLine2 interface{} `json:"additionalAddressLine2"`
+				Country                interface{} `json:"country"`
+				CountryState           interface{} `json:"countryState"`
+				Order                  interface{} `json:"order"`
+				Salutation             struct {
+					SalutationKey        string      `json:"salutationKey"`
+					DisplayName          string      `json:"displayName"`
+					LetterName           string      `json:"letterName"`
+					Translations         interface{} `json:"translations"`
+					Customers            interface{} `json:"customers"`
+					CustomerAddresses    interface{} `json:"customerAddresses"`
+					OrderCustomers       interface{} `json:"orderCustomers"`
+					OrderAddresses       interface{} `json:"orderAddresses"`
+					NewsletterRecipients interface{} `json:"newsletterRecipients"`
+					UniqueIdentifier     string      `json:"_uniqueIdentifier"`
+					VersionId            interface{} `json:"versionId"`
+					Translated           struct {
+						DisplayName  string        `json:"displayName"`
+						LetterName   string        `json:"letterName"`
+						CustomFields []interface{} `json:"customFields"`
+					} `json:"translated"`
+					CreatedAt  time.Time   `json:"createdAt"`
+					UpdatedAt  interface{} `json:"updatedAt"`
+					Extensions struct {
+						ForeignKeys struct {
+							ApiAlias   interface{}   `json:"apiAlias"`
+							Extensions []interface{} `json:"extensions"`
+						} `json:"foreignKeys"`
+					} `json:"extensions"`
+					Id           string      `json:"id"`
+					CustomFields interface{} `json:"customFields"`
+					ApiAlias     string      `json:"apiAlias"`
+				} `json:"salutation"`
+				OrderDeliveries  interface{}   `json:"orderDeliveries"`
+				OrderId          string        `json:"orderId"`
+				UniqueIdentifier string        `json:"_uniqueIdentifier"`
+				VersionId        string        `json:"versionId"`
+				Translated       []interface{} `json:"translated"`
+				CreatedAt        time.Time     `json:"createdAt"`
+				UpdatedAt        interface{}   `json:"updatedAt"`
+				Extensions       struct {
+					ForeignKeys struct {
+						ApiAlias   interface{}   `json:"apiAlias"`
+						Extensions []interface{} `json:"extensions"`
+					} `json:"foreignKeys"`
+					InternalMappingStorage struct {
+						ApiAlias   interface{}   `json:"apiAlias"`
+						Extensions []interface{} `json:"extensions"`
+					} `json:"internal_mapping_storage"`
+				} `json:"extensions"`
+				Id             string      `json:"id"`
+				CustomFields   interface{} `json:"customFields"`
+				OrderVersionId string      `json:"orderVersionId"`
+				ApiAlias       string      `json:"apiAlias"`
+			} `json:"shippingOrderAddress"`
+			StateId           string `json:"stateId"`
+			StateMachineState struct {
+				Name                           string      `json:"name"`
+				TechnicalName                  string      `json:"technicalName"`
+				StateMachineId                 string      `json:"stateMachineId"`
+				StateMachine                   interface{} `json:"stateMachine"`
+				FromStateMachineTransitions    interface{} `json:"fromStateMachineTransitions"`
+				ToStateMachineTransitions      interface{} `json:"toStateMachineTransitions"`
+				Translations                   interface{} `json:"translations"`
+				Orders                         interface{} `json:"orders"`
+				OrderTransactions              interface{} `json:"orderTransactions"`
+				OrderDeliveries                interface{} `json:"orderDeliveries"`
+				FromStateMachineHistoryEntries interface{} `json:"fromStateMachineHistoryEntries"`
+				ToStateMachineHistoryEntries   interface{} `json:"toStateMachineHistoryEntries"`
+				UniqueIdentifier               string      `json:"_uniqueIdentifier"`
+				VersionId                      interface{} `json:"versionId"`
+				Translated                     struct {
+					Name         string        `json:"name"`
+					CustomFields []interface{} `json:"customFields"`
+				} `json:"translated"`
+				CreatedAt  time.Time   `json:"createdAt"`
+				UpdatedAt  interface{} `json:"updatedAt"`
+				Extensions struct {
+					ForeignKeys struct {
+						ApiAlias   interface{}   `json:"apiAlias"`
+						Extensions []interface{} `json:"extensions"`
+					} `json:"foreignKeys"`
+					InternalMappingStorage struct {
+						ApiAlias   interface{}   `json:"apiAlias"`
+						Extensions []interface{} `json:"extensions"`
+					} `json:"internal_mapping_storage"`
+				} `json:"extensions"`
+				Id           string      `json:"id"`
+				CustomFields interface{} `json:"customFields"`
+				ApiAlias     string      `json:"apiAlias"`
+			} `json:"stateMachineState"`
+			ShippingMethod   interface{}   `json:"shippingMethod"`
+			Order            interface{}   `json:"order"`
+			Positions        interface{}   `json:"positions"`
+			UniqueIdentifier string        `json:"_uniqueIdentifier"`
+			VersionId        string        `json:"versionId"`
+			Translated       []interface{} `json:"translated"`
+			CreatedAt        time.Time     `json:"createdAt"`
+			UpdatedAt        time.Time     `json:"updatedAt"`
+			Extensions       struct {
+				ForeignKeys struct {
+					ApiAlias   interface{}   `json:"apiAlias"`
+					Extensions []interface{} `json:"extensions"`
+				} `json:"foreignKeys"`
+			} `json:"extensions"`
+			Id                            string      `json:"id"`
+			CustomFields                  interface{} `json:"customFields"`
+			OrderVersionId                string      `json:"orderVersionId"`
+			ShippingOrderAddressVersionId string      `json:"shippingOrderAddressVersionId"`
+			ApiAlias                      string      `json:"apiAlias"`
+		} `json:"deliveries"`
+		LineItems []struct {
 			OrderId      string  `json:"orderId"`
 			Identifier   string  `json:"identifier"`
 			ReferencedId string  `json:"referencedId"`
