@@ -1797,3 +1797,31 @@ if err != nil {
     log.Println(orderState)
 }
 ```
+
+### Update order tracking number
+
+If you want to update the order tracking number you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+body := UpdateOrderTrackingNumberBody{}
+
+updateOrderBody.Deliveries = append(body.Deliveries, UpdateOrderTrackingNumberBodyDeliveries{
+    Id:            "407928d7e48047c5a97c31bc55ca0498",
+    TrackingCodes: []string{"187DE"},
+})
+
+// Update order tracking number
+updateOrder, err := UpdateOrderTrackingNumber("61e17e50646c43d5b0c77ab23bedb008", body, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(updateOrder)
+}
+```
