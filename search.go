@@ -26,6 +26,10 @@ type CustomOrderSearchBody struct {
 		Currency struct {
 		} `json:"currency"`
 		LineItems struct {
+			Associations struct {
+				Product struct {
+				} `json:"product"`
+			} `json:"associations"`
 		} `json:"lineItems"`
 		Addresses struct {
 			Associations struct {
@@ -38,6 +42,10 @@ type CustomOrderSearchBody struct {
 			} `json:"associations"`
 		} `json:"addresses"`
 		Transactions struct {
+			Associations struct {
+				PaymentMethod struct {
+				} `json:"paymentMethod"`
+			} `json:"associations"`
 		} `json:"transactions"`
 	} `json:"associations"`
 }
