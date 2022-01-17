@@ -628,6 +628,37 @@ type OrderStateReturn struct {
 	} `json:"errors"`
 }
 
+// UpdateOrderTrackingNumberBody is to structure the body data
+type UpdateOrderTrackingNumberBody struct {
+	Deliveries []UpdateOrderTrackingNumberBodyDeliveries `json:"deliveries"`
+}
+
+type UpdateOrderTrackingNumberBodyDeliveries struct {
+	Id            string   `json:"id"`
+	TrackingCodes []string `json:"trackingCodes"`
+}
+
+// UpdateOrderTrackingNumberReturn is to decode the json data
+type UpdateOrderTrackingNumberReturn struct {
+	Errors []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
 // Orders are to get a list of all orders
 func Orders(parameter map[string]string, r Request) (OrdersReturn, error) {
 
@@ -818,6 +849,47 @@ func OrderState(id string, state int, body OrderStateBody, r Request) (OrderStat
 	err = json.NewDecoder(response.Body).Decode(&decode)
 	if err != nil {
 		return OrderStateReturn{}, err
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// UpdateOrderTrackingNumber is to update the tracking number of an order
+func UpdateOrderTrackingNumber(id string, body UpdateOrderTrackingNumberBody, r Request) (UpdateOrderTrackingNumberReturn, error) {
+
+	// Convert body data
+	convert, err := json.Marshal(body)
+	if err != nil {
+		return UpdateOrderTrackingNumberReturn{}, err
+	}
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/order/" + id,
+		Method: "PATCH",
+		Body:   convert,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return UpdateOrderTrackingNumberReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode UpdateOrderTrackingNumberReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return UpdateOrderTrackingNumberReturn{}, err
+		}
 	}
 
 	// Return data
