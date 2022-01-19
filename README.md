@@ -395,6 +395,31 @@ if err != nil {
 }
 ```
 
+### Get all product configuration settings
+
+If you want to read all product configuration settings, you can do it with the following function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
+// Get all product configuration settings
+productConfigurationSettings, err := gosw6.ProductConfiguratorSettings(parameter, "c448b82288914946b1ca4a93bcbf824f", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(productConfigurationSettings)
+}
+```
+
 ### Update product configuration settings
 
 If you want to update product configuration settings, you can do it with this function.
@@ -407,20 +432,45 @@ r := gosw6.Request{
 }
 
 // Define body
-body := gosw6.UpdateProductConfiguratorSettingsBody{
-    ConfiguratorSettings: []gosw6.UpdateProductConfiguratorSettingsBodyConfiguratorSettings{},
+updateProductConfiguratorSettingBody := UpdateProductConfiguratorSettingBody{
+    ConfiguratorSettings: []UpdateProductConfiguratorSettingBodyConfiguratorSettings{},
 }
 
-body.ConfiguratorSettings = append(body.ConfiguratorSettings, gosw6.UpdateProductConfiguratorSettingsBodyConfiguratorSettings{"83f39523e6af4e248b5fb0bbb7b8837b"})
-body.ConfiguratorSettings = append(body.ConfiguratorSettings, gosw6.UpdateProductConfiguratorSettingsBodyConfiguratorSettings{"c41d245ae1c6416f94267dba8104437a"})
-body.ConfiguratorSettings = append(body.ConfiguratorSettings, gosw6.UpdateProductConfiguratorSettingsBodyConfiguratorSettings{"9513190a41a44347b054c47eb62e247d"})
+updateProductConfiguratorSettingBody.ConfiguratorSettings = append(updateProductConfiguratorSettingBody.ConfiguratorSettings, UpdateProductConfiguratorSettingBodyConfiguratorSettings{"83f39523e6af4e248b5fb0bbb7b8837b"})
+updateProductConfiguratorSettingBody.ConfiguratorSettings = append(updateProductConfiguratorSettingBody.ConfiguratorSettings, UpdateProductConfiguratorSettingBodyConfiguratorSettings{"c41d245ae1c6416f94267dba8104437a"})
+updateProductConfiguratorSettingBody.ConfiguratorSettings = append(updateProductConfiguratorSettingBody.ConfiguratorSettings, UpdateProductConfiguratorSettingBodyConfiguratorSettings{"9513190a41a44347b054c47eb62e247d"})
 
 // Update product configuration settings
-updateProductConfiguratorSettings, err := gosw6.UpdateProductConfiguratorSettings("9553fd97f5af4d77a2e8befcb83ed697", body, r)
+updateProductConfiguratorSettings, err := UpdateProductConfiguratorSetting("9553fd97f5af4d77a2e8befcb83ed697", updateProductConfiguratorSettingBody, r)
 if err != nil {
     log.Fatalln(err)
 } else {
     log.Println(updateProductConfiguratorSettings)
+}
+```
+
+### Delete a product configuration setting
+
+If you want to delete a product configuration setting, you can do it with the following function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
+// Get all product configuration settings
+productConfigurationSettings, err := gosw6.ProductConfiguratorSettings(parameter, "c448b82288914946b1ca4a93bcbf824f", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(productConfigurationSettings)
 }
 ```
 

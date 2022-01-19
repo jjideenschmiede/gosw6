@@ -591,17 +591,86 @@ type DeleteProductReturn struct {
 	} `json:"errors"`
 }
 
-// UpdateProductConfiguratorSettingsBody is to structure the body data
-type UpdateProductConfiguratorSettingsBody struct {
-	ConfiguratorSettings []UpdateProductConfiguratorSettingsBodyConfiguratorSettings `json:"configuratorSettings"`
+// ProductConfiguratorSettingsReturn is to decode the json data
+type ProductConfiguratorSettingsReturn struct {
+	Total int `json:"total"`
+	Data  []struct {
+		ProductId        string        `json:"productId"`
+		OptionId         string        `json:"optionId"`
+		MediaId          interface{}   `json:"mediaId"`
+		Position         int           `json:"position"`
+		Price            interface{}   `json:"price"`
+		Option           interface{}   `json:"option"`
+		Media            interface{}   `json:"media"`
+		Selected         bool          `json:"selected"`
+		Product          interface{}   `json:"product"`
+		UniqueIdentifier string        `json:"_uniqueIdentifier"`
+		VersionId        string        `json:"versionId"`
+		Translated       []interface{} `json:"translated"`
+		CreatedAt        time.Time     `json:"createdAt"`
+		UpdatedAt        interface{}   `json:"updatedAt"`
+		Extensions       struct {
+			ForeignKeys struct {
+				ApiAlias   interface{}   `json:"apiAlias"`
+				Extensions []interface{} `json:"extensions"`
+			} `json:"foreignKeys"`
+		} `json:"extensions"`
+		Id           string      `json:"id"`
+		CustomFields interface{} `json:"customFields"`
+		ApiAlias     string      `json:"apiAlias"`
+	} `json:"data"`
+	Aggregations []interface{} `json:"aggregations"`
+	Errors       []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
 }
 
-type UpdateProductConfiguratorSettingsBodyConfiguratorSettings struct {
+// UpdateProductConfiguratorSettingBody is to structure the body data
+type UpdateProductConfiguratorSettingBody struct {
+	ConfiguratorSettings []UpdateProductConfiguratorSettingBodyConfiguratorSettings `json:"configuratorSettings"`
+}
+
+type UpdateProductConfiguratorSettingBodyConfiguratorSettings struct {
 	OptionId string `json:"optionId"`
 }
 
-// UpdateProductConfiguratorSettingsReturn is to decode the json data
-type UpdateProductConfiguratorSettingsReturn struct {
+// UpdateProductConfiguratorSettingReturn is to decode the json data
+type UpdateProductConfiguratorSettingReturn struct {
+	Errors []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
+// DeleteProductConfiguratorSettingReturn is to decode the json data
+type DeleteProductConfiguratorSettingReturn struct {
 	Errors []struct {
 		Code   string `json:"code"`
 		Status string `json:"status"`
@@ -1543,13 +1612,64 @@ func DeleteProduct(id string, r Request) (DeleteProductReturn, error) {
 
 }
 
-// UpdateProductConfiguratorSettings is to update the configurator settings
-func UpdateProductConfiguratorSettings(id string, body UpdateProductConfiguratorSettingsBody, r Request) (UpdateProductConfiguratorSettingsReturn, error) {
+// ProductConfiguratorSettings is to get all product configuration settings
+func ProductConfiguratorSettings(parameter map[string]string, id string, r Request) (ProductConfiguratorSettingsReturn, error) {
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + id + "/configuratorSettings",
+		Method: "GET",
+		Body:   nil,
+	}
+
+	// Parse url & add attributes
+	parse, err := url.Parse(c.Path)
+	if err != nil {
+		return ProductConfiguratorSettingsReturn{}, err
+	}
+
+	newUrl, err := url.ParseQuery(parse.RawQuery)
+	if err != nil {
+		return ProductConfiguratorSettingsReturn{}, err
+	}
+
+	for index, value := range parameter {
+		newUrl.Add(index, value)
+	}
+
+	// Set new url
+	parse.RawQuery = newUrl.Encode()
+	c.Path = fmt.Sprintf("%s", parse)
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return ProductConfiguratorSettingsReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode ProductConfiguratorSettingsReturn
+
+	err = json.NewDecoder(response.Body).Decode(&decode)
+	if err != nil {
+		return ProductConfiguratorSettingsReturn{}, err
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// UpdateProductConfiguratorSetting is to update the configurator settings
+func UpdateProductConfiguratorSetting(id string, body UpdateProductConfiguratorSettingBody, r Request) (UpdateProductConfiguratorSettingReturn, error) {
 
 	// Convert body data
 	convert, err := json.Marshal(body)
 	if err != nil {
-		return UpdateProductConfiguratorSettingsReturn{}, err
+		return UpdateProductConfiguratorSettingReturn{}, err
 	}
 
 	// Set config for request
@@ -1562,20 +1682,55 @@ func UpdateProductConfiguratorSettings(id string, body UpdateProductConfigurator
 	// Send request
 	response, err := c.Send(r)
 	if err != nil {
-		return UpdateProductConfiguratorSettingsReturn{}, err
+		return UpdateProductConfiguratorSettingReturn{}, err
 	}
 
 	// Close request
 	defer response.Body.Close()
 
 	// Decode data
-	var decode UpdateProductConfiguratorSettingsReturn
+	var decode UpdateProductConfiguratorSettingReturn
 
 	// Check response header
 	if response.Status != "204 No Content" {
 		err = json.NewDecoder(response.Body).Decode(&decode)
 		if err != nil {
-			return UpdateProductConfiguratorSettingsReturn{}, err
+			return UpdateProductConfiguratorSettingReturn{}, err
+		}
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// DeleteProductConfiguratorSetting is to delete all product configuration setting
+func DeleteProductConfiguratorSetting(productId, configurationSettingId string, r Request) (DeleteProductConfiguratorSettingReturn, error) {
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + productId + "/configuratorSettings/" + configurationSettingId,
+		Method: "DELETE",
+		Body:   nil,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return DeleteProductConfiguratorSettingReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode DeleteProductConfiguratorSettingReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return DeleteProductConfiguratorSettingReturn{}, err
 		}
 	}
 
