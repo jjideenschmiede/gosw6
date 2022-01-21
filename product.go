@@ -244,7 +244,7 @@ type ProductBody struct {
 	PurchaseSteps        int                          `json:"purchaseSteps,omitempty"`
 	MaxPurchase          int                          `json:"maxPurchase"`
 	MinPurchase          int                          `json:"minPurchase"`
-	ShippingFree         bool                         `json:"shippingFree,omitempty"`
+	ShippingFree         bool                         `json:"shippingFree"`
 	PurchasePrices       []*ProductBodyPurchasePrices `json:"purchasePrices"`
 	MarkAsTopseller      bool                         `json:"markAsTopseller,omitempty"`
 	Weight               float64                      `json:"weight"`
