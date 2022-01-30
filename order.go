@@ -273,7 +273,7 @@ type OrderReturn struct {
 			} `json:"calculatedTaxes"`
 			TaxRules []struct {
 				TaxRate    int           `json:"taxRate"`
-				Percentage int           `json:"percentage"`
+				Percentage float64       `json:"percentage"`
 				Extensions []interface{} `json:"extensions"`
 				ApiAlias   string        `json:"apiAlias"`
 			} `json:"taxRules"`
@@ -300,7 +300,7 @@ type OrderReturn struct {
 			} `json:"calculatedTaxes"`
 			TaxRules []struct {
 				TaxRate    int           `json:"taxRate"`
-				Percentage int           `json:"percentage"`
+				Percentage float64       `json:"percentage"`
 				Extensions []interface{} `json:"extensions"`
 				ApiAlias   string        `json:"apiAlias"`
 			} `json:"taxRules"`
