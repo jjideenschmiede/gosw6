@@ -22,7 +22,7 @@ import (
 type TaxesReturn struct {
 	Total int `json:"total"`
 	Data  []struct {
-		TaxRate          int           `json:"taxRate"`
+		TaxRate          float64       `json:"taxRate"`
 		Name             string        `json:"name"`
 		Position         int           `json:"position"`
 		Products         interface{}   `json:"products"`
