@@ -216,12 +216,12 @@ type CategoryBody struct {
 	InternalLink          interface{} `json:"internalLink,omitempty"`
 	ExternalLink          interface{} `json:"externalLink,omitempty"`
 	Visible               bool        `json:"visible"`
-	Type                  string      `json:"type,omitempty"`
-	ProductAssignmentType string      `json:"productAssignmentType,omitempty"`
-	Description           string      `json:"description,omitempty"`
-	MetaTitle             string      `json:"metaTitle,omitempty"`
-	MetaDescription       string      `json:"metaDescription,omitempty"`
-	Keywords              string      `json:"keywords,omitempty"`
+	Type                  string      `json:"type"`
+	ProductAssignmentType string      `json:"productAssignmentType"`
+	Description           string      `json:"description"`
+	MetaTitle             string      `json:"metaTitle"`
+	MetaDescription       string      `json:"metaDescription"`
+	Keywords              string      `json:"keywords"`
 }
 
 // CreateCategoryReturn is to decode the json data
