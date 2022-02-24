@@ -207,15 +207,15 @@ type CategoryBody struct {
 	ParentId              string      `json:"parentId,omitempty"`
 	MediaId               interface{} `json:"mediaId,omitempty"`
 	Name                  string      `json:"name"`
-	Active                bool        `json:"active,omitempty"`
-	VisibleChildCount     int         `json:"visibleChildCount,omitempty"`
-	DisplayNestedProducts bool        `json:"displayNestedProducts,omitempty"`
+	Active                bool        `json:"active"`
+	VisibleChildCount     int         `json:"visibleChildCount"`
+	DisplayNestedProducts bool        `json:"displayNestedProducts"`
 	CmsPageId             string      `json:"cmsPageId,omitempty"`
 	LinkType              interface{} `json:"linkType,omitempty"`
 	LinkNewTab            interface{} `json:"linkNewTab,omitempty"`
 	InternalLink          interface{} `json:"internalLink,omitempty"`
 	ExternalLink          interface{} `json:"externalLink,omitempty"`
-	Visible               bool        `json:"visible,omitempty"`
+	Visible               bool        `json:"visible"`
 	Type                  string      `json:"type,omitempty"`
 	ProductAssignmentType string      `json:"productAssignmentType,omitempty"`
 	Description           string      `json:"description,omitempty"`
