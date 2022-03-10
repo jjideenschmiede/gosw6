@@ -21,6 +21,7 @@ Currently we have the following functions covered:
 - [Property groups](https://github.com/jjideenschmiede/gosw6#property-group)
 - [Property groups option](https://github.com/jjideenschmiede/gosw6#property-group-option)
 - [Tax](https://github.com/jjideenschmiede/gosw6#tax)
+- [Unit](https://github.com/jjideenschmiede/gosw6#unit)
 - [Sale channels](https://github.com/jjideenschmiede/gosw6#sale-channels)
 - [Currencies](https://github.com/jjideenschmiede/gosw6#currencies)
 - [Delivery time](https://github.com/jjideenschmiede/gosw6#delivery-time)
@@ -228,6 +229,8 @@ body := gosw6.ProductBody{
     Width:              0,
     Height:             0,
     Length:             0,
+    UnitId:             "367da3d1aef34cc3a442f68143fa8ede",
+    PurchaseUnit:       187,
     ReleaseDate:        time.Now().Format("2006-01-02T15:04:05.000+00:00"),
     Name:               "J&J Afterware6",
     Tags:               []*gosw6.ProductBodyTags{},
@@ -319,6 +322,8 @@ body := gosw6.ProductBody{
     Width:              nil,
     Height:             nil,
     Length:             nil,
+    UnitId:             "367da3d1aef34cc3a442f68143fa8ede",
+    PurchaseUnit:       187,
     ReleaseDate:        time.Now().Format("2006-01-02T15:04:05.000+00:00"),
     Name:               "J&J Afterware6 v2",
     Tags:               []*gosw6.ProductBodyTags{},
@@ -1373,6 +1378,33 @@ if err != nil {
     log.Fatalln(err)
 } else {
     log.Println(taxes)
+}
+```
+
+## Unit
+
+### Get all units
+
+If you want to read all units, you can do it with the following function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
+// Get all units
+units, err := gosw6.Units(parameter, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(units)
 }
 ```
 
