@@ -290,7 +290,7 @@ type ProductBodyPurchasePrices struct {
 }
 
 type ProductBodyTags struct {
-	Name string `json:"name"`
+	Id string `json:"id"`
 }
 
 type ProductBodyProperties struct {
