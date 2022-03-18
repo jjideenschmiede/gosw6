@@ -21,6 +21,7 @@ Currently we have the following functions covered:
 - [Property groups](https://github.com/jjideenschmiede/gosw6#property-group)
 - [Property groups option](https://github.com/jjideenschmiede/gosw6#property-group-option)
 - [Tax](https://github.com/jjideenschmiede/gosw6#tax)
+- [Tag](https://github.com/jjideenschmiede/gosw6#tag)
 - [Unit](https://github.com/jjideenschmiede/gosw6#unit)
 - [Sale channels](https://github.com/jjideenschmiede/gosw6#sale-channels)
 - [Currencies](https://github.com/jjideenschmiede/gosw6#currencies)
@@ -271,7 +272,7 @@ body.PurchasePrices = append(body.PurchasePrices, &gosw6.ProductBodyPurchasePric
 
 // Add tags
 body.Tags = append(body.Tags, &gosw6.ProductBodyTags{
-    Name: "Neuster Scheiß",
+    Id: "013a333c30e84059ba1b0025e70edec6",
 })
 
 // Add category
@@ -363,7 +364,7 @@ body.PurchasePrices = append(body.PurchasePrices, &gosw6.ProductBodyPurchasePric
 
 // Add tags
 body.Tags = append(body.Tags, &gosw6.ProductBodyTags{
-    Name: "Neuster Scheiß",
+    Id: "013a333c30e84059ba1b0025e70edec6",
 })
 
 // Add category
@@ -1378,6 +1379,33 @@ if err != nil {
     log.Fatalln(err)
 } else {
     log.Println(taxes)
+}
+```
+
+## Tag
+
+### Get all tags
+
+If you want to read all tags, you can do it with the following function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
+// Get all tags
+tags, err := gosw6.Tags(parameter, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(tags)
 }
 ```
 
