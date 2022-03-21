@@ -1318,6 +1318,7 @@ type ProductCoverReturn struct {
 type CreateProductCoverBody struct {
 	ProductId string `json:"productId"`
 	MediaId   string `json:"mediaId"`
+	Position  int    `json:"position"`
 }
 
 // CreateProductCoverReturn is to decode the json data
