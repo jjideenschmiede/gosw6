@@ -772,6 +772,7 @@ r := gosw6.Request{
 createProductCoverBody := CreateProductCoverBody{
     ProductId: "dddbf38937df464690f25b18a32cdeb0",
     MediaId:   "c97dc00288574ed394c5f9ee6012cd9a",
+	Position:  1,
 }
 
 // Create a product cover
