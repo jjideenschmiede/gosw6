@@ -47,7 +47,12 @@ type CustomOrderSearchBody struct {
 				} `json:"paymentMethod"`
 			} `json:"associations"`
 		} `json:"transactions"`
-		Deliveries struct{} `json:"deliveries"`
+		Deliveries struct {
+			Associations struct {
+				ShippingMethod struct {
+				} `json:"shippingMethod"`
+			} `json:"associations"`
+		} `json:"deliveries"`
 	} `json:"associations"`
 }
 
@@ -379,12 +384,12 @@ type CustomOrderSearchReturn struct {
 		} `json:"addresses"`
 		BillingAddress interface{} `json:"billingAddress"`
 		Deliveries     []struct {
-			OrderId                string        `json:"orderId"`
-			ShippingOrderAddressId string        `json:"shippingOrderAddressId"`
-			ShippingMethodId       string        `json:"shippingMethodId"`
-			TrackingCodes          []interface{} `json:"trackingCodes"`
-			ShippingDateEarliest   time.Time     `json:"shippingDateEarliest"`
-			ShippingDateLatest     time.Time     `json:"shippingDateLatest"`
+			OrderId                string    `json:"orderId"`
+			ShippingOrderAddressId string    `json:"shippingOrderAddressId"`
+			ShippingMethodId       string    `json:"shippingMethodId"`
+			TrackingCodes          []string  `json:"trackingCodes"`
+			ShippingDateEarliest   time.Time `json:"shippingDateEarliest"`
+			ShippingDateLatest     time.Time `json:"shippingDateLatest"`
 			ShippingCosts          struct {
 				UnitPrice       float64 `json:"unitPrice"`
 				Quantity        int     `json:"quantity"`
@@ -513,7 +518,79 @@ type CustomOrderSearchReturn struct {
 				CustomFields interface{} `json:"customFields"`
 				ApiAlias     string      `json:"apiAlias"`
 			} `json:"stateMachineState"`
-			ShippingMethod   interface{}   `json:"shippingMethod"`
+			ShippingMethod struct {
+				Name           string      `json:"name"`
+				Active         bool        `json:"active"`
+				Description    interface{} `json:"description"`
+				TrackingUrl    interface{} `json:"trackingUrl"`
+				DeliveryTimeId string      `json:"deliveryTimeId"`
+				DeliveryTime   struct {
+					Name             string      `json:"name"`
+					Min              int         `json:"min"`
+					Max              int         `json:"max"`
+					Unit             string      `json:"unit"`
+					ShippingMethods  interface{} `json:"shippingMethods"`
+					Translations     interface{} `json:"translations"`
+					Products         interface{} `json:"products"`
+					UniqueIdentifier string      `json:"_uniqueIdentifier"`
+					VersionId        interface{} `json:"versionId"`
+					Translated       struct {
+						Name         string        `json:"name"`
+						CustomFields []interface{} `json:"customFields"`
+					} `json:"translated"`
+					CreatedAt  time.Time   `json:"createdAt"`
+					UpdatedAt  interface{} `json:"updatedAt"`
+					Extensions struct {
+						ForeignKeys struct {
+							ApiAlias   interface{}   `json:"apiAlias"`
+							Extensions []interface{} `json:"extensions"`
+						} `json:"foreignKeys"`
+						InternalMappingStorage struct {
+							ApiAlias   interface{}   `json:"apiAlias"`
+							Extensions []interface{} `json:"extensions"`
+						} `json:"internal_mapping_storage"`
+					} `json:"extensions"`
+					Id           string      `json:"id"`
+					CustomFields interface{} `json:"customFields"`
+					ApiAlias     string      `json:"apiAlias"`
+				} `json:"deliveryTime"`
+				Translations                   interface{}   `json:"translations"`
+				OrderDeliveries                interface{}   `json:"orderDeliveries"`
+				SalesChannelDefaultAssignments interface{}   `json:"salesChannelDefaultAssignments"`
+				SalesChannels                  interface{}   `json:"salesChannels"`
+				AvailabilityRule               interface{}   `json:"availabilityRule"`
+				AvailabilityRuleId             string        `json:"availabilityRuleId"`
+				Prices                         []interface{} `json:"prices"`
+				MediaId                        interface{}   `json:"mediaId"`
+				TaxId                          interface{}   `json:"taxId"`
+				Media                          interface{}   `json:"media"`
+				Tags                           interface{}   `json:"tags"`
+				TaxType                        string        `json:"taxType"`
+				Tax                            interface{}   `json:"tax"`
+				UniqueIdentifier               string        `json:"_uniqueIdentifier"`
+				VersionId                      interface{}   `json:"versionId"`
+				Translated                     struct {
+					Name         string        `json:"name"`
+					CustomFields []interface{} `json:"customFields"`
+					Description  interface{}   `json:"description"`
+					TrackingUrl  interface{}   `json:"trackingUrl"`
+				} `json:"translated"`
+				CreatedAt  time.Time `json:"createdAt"`
+				UpdatedAt  time.Time `json:"updatedAt"`
+				Extensions struct {
+					ForeignKeys struct {
+						ApiAlias   interface{}   `json:"apiAlias"`
+						Extensions []interface{} `json:"extensions"`
+					} `json:"foreignKeys"`
+					InternalMappingStorage struct {
+						ApiAlias   interface{}   `json:"apiAlias"`
+						Extensions []interface{} `json:"extensions"`
+					} `json:"internal_mapping_storage"`
+				} `json:"extensions"`
+				Id           string      `json:"id"`
+				CustomFields interface{} `json:"customFields"`
+				ApiAlias     string      `json:"apiAlias"`
+			} `json:"shippingMethod"`
 			Order            interface{}   `json:"order"`
 			Positions        interface{}   `json:"positions"`
 			UniqueIdentifier string        `json:"_uniqueIdentifier"`
