@@ -17,6 +17,7 @@ Currently we have the following functions covered:
 - [Search](https://github.com/jjideenschmiede/gosw6#search)
 - [Product](https://github.com/jjideenschmiede/gosw6#product)
 - [Category](https://github.com/jjideenschmiede/gosw6#category)
+- [Cms Page](https://github.com/jjideenschmiede/gosw6#cms-page)
 - [Manufacturer](https://github.com/jjideenschmiede/gosw6#manufacturer)
 - [Property groups](https://github.com/jjideenschmiede/gosw6#property-group)
 - [Property groups option](https://github.com/jjideenschmiede/gosw6#property-group-option)
@@ -978,6 +979,33 @@ if err != nil {
     log.Fatalln(err)
 } else {
     log.Println(deleteCategory)
+}
+```
+
+## Cms Page
+
+### Get all cms pages
+
+If you want to read all cms pages, you can do it with the following function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
+// Get all cms pages
+cmsPages, err := gosw6.CmsPages(parameter, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(cmsPages)
 }
 ```
 
