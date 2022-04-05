@@ -261,6 +261,12 @@ body.Price = append(body.Price, &gosw6.ProductBodyPrice{
         Gross:      11,
         Linked:     false,
     },
+	RegulationPrice: ProductBodyRegulationPrice{
+        CurrencyId: "b7d2554b0ce847cd82f3ac9bd1c0dfca",
+        Net:        81,
+        Gross:      100,
+        Linked:     false,
+    },
 })
 
 // Add purchase price
@@ -351,6 +357,12 @@ body.Price = append(body.Price, &gosw6.ProductBodyPrice{
         CurrencyId: "b7d2554b0ce847cd82f3ac9bd1c0dfca",
         Net:        9.2436974789916,
         Gross:      11,
+        Linked:     false,
+    },
+    RegulationPrice: ProductBodyRegulationPrice{
+        CurrencyId: "b7d2554b0ce847cd82f3ac9bd1c0dfca",
+        Net:        81,
+        Gross:      100,
         Linked:     false,
     },
 })
