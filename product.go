@@ -31,12 +31,36 @@ type ProductsReturn struct {
 		Active         bool        `json:"active"`
 		DisplayGroup   string      `json:"displayGroup"`
 		Price          []struct {
-			CurrencyId string        `json:"currencyId"`
-			Net        float64       `json:"net"`
-			Gross      float64       `json:"gross"`
-			Linked     bool          `json:"linked"`
-			ListPrice  interface{}   `json:"listPrice"`
-			Percentage interface{}   `json:"percentage"`
+			CurrencyId string  `json:"currencyId"`
+			Net        float64 `json:"net"`
+			Gross      float64 `json:"gross"`
+			Linked     bool    `json:"linked"`
+			ListPrice  struct {
+				CurrencyId      string        `json:"currencyId"`
+				Net             float64       `json:"net"`
+				Gross           float64       `json:"gross"`
+				Linked          bool          `json:"linked"`
+				ListPrice       interface{}   `json:"listPrice"`
+				Percentage      interface{}   `json:"percentage"`
+				RegulationPrice interface{}   `json:"regulationPrice"`
+				Extensions      []interface{} `json:"extensions"`
+				ApiAlias        string        `json:"apiAlias"`
+			} `json:"listPrice"`
+			Percentage struct {
+				Net   float64 `json:"net"`
+				Gross float64 `json:"gross"`
+			} `json:"percentage"`
+			RegulationPrice struct {
+				CurrencyId      string        `json:"currencyId"`
+				Net             float64       `json:"net"`
+				Gross           int           `json:"gross"`
+				Linked          bool          `json:"linked"`
+				ListPrice       interface{}   `json:"listPrice"`
+				Percentage      interface{}   `json:"percentage"`
+				RegulationPrice interface{}   `json:"regulationPrice"`
+				Extensions      []interface{} `json:"extensions"`
+				ApiAlias        string        `json:"apiAlias"`
+			} `json:"regulationPrice"`
 			Extensions []interface{} `json:"extensions"`
 			ApiAlias   string        `json:"apiAlias"`
 		} `json:"price"`
@@ -268,14 +292,22 @@ type ProductBody struct {
 }
 
 type ProductBodyPrice struct {
-	CurrencyId string               `json:"currencyId"`
-	Net        float64              `json:"net"`
-	Gross      float64              `json:"gross"`
-	Linked     bool                 `json:"linked"`
-	ListPrice  ProductBodyListPrice `json:"listPrice"`
+	CurrencyId      string                     `json:"currencyId"`
+	Net             float64                    `json:"net"`
+	Gross           float64                    `json:"gross"`
+	Linked          bool                       `json:"linked"`
+	ListPrice       ProductBodyListPrice       `json:"listPrice"`
+	RegulationPrice ProductBodyRegulationPrice `json:"regulationPrice"`
 }
 
 type ProductBodyListPrice struct {
+	CurrencyId string  `json:"currencyId"`
+	Net        float64 `json:"net"`
+	Gross      float64 `json:"gross"`
+	Linked     bool    `json:"linked"`
+}
+
+type ProductBodyRegulationPrice struct {
 	CurrencyId string  `json:"currencyId"`
 	Net        float64 `json:"net"`
 	Gross      float64 `json:"gross"`
@@ -317,12 +349,36 @@ type ProductReturn struct {
 		Active         bool        `json:"active"`
 		DisplayGroup   string      `json:"displayGroup"`
 		Price          []struct {
-			CurrencyId string        `json:"currencyId"`
-			Net        int           `json:"net"`
-			Gross      int           `json:"gross"`
-			Linked     bool          `json:"linked"`
-			ListPrice  interface{}   `json:"listPrice"`
-			Percentage interface{}   `json:"percentage"`
+			CurrencyId string  `json:"currencyId"`
+			Net        float64 `json:"net"`
+			Gross      float64 `json:"gross"`
+			Linked     bool    `json:"linked"`
+			ListPrice  struct {
+				CurrencyId      string        `json:"currencyId"`
+				Net             float64       `json:"net"`
+				Gross           float64       `json:"gross"`
+				Linked          bool          `json:"linked"`
+				ListPrice       interface{}   `json:"listPrice"`
+				Percentage      interface{}   `json:"percentage"`
+				RegulationPrice interface{}   `json:"regulationPrice"`
+				Extensions      []interface{} `json:"extensions"`
+				ApiAlias        string        `json:"apiAlias"`
+			} `json:"listPrice"`
+			Percentage struct {
+				Net   float64 `json:"net"`
+				Gross float64 `json:"gross"`
+			} `json:"percentage"`
+			RegulationPrice struct {
+				CurrencyId      string        `json:"currencyId"`
+				Net             float64       `json:"net"`
+				Gross           int           `json:"gross"`
+				Linked          bool          `json:"linked"`
+				ListPrice       interface{}   `json:"listPrice"`
+				Percentage      interface{}   `json:"percentage"`
+				RegulationPrice interface{}   `json:"regulationPrice"`
+				Extensions      []interface{} `json:"extensions"`
+				ApiAlias        string        `json:"apiAlias"`
+			} `json:"regulationPrice"`
 			Extensions []interface{} `json:"extensions"`
 			ApiAlias   string        `json:"apiAlias"`
 		} `json:"price"`
