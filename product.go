@@ -285,6 +285,7 @@ type ProductBody struct {
 	MetaTitle            string                       `json:"metaTitle"`
 	Keywords             string                       `json:"keywords"`
 	TaxId                string                       `json:"taxId,omitempty"`
+	CmsPageId            string                       `json:"cmsPageId,omitempty"`
 	Properties           []*ProductBodyProperties     `json:"properties"`
 	Options              []*ProductBodyOptions        `json:"options"`
 	Categories           []*ProductBodyCategories     `json:"categories"`
