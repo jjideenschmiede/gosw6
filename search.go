@@ -201,9 +201,9 @@ type CustomOrderSearchReturn struct {
 			UniqueIdentifier string      `json:"_uniqueIdentifier"`
 			VersionId        interface{} `json:"versionId"`
 			Translated       struct {
-				ShortName    string        `json:"shortName"`
-				Name         string        `json:"name"`
-				CustomFields []interface{} `json:"customFields"`
+				ShortName    string      `json:"shortName"`
+				Name         string      `json:"name"`
+				CustomFields interface{} `json:"customFields"`
 			} `json:"translated"`
 			CreatedAt  time.Time   `json:"createdAt"`
 			UpdatedAt  interface{} `json:"updatedAt"`
@@ -279,8 +279,8 @@ type CustomOrderSearchReturn struct {
 				UniqueIdentifier               string      `json:"_uniqueIdentifier"`
 				VersionId                      interface{} `json:"versionId"`
 				Translated                     struct {
-					Name         string        `json:"name"`
-					CustomFields []interface{} `json:"customFields"`
+					Name         string      `json:"name"`
+					CustomFields interface{} `json:"customFields"`
 				} `json:"translated"`
 				CreatedAt  time.Time   `json:"createdAt"`
 				UpdatedAt  interface{} `json:"updatedAt"`
@@ -311,8 +311,8 @@ type CustomOrderSearchReturn struct {
 				UniqueIdentifier  string      `json:"_uniqueIdentifier"`
 				VersionId         interface{} `json:"versionId"`
 				Translated        struct {
-					Name         string        `json:"name"`
-					CustomFields []interface{} `json:"customFields"`
+					Name         string      `json:"name"`
+					CustomFields interface{} `json:"customFields"`
 				} `json:"translated"`
 				CreatedAt  time.Time   `json:"createdAt"`
 				UpdatedAt  interface{} `json:"updatedAt"`
@@ -344,9 +344,9 @@ type CustomOrderSearchReturn struct {
 				UniqueIdentifier     string      `json:"_uniqueIdentifier"`
 				VersionId            interface{} `json:"versionId"`
 				Translated           struct {
-					DisplayName  string        `json:"displayName"`
-					LetterName   string        `json:"letterName"`
-					CustomFields []interface{} `json:"customFields"`
+					DisplayName  string      `json:"displayName"`
+					LetterName   string      `json:"letterName"`
+					CustomFields interface{} `json:"customFields"`
 				} `json:"translated"`
 				CreatedAt  time.Time   `json:"createdAt"`
 				UpdatedAt  interface{} `json:"updatedAt"`
@@ -444,9 +444,9 @@ type CustomOrderSearchReturn struct {
 					UniqueIdentifier     string      `json:"_uniqueIdentifier"`
 					VersionId            interface{} `json:"versionId"`
 					Translated           struct {
-						DisplayName  string        `json:"displayName"`
-						LetterName   string        `json:"letterName"`
-						CustomFields []interface{} `json:"customFields"`
+						DisplayName  string      `json:"displayName"`
+						LetterName   string      `json:"letterName"`
+						CustomFields interface{} `json:"customFields"`
 					} `json:"translated"`
 					CreatedAt  time.Time   `json:"createdAt"`
 					UpdatedAt  interface{} `json:"updatedAt"`
@@ -499,8 +499,8 @@ type CustomOrderSearchReturn struct {
 				UniqueIdentifier               string      `json:"_uniqueIdentifier"`
 				VersionId                      interface{} `json:"versionId"`
 				Translated                     struct {
-					Name         string        `json:"name"`
-					CustomFields []interface{} `json:"customFields"`
+					Name         string      `json:"name"`
+					CustomFields interface{} `json:"customFields"`
 				} `json:"translated"`
 				CreatedAt  time.Time   `json:"createdAt"`
 				UpdatedAt  interface{} `json:"updatedAt"`
@@ -535,8 +535,8 @@ type CustomOrderSearchReturn struct {
 					UniqueIdentifier string      `json:"_uniqueIdentifier"`
 					VersionId        interface{} `json:"versionId"`
 					Translated       struct {
-						Name         string        `json:"name"`
-						CustomFields []interface{} `json:"customFields"`
+						Name         string      `json:"name"`
+						CustomFields interface{} `json:"customFields"`
 					} `json:"translated"`
 					CreatedAt  time.Time   `json:"createdAt"`
 					UpdatedAt  interface{} `json:"updatedAt"`
@@ -570,10 +570,10 @@ type CustomOrderSearchReturn struct {
 				UniqueIdentifier               string        `json:"_uniqueIdentifier"`
 				VersionId                      interface{}   `json:"versionId"`
 				Translated                     struct {
-					Name         string        `json:"name"`
-					CustomFields []interface{} `json:"customFields"`
-					Description  interface{}   `json:"description"`
-					TrackingUrl  interface{}   `json:"trackingUrl"`
+					Name         string      `json:"name"`
+					CustomFields interface{} `json:"customFields"`
+					Description  interface{} `json:"description"`
+					TrackingUrl  interface{} `json:"trackingUrl"`
 				} `json:"translated"`
 				CreatedAt  time.Time `json:"createdAt"`
 				UpdatedAt  time.Time `json:"updatedAt"`
@@ -664,20 +664,20 @@ type CustomOrderSearchReturn struct {
 				ApiAlias                 string        `json:"apiAlias"`
 			} `json:"priceDefinition"`
 			Payload struct {
-				IsCloseout      bool          `json:"isCloseout"`
-				CustomFields    []interface{} `json:"customFields"`
-				CreatedAt       string        `json:"createdAt"`
-				ReleaseDate     string        `json:"releaseDate"`
-				IsNew           bool          `json:"isNew"`
-				MarkAsTopseller interface{}   `json:"markAsTopseller"`
-				PurchasePrices  string        `json:"purchasePrices"`
-				ProductNumber   string        `json:"productNumber"`
-				ManufacturerId  string        `json:"manufacturerId"`
-				TaxId           string        `json:"taxId"`
-				TagIds          interface{}   `json:"tagIds"`
-				CategoryIds     []string      `json:"categoryIds"`
-				PropertyIds     interface{}   `json:"propertyIds"`
-				OptionIds       []string      `json:"optionIds"`
+				IsCloseout      bool        `json:"isCloseout"`
+				CustomFields    interface{} `json:"customFields"`
+				CreatedAt       string      `json:"createdAt"`
+				ReleaseDate     string      `json:"releaseDate"`
+				IsNew           bool        `json:"isNew"`
+				MarkAsTopseller interface{} `json:"markAsTopseller"`
+				PurchasePrices  string      `json:"purchasePrices"`
+				ProductNumber   string      `json:"productNumber"`
+				ManufacturerId  string      `json:"manufacturerId"`
+				TaxId           string      `json:"taxId"`
+				TagIds          interface{} `json:"tagIds"`
+				CategoryIds     []string    `json:"categoryIds"`
+				PropertyIds     interface{} `json:"propertyIds"`
+				OptionIds       []string    `json:"optionIds"`
 				Options         []struct {
 					Group  string `json:"group"`
 					Option string `json:"option"`
@@ -761,10 +761,10 @@ type CustomOrderSearchReturn struct {
 				UniqueIdentifier               string      `json:"_uniqueIdentifier"`
 				VersionId                      interface{} `json:"versionId"`
 				Translated                     struct {
-					Name                string        `json:"name"`
-					DistinguishableName string        `json:"distinguishableName"`
-					Description         string        `json:"description"`
-					CustomFields        []interface{} `json:"customFields"`
+					Name                string      `json:"name"`
+					DistinguishableName string      `json:"distinguishableName"`
+					Description         string      `json:"description"`
+					CustomFields        interface{} `json:"customFields"`
 				} `json:"translated"`
 				CreatedAt  time.Time `json:"createdAt"`
 				UpdatedAt  time.Time `json:"updatedAt"`
@@ -799,8 +799,8 @@ type CustomOrderSearchReturn struct {
 				UniqueIdentifier               string      `json:"_uniqueIdentifier"`
 				VersionId                      interface{} `json:"versionId"`
 				Translated                     struct {
-					Name         string        `json:"name"`
-					CustomFields []interface{} `json:"customFields"`
+					Name         string      `json:"name"`
+					CustomFields interface{} `json:"customFields"`
 				} `json:"translated"`
 				CreatedAt  time.Time   `json:"createdAt"`
 				UpdatedAt  interface{} `json:"updatedAt"`
@@ -853,8 +853,8 @@ type CustomOrderSearchReturn struct {
 			UniqueIdentifier               string      `json:"_uniqueIdentifier"`
 			VersionId                      interface{} `json:"versionId"`
 			Translated                     struct {
-				Name         string        `json:"name"`
-				CustomFields []interface{} `json:"customFields"`
+				Name         string      `json:"name"`
+				CustomFields interface{} `json:"customFields"`
 			} `json:"translated"`
 			CreatedAt  time.Time   `json:"createdAt"`
 			UpdatedAt  interface{} `json:"updatedAt"`
