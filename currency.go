@@ -23,7 +23,7 @@ type CurrenciesReturn struct {
 	Total int `json:"total"`
 	Data  []struct {
 		IsoCode                        string      `json:"isoCode"`
-		Factor                         int         `json:"factor"`
+		Factor                         float64     `json:"factor"`
 		Symbol                         string      `json:"symbol"`
 		ShortName                      string      `json:"shortName"`
 		Name                           string      `json:"name"`
