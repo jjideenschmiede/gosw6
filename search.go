@@ -93,7 +93,7 @@ type CustomOrderSearchReturn struct {
 				ApiAlias   string        `json:"apiAlias"`
 			} `json:"calculatedTaxes"`
 			TaxRules []struct {
-				TaxRate    int           `json:"taxRate"`
+				TaxRate    float64       `json:"taxRate"`
 				Percentage float64       `json:"percentage"`
 				Extensions []interface{} `json:"extensions"`
 				ApiAlias   string        `json:"apiAlias"`
@@ -114,13 +114,13 @@ type CustomOrderSearchReturn struct {
 			TotalPrice      float64 `json:"totalPrice"`
 			CalculatedTaxes []struct {
 				Tax        float64       `json:"tax"`
-				TaxRate    int           `json:"taxRate"`
+				TaxRate    float64       `json:"taxRate"`
 				Price      float64       `json:"price"`
 				Extensions []interface{} `json:"extensions"`
 				ApiAlias   string        `json:"apiAlias"`
 			} `json:"calculatedTaxes"`
 			TaxRules []struct {
-				TaxRate    int           `json:"taxRate"`
+				TaxRate    float64       `json:"taxRate"`
 				Percentage float64       `json:"percentage"`
 				Extensions []interface{} `json:"extensions"`
 				ApiAlias   string        `json:"apiAlias"`
@@ -396,13 +396,13 @@ type CustomOrderSearchReturn struct {
 				TotalPrice      float64 `json:"totalPrice"`
 				CalculatedTaxes []struct {
 					Tax        float64       `json:"tax"`
-					TaxRate    int           `json:"taxRate"`
+					TaxRate    float64       `json:"taxRate"`
 					Price      float64       `json:"price"`
 					Extensions []interface{} `json:"extensions"`
 					ApiAlias   string        `json:"apiAlias"`
 				} `json:"calculatedTaxes"`
 				TaxRules []struct {
-					TaxRate    int           `json:"taxRate"`
+					TaxRate    float64       `json:"taxRate"`
 					Percentage float64       `json:"percentage"`
 					Extensions []interface{} `json:"extensions"`
 					ApiAlias   string        `json:"apiAlias"`
@@ -637,7 +637,7 @@ type CustomOrderSearchReturn struct {
 					ApiAlias   string        `json:"apiAlias"`
 				} `json:"calculatedTaxes"`
 				TaxRules []struct {
-					TaxRate    int           `json:"taxRate"`
+					TaxRate    float64       `json:"taxRate"`
 					Percentage float64       `json:"percentage"`
 					Extensions []interface{} `json:"extensions"`
 					ApiAlias   string        `json:"apiAlias"`
@@ -650,7 +650,7 @@ type CustomOrderSearchReturn struct {
 			PriceDefinition struct {
 				Price    float64 `json:"price"`
 				TaxRules []struct {
-					TaxRate    int           `json:"taxRate"`
+					TaxRate    float64       `json:"taxRate"`
 					Percentage float64       `json:"percentage"`
 					Extensions []interface{} `json:"extensions"`
 					ApiAlias   string        `json:"apiAlias"`
@@ -721,13 +721,13 @@ type CustomOrderSearchReturn struct {
 				TotalPrice      float64 `json:"totalPrice"`
 				CalculatedTaxes []struct {
 					Tax        float64       `json:"tax"`
-					TaxRate    int           `json:"taxRate"`
+					TaxRate    float64       `json:"taxRate"`
 					Price      float64       `json:"price"`
 					Extensions []interface{} `json:"extensions"`
 					ApiAlias   string        `json:"apiAlias"`
 				} `json:"calculatedTaxes"`
 				TaxRules []struct {
-					TaxRate    int           `json:"taxRate"`
+					TaxRate    float64       `json:"taxRate"`
 					Percentage float64       `json:"percentage"`
 					Extensions []interface{} `json:"extensions"`
 					ApiAlias   string        `json:"apiAlias"`
