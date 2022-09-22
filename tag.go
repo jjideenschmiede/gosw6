@@ -115,3 +115,38 @@ func Tags(parameter map[string]string, r Request) (TagsReturn, error) {
 	return decode, err
 
 }
+
+// DeleteTag is to delete an tag
+func DeleteTag(id string, r Request) (TagsReturn, error) {
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/tag/" + id,
+		Method: "DELETE",
+		Body:   nil,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return TagsReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode TagsReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return TagsReturn{}, err
+		}
+	}
+
+	// Return data
+	return decode, err
+
+}

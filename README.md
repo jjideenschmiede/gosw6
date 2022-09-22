@@ -1387,7 +1387,7 @@ r := gosw6.Request{
     BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
 }
 
-// Update a property group option by id
+// Delete a property group option 
 deletePropertyGroupOption, err := gosw6.DeletePropertyGroupOption("830cbe62c1b943c5b5ffa4895b48efd6", r)
 if err != nil {
     log.Fatalln(err)
@@ -1447,6 +1447,26 @@ if err != nil {
     log.Fatalln(err)
 } else {
     log.Println(tags)
+}
+```
+
+### Delete a tag
+
+If you want to delete a tag, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Delete a tag 
+deleteTag, err := gosw6.DeleteTag("33fa1a797a0b49a3b90f85160521cafc", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(deleteTag)
 }
 ```
 
