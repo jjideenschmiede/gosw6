@@ -1608,6 +1608,31 @@ if err != nil {
 
 ## Media
 
+### Get all media
+
+If you want to get a list of all media, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
+// Get all media 
+media, err := gosw6.Media(parameter, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(media)
+}
+```
+
 ### Create a media
 
 If you want to create a media, you can do it with this function.
