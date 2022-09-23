@@ -1684,6 +1684,26 @@ if err != nil {
 }
 ```
 
+### Delete a media
+
+If you want to delete a media, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Delete a media 
+deleteMedia, err := gosw6.DeleteMedia("33fa1a797a0b49a3b90f85160521cafc", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(deleteMedia)
+}
+```
+
 ## Media folder
 
 ### Get all media folders

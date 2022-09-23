@@ -93,6 +93,28 @@ type UploadLocalMediaReturn struct {
 	} `json:"errors"`
 }
 
+// DeleteMediaReturn is to decode the json data
+type DeleteMediaReturn struct {
+	Location string `json:"location"`
+	Errors   []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
 // CreateMedia is to create a new media
 func CreateMedia(body CreateMediaBody, r Request) (CreateMediaReturn, error) {
 
@@ -249,6 +271,41 @@ func UploadLocalMedia(file *os.File, name, extension, id string, r Request) (Upl
 		err = json.NewDecoder(response.Body).Decode(&decode)
 		if err != nil {
 			return UploadLocalMediaReturn{}, err
+		}
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// DeleteMedia is to delete a media
+func DeleteMedia(id string, r Request) (DeleteMediaReturn, error) {
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/media/" + id,
+		Method: "DELETE",
+		Body:   nil,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return DeleteMediaReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode DeleteMediaReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return DeleteMediaReturn{}, err
 		}
 	}
 
