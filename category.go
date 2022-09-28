@@ -218,10 +218,10 @@ type CategoryBody struct {
 	Visible               bool        `json:"visible"`
 	Type                  string      `json:"type"`
 	ProductAssignmentType string      `json:"productAssignmentType"`
-	Description           string      `json:"description"`
-	MetaTitle             string      `json:"metaTitle"`
-	MetaDescription       string      `json:"metaDescription"`
-	Keywords              string      `json:"keywords"`
+	Description           string      `json:"description,omitempty"`
+	MetaTitle             string      `json:"metaTitle,omitempty"`
+	MetaDescription       string      `json:"metaDescription,omitempty"`
+	Keywords              string      `json:"keywords,omitempty"`
 }
 
 // CreateCategoryReturn is to decode the json data
