@@ -277,6 +277,7 @@ type ProductBody struct {
 	Length               float64                      `json:"length"`
 	UnitId               string                       `json:"unitId,omitempty"`
 	PurchaseUnit         float64                      `json:"purchaseUnit"`
+	ReferenceUnit        float64                      `json:"referenceUnit"`
 	ReleaseDate          string                       `json:"releaseDate,omitempty"`
 	Name                 string                       `json:"name"`
 	Tags                 []*ProductBodyTags           `json:"tags"`
