@@ -53,7 +53,7 @@ type ProductsReturn struct {
 			RegulationPrice struct {
 				CurrencyId      string        `json:"currencyId"`
 				Net             float64       `json:"net"`
-				Gross           int           `json:"gross"`
+				Gross           float64       `json:"gross"`
 				Linked          bool          `json:"linked"`
 				ListPrice       interface{}   `json:"listPrice"`
 				Percentage      interface{}   `json:"percentage"`
