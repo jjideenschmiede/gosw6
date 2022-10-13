@@ -264,7 +264,7 @@ type ProductBody struct {
 	Stock                int                          `json:"stock"`
 	DeliveryTimeId       string                       `json:"deliveryTimeId"`
 	RestockTime          int                          `json:"restockTime,omitempty"`
-	IsCloseout           bool                         `json:"isCloseout,omitempty"`
+	IsCloseout           bool                         `json:"isCloseout"`
 	PurchaseSteps        int                          `json:"purchaseSteps,omitempty"`
 	MaxPurchase          int                          `json:"maxPurchase"`
 	MinPurchase          int                          `json:"minPurchase"`
