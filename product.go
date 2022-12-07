@@ -1470,6 +1470,142 @@ type CreateProductVisibilityReturn struct {
 	} `json:"errors"`
 }
 
+// ProductPricesReturn is to decode the json return
+type ProductPricesReturn struct {
+	Total int `json:"total"`
+	Data  []struct {
+		ProductId     string      `json:"productId"`
+		QuantityStart int         `json:"quantityStart"`
+		QuantityEnd   int         `json:"quantityEnd"`
+		Product       interface{} `json:"product"`
+		Rule          interface{} `json:"rule"`
+		RuleId        string      `json:"ruleId"`
+		Price         []struct {
+			CurrencyId string  `json:"currencyId"`
+			Net        float64 `json:"net"`
+			Gross      float64 `json:"gross"`
+			Linked     bool    `json:"linked"`
+			ListPrice  struct {
+				CurrencyId      string        `json:"currencyId"`
+				Net             float64       `json:"net"`
+				Gross           int           `json:"gross"`
+				Linked          bool          `json:"linked"`
+				ListPrice       interface{}   `json:"listPrice"`
+				Percentage      interface{}   `json:"percentage"`
+				RegulationPrice interface{}   `json:"regulationPrice"`
+				Extensions      []interface{} `json:"extensions"`
+				ApiAlias        string        `json:"apiAlias"`
+			} `json:"listPrice"`
+			Percentage struct {
+				Net   float64 `json:"net"`
+				Gross float64 `json:"gross"`
+			} `json:"percentage"`
+			RegulationPrice struct {
+				CurrencyId      string        `json:"currencyId"`
+				Net             float64       `json:"net"`
+				Gross           int           `json:"gross"`
+				Linked          bool          `json:"linked"`
+				ListPrice       interface{}   `json:"listPrice"`
+				Percentage      interface{}   `json:"percentage"`
+				RegulationPrice interface{}   `json:"regulationPrice"`
+				Extensions      []interface{} `json:"extensions"`
+				ApiAlias        string        `json:"apiAlias"`
+			} `json:"regulationPrice"`
+			Extensions []interface{} `json:"extensions"`
+			ApiAlias   string        `json:"apiAlias"`
+		} `json:"price"`
+		UniqueIdentifier string        `json:"_uniqueIdentifier"`
+		VersionId        string        `json:"versionId"`
+		Translated       []interface{} `json:"translated"`
+		CreatedAt        time.Time     `json:"createdAt"`
+		UpdatedAt        time.Time     `json:"updatedAt"`
+		Extensions       struct {
+			ForeignKeys struct {
+				ApiAlias   interface{}   `json:"apiAlias"`
+				Extensions []interface{} `json:"extensions"`
+			} `json:"foreignKeys"`
+		} `json:"extensions"`
+		Id           string      `json:"id"`
+		CustomFields interface{} `json:"customFields"`
+		ApiAlias     string      `json:"apiAlias"`
+	} `json:"data"`
+	Aggregations []interface{} `json:"aggregations"`
+	Errors       []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
+// ProductPriceBody is to structure the data
+type ProductPriceBody struct {
+	QuantityStart int                     `json:"quantityStart"`
+	QuantityEnd   int                     `json:"quantityEnd"`
+	RuleId        string                  `json:"ruleId"`
+	Price         []ProductPriceBodyPrice `json:"price"`
+}
+
+type ProductPriceBodyPrice struct {
+	CurrencyId string  `json:"currencyId"`
+	Net        float64 `json:"net"`
+	Gross      float64 `json:"gross"`
+	Linked     bool    `json:"linked"`
+}
+
+// CreateProductPriceReturn is to decode the json return
+type CreateProductPriceReturn struct {
+	Errors []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
+// DeleteProductPriceReturn is to decode the json data
+type DeleteProductPriceReturn struct {
+	Errors []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
 // Products are to get a list of all products
 func Products(parameter map[string]string, r Request) (ProductsReturn, error) {
 
@@ -2453,6 +2589,133 @@ func CreateProductVisibility(id string, body ProductVisibilityBody, r Request) (
 		err = json.NewDecoder(response.Body).Decode(&decode)
 		if err != nil {
 			return CreateProductVisibilityReturn{}, err
+		}
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// ProductPrices are to get a list of all product prices
+func ProductPrices(parameter map[string]string, id string, r Request) (ProductPricesReturn, error) {
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + id + "/prices",
+		Method: "GET",
+		Body:   nil,
+	}
+
+	// Parse url & add attributes
+	parse, err := url.Parse(c.Path)
+	if err != nil {
+		return ProductPricesReturn{}, err
+	}
+
+	newUrl, err := url.ParseQuery(parse.RawQuery)
+	if err != nil {
+		return ProductPricesReturn{}, err
+	}
+
+	for index, value := range parameter {
+		newUrl.Add(index, value)
+	}
+
+	// Set new url
+	parse.RawQuery = newUrl.Encode()
+	c.Path = fmt.Sprintf("%s", parse)
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return ProductPricesReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode ProductPricesReturn
+
+	err = json.NewDecoder(response.Body).Decode(&decode)
+	if err != nil {
+		return ProductPricesReturn{}, err
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// CreateProductPrice is to create a product price
+func CreateProductPrice(id string, body ProductPriceBody, r Request) (CreateProductPriceReturn, error) {
+
+	// Convert body data
+	convert, err := json.Marshal(body)
+	if err != nil {
+		return CreateProductPriceReturn{}, err
+	}
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + id + "/prices",
+		Method: "POST",
+		Body:   convert,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return CreateProductPriceReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode CreateProductPriceReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return CreateProductPriceReturn{}, err
+		}
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// ProductPrice is to delete a product price
+func ProductPrice(productId, priceId string, r Request) (DeleteProductPriceReturn, error) {
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + productId + "/prices/" + priceId,
+		Method: "DELETE",
+		Body:   nil,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return DeleteProductPriceReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode DeleteProductPriceReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return DeleteProductPriceReturn{}, err
 		}
 	}
 
