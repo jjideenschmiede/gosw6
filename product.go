@@ -2689,8 +2689,8 @@ func CreateProductPrice(id string, body ProductPriceBody, r Request) (CreateProd
 
 }
 
-// ProductPrice is to delete a product price
-func ProductPrice(productId, priceId string, r Request) (DeleteProductPriceReturn, error) {
+// DeleteProductPrice is to delete a product price
+func DeleteProductPrice(productId, priceId string, r Request) (DeleteProductPriceReturn, error) {
 
 	// Set config for request
 	c := Config{
