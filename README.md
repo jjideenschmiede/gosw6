@@ -1574,6 +1574,33 @@ if err != nil {
 }
 ```
 
+## Rule
+
+### Get all rules
+
+If you want to read all rules, you can do it with the following function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Use parameter
+parameter := make(map[string]string)
+parameter["limit"] = "5"
+parameter["page"] = "1"
+
+// Get all rules 
+rules, err := gosw6.Rules(parameter, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(rules)
+}
+```
+
 ## Sale channels
 
 ### Get all sale channels
