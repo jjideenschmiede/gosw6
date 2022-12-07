@@ -845,6 +845,81 @@ if err != nil {
 }
 ```
 
+### Get all product prices 
+
+If you want to get all prices of a product, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Get all product prices
+productPrices, err := gosw6.ProductPrices(map[string]string{}, "a88079a02bf146179d706c58d7294031", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(productPrices)
+}
+```
+
+### Create product price 
+
+If you want to create a price to a product, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Define body
+createProductPriceBody := gosw6.ProductPriceBody{
+    QuantityStart: 11,
+    QuantityEnd:   20,
+    RuleId:        "26a7fc74519d4622a22b8f4dbcb015a3",
+    Price: []gosw6.ProductPriceBodyPrice{
+        {
+            CurrencyId: "b7d2554b0ce847cd82f3ac9bd1c0dfca",
+            Net:        19.99,
+            Gross:      12.99,
+            Linked:     true,
+        },
+    },
+}
+
+// Create product price
+createProductPrice, err := gosw6.CreateProductPrice("f58d1ed3c59642f08fc882897f3e9758", createProductPriceBody, r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(createProductPrice)
+}
+```
+
+### Delete a product price 
+
+If you want to delete a product price, you can do it with this function.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Delete a product price 
+delteProductPrice, err := gosw6.DeleteProductPrice("b398f53c50f243aaacc38a68659f71e1", "a1b5a538e2ff4ac78034741873cee064", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(delteProductPrice)
+}
+```
+
 ## Category
 
 ### Get all categories
