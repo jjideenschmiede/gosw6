@@ -1552,7 +1552,7 @@ type ProductPricesReturn struct {
 // ProductPriceBody is to structure the data
 type ProductPriceBody struct {
 	QuantityStart int                     `json:"quantityStart"`
-	QuantityEnd   int                     `json:"quantityEnd"`
+	QuantityEnd   int                     `json:"quantityEnd,omitempty"`
 	RuleId        string                  `json:"ruleId"`
 	Price         []ProductPriceBodyPrice `json:"price"`
 }
