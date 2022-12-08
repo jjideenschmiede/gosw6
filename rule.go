@@ -83,7 +83,7 @@ func Rules(parameter map[string]string, r Request) (RulesReturn, error) {
 
 	// Set config for request
 	c := Config{
-		Path:   "/api/tax",
+		Path:   "/api/rule",
 		Method: "GET",
 		Body:   nil,
 	}
