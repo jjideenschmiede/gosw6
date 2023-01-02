@@ -54,6 +54,9 @@ type CustomOrderSearchBody struct {
 			} `json:"associations"`
 		} `json:"deliveries"`
 	} `json:"associations"`
+	Includes struct {
+		Product []string `json:"product"`
+	} `json:"includes"`
 }
 
 type CustomOrderSearchBodyFilter struct {
@@ -663,42 +666,24 @@ type CustomOrderSearchReturn struct {
 				Type                     string        `json:"type"`
 				ApiAlias                 string        `json:"apiAlias"`
 			} `json:"priceDefinition"`
-			Payload struct {
-				IsCloseout      bool        `json:"isCloseout"`
-				CustomFields    interface{} `json:"customFields"`
-				CreatedAt       string      `json:"createdAt"`
-				ReleaseDate     string      `json:"releaseDate"`
-				IsNew           bool        `json:"isNew"`
-				MarkAsTopseller interface{} `json:"markAsTopseller"`
-				PurchasePrices  string      `json:"purchasePrices"`
-				ProductNumber   string      `json:"productNumber"`
-				ManufacturerId  string      `json:"manufacturerId"`
-				TaxId           string      `json:"taxId"`
-				TagIds          interface{} `json:"tagIds"`
-				CategoryIds     []string    `json:"categoryIds"`
-				PropertyIds     interface{} `json:"propertyIds"`
-				OptionIds       []string    `json:"optionIds"`
-				Options         []struct {
-					Group  string `json:"group"`
-					Option string `json:"option"`
-				} `json:"options"`
-				StreamIds interface{}   `json:"streamIds"`
-				Features  []interface{} `json:"features"`
-			} `json:"payload"`
-			ParentId               interface{}   `json:"parentId"`
-			Parent                 interface{}   `json:"parent"`
-			Type                   string        `json:"type"`
-			Order                  interface{}   `json:"order"`
-			OrderDeliveryPositions interface{}   `json:"orderDeliveryPositions"`
-			Cover                  interface{}   `json:"cover"`
-			Children               interface{}   `json:"children"`
-			Product                interface{}   `json:"product"`
-			UniqueIdentifier       string        `json:"_uniqueIdentifier"`
-			VersionId              string        `json:"versionId"`
-			Translated             []interface{} `json:"translated"`
-			CreatedAt              time.Time     `json:"createdAt"`
-			UpdatedAt              interface{}   `json:"updatedAt"`
-			Extensions             struct {
+			Payload                json.RawMessage `json:"payload"`
+			ParentId               interface{}     `json:"parentId"`
+			Parent                 interface{}     `json:"parent"`
+			Type                   string          `json:"type"`
+			Order                  interface{}     `json:"order"`
+			OrderDeliveryPositions interface{}     `json:"orderDeliveryPositions"`
+			Cover                  interface{}     `json:"cover"`
+			Children               interface{}     `json:"children"`
+			Product                struct {
+				ProductNumber string `json:"productNumber"`
+				ApiAlias      string `json:"apiAlias"`
+			} `json:"product"`
+			UniqueIdentifier string        `json:"_uniqueIdentifier"`
+			VersionId        string        `json:"versionId"`
+			Translated       []interface{} `json:"translated"`
+			CreatedAt        time.Time     `json:"createdAt"`
+			UpdatedAt        interface{}   `json:"updatedAt"`
+			Extensions       struct {
 				ForeignKeys struct {
 					ApiAlias   interface{}   `json:"apiAlias"`
 					Extensions []interface{} `json:"extensions"`
