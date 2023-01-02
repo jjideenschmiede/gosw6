@@ -17,11 +17,12 @@ import (
 
 // AccessTokenBody is to structure the data
 type AccessTokenBody struct {
-	ClientId  string `json:"client_id"`
-	GrantType string `json:"grant_type"`
-	Scopes    string `json:"scopes"`
-	Username  string `json:"username"`
-	Password  string `json:"password"`
+	GrantType    string `json:"grant_type"`
+	ClientId     string `json:"client_id"`
+	ClientSecret string `json:"client_secret"`
+	Scopes       string `json:"scopes"`
+	Username     string `json:"username"`
+	Password     string `json:"password"`
 }
 
 // AccessTokenReturn is to decode the json return
