@@ -602,9 +602,15 @@ type CreateProductReturn struct {
 		Detail   string `json:"detail"`
 		Template string `json:"template"`
 		Meta     struct {
-			Parameters struct {
-				Value string `json:"{{ value }}"`
-			} `json:"parameters"`
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
 		} `json:"meta"`
 		Source struct {
 			Pointer string `json:"pointer"`
@@ -620,9 +626,15 @@ type UpdateProductReturn struct {
 		Detail   string `json:"detail"`
 		Template string `json:"template"`
 		Meta     struct {
-			Parameters struct {
-				Value string `json:"{{ value }}"`
-			} `json:"parameters"`
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
 		} `json:"meta"`
 		Source struct {
 			Pointer string `json:"pointer"`
