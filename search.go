@@ -80,7 +80,7 @@ type CustomOrderSearchReturn struct {
 	Data  []struct {
 		OrderNumber      string    `json:"orderNumber"`
 		CurrencyId       string    `json:"currencyId"`
-		CurrencyFactor   int       `json:"currencyFactor"`
+		CurrencyFactor   float64   `json:"currencyFactor"`
 		SalesChannelId   string    `json:"salesChannelId"`
 		BillingAddressId string    `json:"billingAddressId"`
 		OrderDateTime    time.Time `json:"orderDateTime"`
