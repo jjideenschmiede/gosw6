@@ -815,10 +815,10 @@ type CustomOrderSearchReturn struct {
 					Extensions []interface{} `json:"extensions"`
 				} `json:"foreignKeys"`
 			} `json:"extensions"`
-			Id             string            `json:"id"`
-			CustomFields   map[string]string `json:"customFields"`
-			OrderVersionId string            `json:"orderVersionId"`
-			ApiAlias       string            `json:"apiAlias"`
+			Id             string                 `json:"id"`
+			CustomFields   map[string]interface{} `json:"customFields"`
+			OrderVersionId string                 `json:"orderVersionId"`
+			ApiAlias       string                 `json:"apiAlias"`
 		} `json:"transactions"`
 		DeepLinkCode      string `json:"deepLinkCode"`
 		AutoIncrement     int    `json:"autoIncrement"`
