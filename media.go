@@ -111,6 +111,7 @@ type MediaReturn struct {
 
 // CreateMediaBody is to structure the body data
 type CreateMediaBody struct {
+	Alt           string `json:"alt"`
 	MediaFolderId string `json:"mediaFolderId"`
 }
 
