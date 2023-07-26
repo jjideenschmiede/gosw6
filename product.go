@@ -228,9 +228,9 @@ type ProductsReturn struct {
 				Extensions []interface{} `json:"extensions"`
 			} `json:"foreignKeys"`
 		} `json:"extensions"`
-		Id           string            `json:"id"`
-		CustomFields map[string]string `json:"customFields"`
-		ApiAlias     string            `json:"apiAlias"`
+		Id           string         `json:"id"`
+		CustomFields map[string]any `json:"customFields"`
+		ApiAlias     string         `json:"apiAlias"`
 	} `json:"data"`
 	Aggregations []interface{} `json:"aggregations"`
 	Errors       []struct {
@@ -570,9 +570,9 @@ type ProductReturn struct {
 				Extensions []interface{} `json:"extensions"`
 			} `json:"foreignKeys"`
 		} `json:"extensions"`
-		Id           string            `json:"id"`
-		CustomFields map[string]string `json:"customFields"`
-		ApiAlias     string            `json:"apiAlias"`
+		Id           string         `json:"id"`
+		CustomFields map[string]any `json:"customFields"`
+		ApiAlias     string         `json:"apiAlias"`
 	} `json:"data"`
 	Errors []struct {
 		Code   string `json:"code"`
