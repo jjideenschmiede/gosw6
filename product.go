@@ -290,7 +290,7 @@ type ProductBody struct {
 	Properties         []*ProductBodyProperties     `json:"properties"`
 	Options            []*ProductBodyOptions        `json:"options"`
 	Categories         []*ProductBodyCategories     `json:"categories"`
-	CustomFields       *map[string]string           `json:"customFields"`
+	CustomFields       *map[string]string           `json:"customFields,omitempty"`
 }
 
 type ProductBodyPrice struct {
