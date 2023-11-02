@@ -1500,7 +1500,7 @@ type ProductPricesReturn struct {
 			ListPrice  struct {
 				CurrencyId      string        `json:"currencyId"`
 				Net             float64       `json:"net"`
-				Gross           int           `json:"gross"`
+				Gross           float64       `json:"gross"`
 				Linked          bool          `json:"linked"`
 				ListPrice       interface{}   `json:"listPrice"`
 				Percentage      interface{}   `json:"percentage"`
@@ -1515,7 +1515,7 @@ type ProductPricesReturn struct {
 			RegulationPrice struct {
 				CurrencyId      string        `json:"currencyId"`
 				Net             float64       `json:"net"`
-				Gross           int           `json:"gross"`
+				Gross           float64       `json:"gross"`
 				Linked          bool          `json:"linked"`
 				ListPrice       interface{}   `json:"listPrice"`
 				Percentage      interface{}   `json:"percentage"`
@@ -1570,6 +1570,22 @@ type ProductPriceBody struct {
 }
 
 type ProductPriceBodyPrice struct {
+	CurrencyId      string                          `json:"currencyId"`
+	Net             float64                         `json:"net"`
+	Gross           float64                         `json:"gross"`
+	Linked          bool                            `json:"linked"`
+	ListPrice       ProductPriceBodyListPrice       `json:"listPrice"`
+	RegulationPrice ProductPriceBodyRegulationPrice `json:"regulationPrice"`
+}
+
+type ProductPriceBodyListPrice struct {
+	CurrencyId string  `json:"currencyId"`
+	Net        float64 `json:"net"`
+	Gross      float64 `json:"gross"`
+	Linked     bool    `json:"linked"`
+}
+
+type ProductPriceBodyRegulationPrice struct {
 	CurrencyId string  `json:"currencyId"`
 	Net        float64 `json:"net"`
 	Gross      float64 `json:"gross"`
