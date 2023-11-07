@@ -373,7 +373,7 @@ type ProductReturn struct {
 			RegulationPrice struct {
 				CurrencyId      string        `json:"currencyId"`
 				Net             float64       `json:"net"`
-				Gross           int           `json:"gross"`
+				Gross           float64       `json:"gross"`
 				Linked          bool          `json:"linked"`
 				ListPrice       interface{}   `json:"listPrice"`
 				Percentage      interface{}   `json:"percentage"`
@@ -403,8 +403,8 @@ type ProductReturn struct {
 		ShippingFree       bool        `json:"shippingFree"`
 		PurchasePrices     []struct {
 			CurrencyId string        `json:"currencyId"`
-			Net        int           `json:"net"`
-			Gross      int           `json:"gross"`
+			Net        float64       `json:"net"`
+			Gross      float64       `json:"gross"`
 			Linked     bool          `json:"linked"`
 			ListPrice  interface{}   `json:"listPrice"`
 			Percentage interface{}   `json:"percentage"`
