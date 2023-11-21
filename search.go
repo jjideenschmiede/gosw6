@@ -675,8 +675,9 @@ type CustomOrderSearchReturn struct {
 			Cover                  interface{}     `json:"cover"`
 			Children               interface{}     `json:"children"`
 			Product                struct {
-				ProductNumber string `json:"productNumber"`
-				ApiAlias      string `json:"apiAlias"`
+				ProductNumber string            `json:"productNumber"`
+				CustomFields  map[string]string `json:"customFields"`
+				ApiAlias      string            `json:"apiAlias"`
 			} `json:"product"`
 			UniqueIdentifier string        `json:"_uniqueIdentifier"`
 			VersionId        string        `json:"versionId"`
