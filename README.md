@@ -150,6 +150,61 @@ if err != nil {
 }
 ```
 
+## Custom order transactions search
+
+With this function you get all information you need for an order. We use the `associations` for that. Here is the request body:
+
+```json
+{
+  "ids": [
+    "0041285a9fd64bdaa5c22718f5a15bc0"
+  ],
+  "associations": {
+    "transactions": {
+      "associations": {
+        "paymentMethod": {}
+      }
+    }
+  },
+  "includes": {
+    "order": [
+      "transactions",
+      "customFields"
+    ],
+    "order_transaction": [
+      "paymentMethod",
+      "stateMachineState",
+      "customFields"
+    ],
+    "state_machine_state": [
+      "technicalName"
+    ],
+    "payment_method": [
+      "name",
+      "updatedAt"
+    ]
+  }
+}
+```
+
+And here you can find an example for the function. You can define the page, limit & the date since which all orders should be recorded.
+
+```go
+// Define the request
+r := gosw6.Request{
+    BaseUrl:     "https://shopware-demo.test.de",
+    BearerToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJ...",
+}
+
+// Get an order by id (with all information you need) 
+orders, err := CustomOrderTransactionsSearch("0041285a9fd64bdaa5c22718f5a15bc0", r)
+if err != nil {
+    log.Fatalln(err)
+} else {
+    log.Println(orders)
+}
+```
+
 ## Product
 
 ### Get all products
