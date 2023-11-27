@@ -1050,6 +1050,7 @@ func CustomOrderTransactionsSearch(id string, r Request) (CustomOrderTransaction
 		Ids: []string{id},
 		Includes: CustomOrderTransactionsSearchBodyIncludes{
 			Order: []string{
+				"amountTotal",
 				"transactions",
 				"customFields",
 			},
