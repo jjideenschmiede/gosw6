@@ -944,6 +944,7 @@ type CustomOrderTransactionsSearchBodyIncludes struct {
 type CustomOrderTransactionsSearchReturn struct {
 	Total int `json:"total"`
 	Data  []struct {
+		AmountTotal  float64 `json:"amountTotal"`
 		Transactions []struct {
 			PaymentMethod struct {
 				UpdatedAt time.Time `json:"updatedAt"`
