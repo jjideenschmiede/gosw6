@@ -789,6 +789,63 @@ type UpdateProductStockReturn struct {
 	} `json:"errors"`
 }
 
+// UpdateProductPriceBody is to structure the body data
+type UpdateProductPriceBody struct {
+	Price          []UpdateProductPriceBodyPrice  `json:"price"`
+	PurchasePrices []UpdateProductPriceBodyPrices `json:"purchasePrices"`
+}
+
+type UpdateProductPriceBodyPrice struct {
+	CurrencyId      string                                `json:"currencyId"`
+	Net             float64                               `json:"net"`
+	Gross           float64                               `json:"gross"`
+	Linked          bool                                  `json:"linked"`
+	ListPrice       UpdateProductPriceBodyListPrice       `json:"listPrice"`
+	RegulationPrice UpdateProductPriceBodyRegulationPrice `json:"regulationPrice"`
+}
+
+type UpdateProductPriceBodyListPrice struct {
+	CurrencyId string  `json:"currencyId"`
+	Net        float64 `json:"net"`
+	Gross      float64 `json:"gross"`
+	Linked     bool    `json:"linked"`
+}
+
+type UpdateProductPriceBodyRegulationPrice struct {
+	CurrencyId string  `json:"currencyId"`
+	Net        float64 `json:"net"`
+	Gross      float64 `json:"gross"`
+	Linked     bool    `json:"linked"`
+}
+
+type UpdateProductPriceBodyPrices struct {
+	CurrencyId string  `json:"currencyId"`
+	Net        float64 `json:"net"`
+	Gross      float64 `json:"gross"`
+	Linked     bool    `json:"linked"`
+}
+
+// UpdateProductPriceReturn is to decode the json data
+type UpdateProductPriceReturn struct {
+	Errors []struct {
+		Code   string `json:"code"`
+		Status string `json:"status"`
+		Title  string `json:"title"`
+		Detail string `json:"detail"`
+		Meta   struct {
+			Trace []struct {
+				File     string `json:"file"`
+				Line     int    `json:"line"`
+				Function string `json:"function"`
+				Class    string `json:"class"`
+				Type     string `json:"type"`
+			} `json:"trace"`
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"meta"`
+	} `json:"errors"`
+}
+
 // ProductPropertiesReturn is to decode the json data
 type ProductPropertiesReturn struct {
 	Total int `json:"total"`
@@ -1997,6 +2054,47 @@ func UpdateProductStock(id string, body UpdateProductStockBody, r Request) (Upda
 		err = json.NewDecoder(response.Body).Decode(&decode)
 		if err != nil {
 			return UpdateProductStockReturn{}, err
+		}
+	}
+
+	// Return data
+	return decode, err
+
+}
+
+// UpdateProductPrice is to update the price of a product
+func UpdateProductPrice(id string, body UpdateProductPriceBody, r Request) (UpdateProductPriceReturn, error) {
+
+	// Convert body data
+	convert, err := json.Marshal(body)
+	if err != nil {
+		return UpdateProductPriceReturn{}, err
+	}
+
+	// Set config for request
+	c := Config{
+		Path:   "/api/product/" + id,
+		Method: "PATCH",
+		Body:   convert,
+	}
+
+	// Send request
+	response, err := c.Send(r)
+	if err != nil {
+		return UpdateProductPriceReturn{}, err
+	}
+
+	// Close request
+	defer response.Body.Close()
+
+	// Decode data
+	var decode UpdateProductPriceReturn
+
+	// Check response header
+	if response.Status != "204 No Content" {
+		err = json.NewDecoder(response.Body).Decode(&decode)
+		if err != nil {
+			return UpdateProductPriceReturn{}, err
 		}
 	}
 
