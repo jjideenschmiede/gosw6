@@ -675,9 +675,8 @@ type CustomOrderSearchReturn struct {
 			Cover                  interface{}     `json:"cover"`
 			Children               interface{}     `json:"children"`
 			Product                struct {
-				ProductNumber string                 `json:"productNumber"`
-				CustomFields  map[string]interface{} `json:"customFields"`
-				ApiAlias      string                 `json:"apiAlias"`
+				ProductNumber string `json:"productNumber"`
+				ApiAlias      string `json:"apiAlias"`
 			} `json:"product"`
 			UniqueIdentifier string        `json:"_uniqueIdentifier"`
 			VersionId        string        `json:"versionId"`
@@ -690,13 +689,12 @@ type CustomOrderSearchReturn struct {
 					Extensions []interface{} `json:"extensions"`
 				} `json:"foreignKeys"`
 			} `json:"extensions"`
-			Id           string `json:"id"`
-			CustomFields interface {
-			} `json:"customFields"`
-			OrderVersionId   string `json:"orderVersionId"`
-			ProductVersionId string `json:"productVersionId"`
-			ParentVersionId  string `json:"parentVersionId"`
-			ApiAlias         string `json:"apiAlias"`
+			Id               string                 `json:"id"`
+			CustomFields     map[string]interface{} `json:"customFields"`
+			OrderVersionId   string                 `json:"orderVersionId"`
+			ProductVersionId string                 `json:"productVersionId"`
+			ParentVersionId  string                 `json:"parentVersionId"`
+			ApiAlias         string                 `json:"apiAlias"`
 		} `json:"lineItems"`
 		Transactions []struct {
 			OrderId         string `json:"orderId"`
