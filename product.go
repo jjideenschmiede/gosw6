@@ -791,8 +791,8 @@ type UpdateProductStockReturn struct {
 
 // UpdateProductPriceBody is to structure the body data
 type UpdateProductPriceBody struct {
-	Price          []UpdateProductPriceBodyPrice  `json:"price"`
-	PurchasePrices []UpdateProductPriceBodyPrices `json:"purchasePrices"`
+	Price          []*UpdateProductPriceBodyPrice          `json:"price"`
+	PurchasePrices []*UpdateProductPriceBodyPurchasePrices `json:"purchasePrices"`
 }
 
 type UpdateProductPriceBodyPrice struct {
@@ -818,7 +818,7 @@ type UpdateProductPriceBodyRegulationPrice struct {
 	Linked     bool    `json:"linked"`
 }
 
-type UpdateProductPriceBodyPrices struct {
+type UpdateProductPriceBodyPurchasePrices struct {
 	CurrencyId string  `json:"currencyId"`
 	Net        float64 `json:"net"`
 	Gross      float64 `json:"gross"`
