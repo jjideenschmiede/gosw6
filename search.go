@@ -23,7 +23,8 @@ type CustomOrderSearchBody struct {
 	Filter       []CustomOrderSearchBodyFilter `json:"filter"`
 	Sort         []CustomOrderSearchBodySort   `json:"sort"`
 	Associations struct {
-		Currency struct {
+		StateMachineState struct{} `json:"stateMachineState"`
+		Currency          struct {
 		} `json:"currency"`
 		LineItems struct {
 			Associations struct {
@@ -45,11 +46,13 @@ type CustomOrderSearchBody struct {
 			Associations struct {
 				PaymentMethod struct {
 				} `json:"paymentMethod"`
+				StateMachineState struct{} `json:"stateMachineState"`
 			} `json:"associations"`
 		} `json:"transactions"`
 		Deliveries struct {
 			Associations struct {
-				ShippingMethod struct {
+				StateMachineState struct{} `json:"stateMachineState"`
+				ShippingMethod    struct {
 				} `json:"shippingMethod"`
 			} `json:"associations"`
 		} `json:"deliveries"`
