@@ -928,6 +928,7 @@ type CustomOrderTransactionsSearchBody struct {
 			Associations struct {
 				PaymentMethod struct {
 				} `json:"paymentMethod"`
+				StateMachineState struct{} `json:"stateMachineState"`
 			} `json:"associations"`
 		} `json:"transactions"`
 	} `json:"associations"`
