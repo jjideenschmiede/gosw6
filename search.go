@@ -144,7 +144,7 @@ type CustomOrderSearchReturn struct {
 			FirstName        string        `json:"firstName"`
 			LastName         string        `json:"lastName"`
 			Title            interface{}   `json:"title"`
-			VatIds           []interface{} `json:"vatIds"`
+			VatIds           []string      `json:"vatIds"`
 			Company          string        `json:"company"`
 			CustomerNumber   string        `json:"customerNumber"`
 			CustomerId       string        `json:"customerId"`
