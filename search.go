@@ -57,9 +57,6 @@ type CustomOrderSearchBody struct {
 			} `json:"associations"`
 		} `json:"deliveries"`
 	} `json:"associations"`
-	Includes struct {
-		Product []string `json:"product"`
-	} `json:"includes"`
 }
 
 type CustomOrderSearchBodyFilter struct {
